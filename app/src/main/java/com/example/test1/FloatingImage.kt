@@ -12,19 +12,18 @@ class FloatingImage(private val context: Context) {
         context.getSystemService(Context.WINDOW_SERVICE) as WindowManager
     private val floatingView: View =
         View.inflate(context, R.layout.floating_image_layout, null)
-    private val layoutParams: WindowManager.LayoutParams
+    private val layoutParams: WindowManager.LayoutParams = WindowManager.LayoutParams(
+        WindowManager.LayoutParams.WRAP_CONTENT,
+        WindowManager.LayoutParams.WRAP_CONTENT,
+        WindowManager.LayoutParams.TYPE_APPLICATION_OVERLAY,
+        WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE or WindowManager.LayoutParams.FLAG_LAYOUT_IN_SCREEN,
+        PixelFormat.TRANSLUCENT
+    )
 
     init {
         // Configure the floating image view
         // Set layoutParams properties as per your requirements (size, position, flags, etc.)
-        layoutParams = WindowManager.LayoutParams(
-            WindowManager.LayoutParams.WRAP_CONTENT,
-            WindowManager.LayoutParams.WRAP_CONTENT,
-            WindowManager.LayoutParams.TYPE_APPLICATION_OVERLAY,
-            WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE or WindowManager.LayoutParams.FLAG_LAYOUT_IN_SCREEN,
-            PixelFormat.TRANSLUCENT
-        )
-        layoutParams.gravity = Gravity.TOP or Gravity.START
+        layoutParams.gravity = Gravity.START
 
         // Set an onTouchListener to handle touch events on the floating image view
         floatingView.setOnTouchListener(FloatingTouchListener())
