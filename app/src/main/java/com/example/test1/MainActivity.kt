@@ -25,7 +25,7 @@ class MainActivity : AppCompatActivity() {
                 // You can show an error message or direct the user to install KakaoTalk
             }
         }
-    //haha
+    //haha wow
         btnEpisode2.setOnClickListener {
             // Similar logic as btnEpisode1
             // Launch KakaoTalk with the appropriate episode intent and display the floating image
