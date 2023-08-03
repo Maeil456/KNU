@@ -4,6 +4,7 @@
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
     <queries>
         <package android:name = "com.kakao.talk" />
+        <package android:name = "com.nhn.android.search" />
     </queries>
     <application
         android:allowBackup="true"
