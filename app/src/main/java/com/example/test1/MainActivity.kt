@@ -17,6 +17,7 @@ class MainActivity : AppCompatActivity() {
     private val REQUEST_OVERLAY_PERMISSION = 101
     private lateinit var overlayPermissionLauncher: ActivityResultLauncher<Intent>
 
+    @RequiresApi(Build.VERSION_CODES.M)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -44,8 +45,9 @@ class MainActivity : AppCompatActivity() {
         btnEpisode1.setOnClickListener {
             val packageName = "com.kakao.talk"
             startEpisodeIntent(packageName)
-            val floatingImage = FloatingImage(this)
-            floatingImage.show(100, 200)
+            checkOverlayPermission()
+            val floatingImageService = FloatingImageService()
+            floatingImageService.showFloatingImage(100, 200)
         }
 
         btnEpisode2.setOnClickListener {
@@ -53,8 +55,8 @@ class MainActivity : AppCompatActivity() {
             // Launch KakaoTalk with the appropriate episode intent and display the floating image
             val packageName = "com.nhn.android.search"
             startEpisodeIntent(packageName)
-            val floatingImage = FloatingImage(this)
-            floatingImage.show(100, 200)
+            val floatingImageService = FloatingImageService()
+            floatingImageService.showFloatingImage(100, 200)
         }
     }
     @RequiresApi(Build.VERSION_CODES.M)
