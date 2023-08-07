@@ -30,25 +30,17 @@ class MainActivity : AppCompatActivity() {
         }
 
 
-        val btnEpisode1 = findViewById<Button>(R.id.btnkakao)
-        val btnEpisode2 = findViewById<Button>(R.id.btnnaver)
-        // Add more buttons for each episode as needed
-
-        btnEpisode1.setOnClickListener {
-            val packageName = "com.kakao.talk"
-            startEpisodeIntent(packageName)
-            val serviceIntent = Intent(this, FloatingImageService::class.java)
-            startService(serviceIntent)
+        findViewById<Button>(R.id.btnkakao).setOnClickListener {
+            handleButtonClick("com.kakao.talk")
         }
-
-        btnEpisode2.setOnClickListener {
-            val packageName = "com.nhn.android.search"
-            startEpisodeIntent(packageName)
-            val serviceIntent = Intent(this, FloatingImageService::class.java)
-            startService(serviceIntent)
-        // Add this code to properly start the service
-            //startFloatingImageService()
+        findViewById<Button>(R.id.btnnaver).setOnClickListener {
+            handleButtonClick("com.nhn.android.search")
         }
+    }
+
+    private fun handleButtonClick(packageName: String) {
+        startEpisodeIntent(packageName)
+        startFloatingImageService()
     }
     private fun requestOverlayPermission() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
@@ -117,4 +109,5 @@ class MainActivity : AppCompatActivity() {
         }
     }
 }
+
 

@@ -6,35 +6,45 @@ import android.graphics.PixelFormat
 import android.os.Build
 import android.view.Gravity
 import android.view.LayoutInflater
-import android.view.MotionEvent
 import android.view.View
 import android.view.WindowManager
 import android.view.accessibility.AccessibilityEvent
 import android.widget.ImageView
+import android.content.Intent
 
 class FloatingImageService : AccessibilityService() {
 
     private lateinit var windowManager: WindowManager
     private lateinit var floatingView: View
-    private lateinit var imageView: ImageView
+    private lateinit var targetPositions: ArrayList<Pair<Int, Int>>
+    private var currentPositionIndex = 0
     private var isShowing = false
 
     override fun onAccessibilityEvent(event: AccessibilityEvent?) {
         // Check if the desired app is launched
-        if (event?.packageName == "com.kakao.talk" || event?.packageName == "com.nhn.android.search") {
+        if (event?.packageName == "com.kakao.talk" ||  event?.packageName == "com.nhn.android.search") {
             // Show the floating image when the desired app is launched
-            showFloatingImage(100, 200)
+            showFloatingImage(100,200)
         } else {
-            // Hide the floating image when the desired app is closed or goes to the background
             hideFloatingImage()
         }
+    }
+
+    override fun onCreate() {
+        super.onCreate()
+        showFloatingImage(100, 200)
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        hideFloatingImage()
     }
 
     override fun onInterrupt() {
         // Handle service interruption
     }
 
-    public fun showFloatingImage(x: Int, y: Int) {
+    private fun showFloatingImage(x: Int, y: Int) {
         if (isShowing) return
 
         windowManager = getSystemService(Context.WINDOW_SERVICE) as WindowManager
@@ -60,39 +70,11 @@ class FloatingImageService : AccessibilityService() {
         params.y = y
 
         floatingView = LayoutInflater.from(this).inflate(R.layout.floating_image_layout, null)
-        windowManager.addView(floatingView, params)
-        isShowing = true
 
-        // Add touch listener to handle dragging and dismissing the floating image
-        imageView.setOnTouchListener(object : View.OnTouchListener {
-            private var initialX: Int = 0
-            private var initialY: Int = 0
-            private var initialTouchX: Float = 0f
-            private var initialTouchY: Float = 0f
-
-            override fun onTouch(v: View, event: MotionEvent): Boolean {
-                when (event.action) {
-                    MotionEvent.ACTION_DOWN -> {
-                        initialX = params.x
-                        initialY = params.y
-                        initialTouchX = event.rawX
-                        initialTouchY = event.rawY
-                        return true
-                    }
-                    MotionEvent.ACTION_MOVE -> {
-                        params.x = initialX + (event.rawX - initialTouchX).toInt()
-                        params.y = initialY + (event.rawY - initialTouchY).toInt()
-                        windowManager.updateViewLayout(floatingView, params)
-                        return true
-                    }
-                    MotionEvent.ACTION_UP -> {
-                        // Implement dismissing logic here if needed
-                        return true
-                    }
-                }
-                return false
-            }
-        })
+        // Add a touch listener to hide the floating image when it's touched
+        floatingView.setOnClickListener {
+            hideFloatingImage()
+        }
 
         windowManager.addView(floatingView, params)
         isShowing = true
@@ -104,5 +86,7 @@ class FloatingImageService : AccessibilityService() {
         isShowing = false
     }
 
-    // Add other methods as needed
+    override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
+        return START_STICKY
+    }
 }
