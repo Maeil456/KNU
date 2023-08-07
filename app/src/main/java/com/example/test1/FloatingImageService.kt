@@ -16,6 +16,8 @@ class FloatingImageService : AccessibilityService() {
 
     private lateinit var windowManager: WindowManager
     private lateinit var floatingView: View
+    private lateinit var targetPositions: ArrayList<Pair<Int, Int>>
+    private var currentPositionIndex = 0
     private var isShowing = false
 
     override fun onAccessibilityEvent(event: AccessibilityEvent?) {
@@ -23,6 +25,8 @@ class FloatingImageService : AccessibilityService() {
         if (event?.packageName == "com.kakao.talk" ||  event?.packageName == "com.nhn.android.search") {
             // Show the floating image when the desired app is launched
             showFloatingImage(100,200)
+        } else {
+            hideFloatingImage()
         }
     }
     override fun onCreate() {
@@ -78,5 +82,4 @@ class FloatingImageService : AccessibilityService() {
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
         return START_STICKY
     }
-    // Add other methods as needed, e.g., to update the position of the floating image based on touch events
 }
