@@ -2,6 +2,7 @@ package com.example.test1
 
 import android.accessibilityservice.AccessibilityService
 import android.content.Context
+import android.content.Intent
 import android.graphics.PixelFormat
 import android.os.Build
 import android.view.Gravity
@@ -19,19 +20,27 @@ class FloatingImageService : AccessibilityService() {
 
     override fun onAccessibilityEvent(event: AccessibilityEvent?) {
         // Check if the desired app is launched
-        if (event?.packageName == "com.kakao.talk") {
+        if (event?.packageName == "com.kakao.talk" ||  event?.packageName == "com.nhn.android.search") {
             // Show the floating image when the desired app is launched
             showFloatingImage(100,200)
         }
     }
+    override fun onCreate() {
+        super.onCreate()
+        showFloatingImage(100, 200)
+    }
 
+    override fun onDestroy() {
+        super.onDestroy()
+        hideFloatingImage()
+    }
 
 
     override fun onInterrupt() {
         // Handle service interruption
     }
 
-    public fun showFloatingImage(x: Int, y: Int) {
+    private fun showFloatingImage(x: Int, y: Int) {
         if (isShowing) return
 
         windowManager = getSystemService(Context.WINDOW_SERVICE) as WindowManager
@@ -66,6 +75,8 @@ class FloatingImageService : AccessibilityService() {
         windowManager.removeView(floatingView)
         isShowing = false
     }
-
+    override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
+        return START_STICKY
+    }
     // Add other methods as needed, e.g., to update the position of the floating image based on touch events
 }

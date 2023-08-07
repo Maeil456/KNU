@@ -1,42 +1,34 @@
 package com.example.test1
 
+import android.content.ComponentName
 import android.content.Intent
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.provider.Settings
 import android.widget.Button
-import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.annotation.RequiresApi
-import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 
 class MainActivity : AppCompatActivity() {
 
-    private val REQUEST_OVERLAY_PERMISSION = 101
-    private lateinit var overlayPermissionLauncher: ActivityResultLauncher<Intent>
+    private val requestOverlayPermissionLauncher =
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+            if (isOverlayPermissionGranted()) {
+                startFloatingImageService()
+            }
+        }
 
-    @RequiresApi(Build.VERSION_CODES.M)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        overlayPermissionLauncher = registerForActivityResult(
-            ActivityResultContracts.StartActivityForResult()
-        ) { result ->
-            // Check if the permission was granted by the user
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                if (Settings.canDrawOverlays(this)) {
-                    // Permission granted, show the floating image
-                    //showFloatingImage()
-                } else {
-                    // Permission denied, handle it gracefully
-                    // For example, show an alternative UI or a message to the user
-                    showOverlayPermissionAlert()
-                }
-            }
+        if (!isOverlayPermissionGranted()) {
+            requestOverlayPermission()
+        } else {
+            startFloatingImageService()
         }
+
 
         val btnEpisode1 = findViewById<Button>(R.id.btnkakao)
         val btnEpisode2 = findViewById<Button>(R.id.btnnaver)
@@ -45,51 +37,70 @@ class MainActivity : AppCompatActivity() {
         btnEpisode1.setOnClickListener {
             val packageName = "com.kakao.talk"
             startEpisodeIntent(packageName)
-            checkOverlayPermission()
-            val floatingImageService = FloatingImageService()
-            floatingImageService.showFloatingImage(100, 200)
+            val serviceIntent = Intent(this, FloatingImageService::class.java)
+            startService(serviceIntent)
         }
 
         btnEpisode2.setOnClickListener {
-            // Similar logic as btnEpisode1
-            // Launch KakaoTalk with the appropriate episode intent and display the floating image
             val packageName = "com.nhn.android.search"
             startEpisodeIntent(packageName)
-            val floatingImageService = FloatingImageService()
-            floatingImageService.showFloatingImage(100, 200)
+            val serviceIntent = Intent(this, FloatingImageService::class.java)
+            startService(serviceIntent)
+        // Add this code to properly start the service
+            //startFloatingImageService()
         }
     }
-    @RequiresApi(Build.VERSION_CODES.M)
-    private fun checkOverlayPermission() {
-        if (!Settings.canDrawOverlays(this)) {
-            // You need to request the permission at runtime
-            showOverlayPermissionAlert()
-        } else {
-            // Permission already granted, show the floating image
-            //showFloatingImage()
+    private fun requestOverlayPermission() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            val intent = Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION, Uri.parse("package:$packageName"))
+            requestOverlayPermissionLauncher.launch(intent)
         }
-    }
-    @RequiresApi(Build.VERSION_CODES.M)
-    private fun showOverlayPermissionAlert() {
-        val alertBuilder = AlertDialog.Builder(this)
-        alertBuilder.setTitle("Permission Required")
-        alertBuilder.setMessage("This app requires the overlay permission to function properly.")
-        alertBuilder.setPositiveButton("Grant Permission") { dialog, which ->
-            requestOverlayPermission()
-        }
-        alertBuilder.setNegativeButton("Cancel") { dialog, which ->
-            // Handle the case when the user cancels the permission request
-            // For example, show an alternative UI or a message to the user
-        }
-        val alertDialog = alertBuilder.create()
-        alertDialog.show()
     }
 
-    @RequiresApi(Build.VERSION_CODES.M)
-    private fun requestOverlayPermission() {
-        val intent = Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION, Uri.parse("package:$packageName"))
-        overlayPermissionLauncher.launch(intent)
+    private fun isOverlayPermissionGranted(): Boolean {
+        return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            Settings.canDrawOverlays(this)
+        } else {
+            true
+        }
     }
+    private fun isAccessibilityServiceEnabled(): Boolean {
+        val enabledServices = Settings.Secure.getString(
+            contentResolver,
+            Settings.Secure.ENABLED_ACCESSIBILITY_SERVICES
+        )?:return false
+        val services = enabledServices.split(":".toRegex()).toTypedArray()
+        val packageName = packageName
+        val className = FloatingImageService::class.java.name
+        val expectedComponentName = ComponentName(packageName, className).flattenToString()
+
+        for (service in services) {
+            if (service.equals(expectedComponentName, ignoreCase = true)) {
+                return true
+            }
+        }
+        return false
+    }
+    private fun openAccessibilitySettings() {
+        val intent = Intent(Settings.ACTION_ACCESSIBILITY_SETTINGS)
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+        startActivity(intent)
+    }
+    private fun startFloatingImageService() {
+        if (!isAccessibilityServiceEnabled()) {
+            openAccessibilitySettings()
+        } else {
+            val intent = Intent(this, FloatingImageService::class.java)
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                startForegroundService(intent)
+            } else {
+                startService(intent)
+            }
+        }
+    }
+
+
+
 
     fun startEpisodeIntent(packageName: String) {
         val intent = packageManager.getLaunchIntentForPackage(packageName)
