@@ -7,17 +7,92 @@
     android:orientation="vertical"
     tools:context=".MainActivity">
 
-    <Button
-        android:id="@+id/btnkakao"
+    <!-- 첫 번째 행 -->
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:text="kakao" />
-    <Button
-        android:id="@+id/btnnaver"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/btnfavor"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="즐겨찾기" />
+
+        <Button
+            android:id="@+id/btnsearch"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="검색하기" />
+    </LinearLayout>
+
+    <!-- 두 번째 행 -->
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:text="naver"
-        />
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/btnkakao"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="kakao" />
+
+        <Button
+            android:id="@+id/btnnaver"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="naver" />
+    </LinearLayout>
+
+    <!-- 세 번째 행 -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/btndelivery"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="배달의 민족" />
+
+        <Button
+            android:id="@+id/btnyoutube"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="유튜브" />
+    </LinearLayout>
+
+    <!-- 네 번째 행 -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/btndaum"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="다음" />
+
+        <Button
+            android:id="@+id/btnetc"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="더보기" />
+    </LinearLayout>
+
 </LinearLayout>

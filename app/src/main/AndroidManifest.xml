@@ -6,6 +6,9 @@
     <queries>
         <package android:name = "com.kakao.talk" />
         <package android:name = "com.nhn.android.search" />
+        <package android:name = "com.woowahan.baemin" />
+        <package android:name = "com.google.android.youtube" />
+        <package android:name = "net.daum.android.mail" />
     </queries>
 
     <application
@@ -35,10 +38,10 @@
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".SearchActivity"></activity>
     </application>
 
 </manifest>
