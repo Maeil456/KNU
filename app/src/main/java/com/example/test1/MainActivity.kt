@@ -56,10 +56,8 @@ class MainActivity : AppCompatActivity() {
         }
 
         btnEpisode3.setOnClickListener {
-            val packageName = "com.kakao.talk"
-            startEpisodeIntent(packageName)
-            val serviceIntent = Intent(this, FloatingImageService::class.java)
-            startService(serviceIntent)
+            val intent = Intent(this, KakaoFunctionsActivity::class.java)
+            startActivity(intent)
         }
 
         btnEpisode4.setOnClickListener {

@@ -42,6 +42,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".SearchActivity"></activity>
+        <activity android:name=".KakaoFunctionsActivity"></activity>
+
     </application>
 
 </manifest>
