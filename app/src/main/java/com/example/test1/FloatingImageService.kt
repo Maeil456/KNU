@@ -22,9 +22,10 @@ class FloatingImageService : AccessibilityService() {
     data class Coord(val x: Int, val y: Int) : Parcelable
 
     private lateinit var windowManager: WindowManager
-    private lateinit var floatingImageLayout: View
-    private lateinit var floatingImageView: ImageView
-    private lateinit var targetPositions: ArrayList<MainActivity.Coord>
+    private var floatingImageLayout: View? = null
+    private var floatingImageView: ImageView? = null
+    private var targetPositions = ArrayList<Coord>()
+    private var isMoving = false
     private var currentPositionIndex = 0
     private var isShowing = false
 
@@ -55,12 +56,12 @@ class FloatingImageService : AccessibilityService() {
         override fun onReceive(context: Context, intent: Intent) {
             if (intent.action == ACTION_SHOW_FLOATING_IMAGE) {
                 val positions = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-                    intent.getParcelableArrayListExtra<Coord>("targetPositions", Coord::class.java)
+                    intent.getParcelableArrayListExtra("targetPositions", T::class.java)
                 } else {
                     intent.getParcelableArrayListExtra<Coord>("targetPositions")
                 }
                 if (positions != null) {
-                    targetPositions = positions as ArrayList<MainActivity.Coord>
+                    targetPositions = positions as ArrayList<Coord>
                     currentPositionIndex = 0
 
                     if (targetPositions.isNotEmpty()) {
@@ -68,6 +69,7 @@ class FloatingImageService : AccessibilityService() {
                             targetPositions[currentPositionIndex].x,
                             targetPositions[currentPositionIndex].y
                         )
+
                         currentPositionIndex = (currentPositionIndex + 1) % targetPositions.size
                     }
                 }
@@ -75,8 +77,6 @@ class FloatingImageService : AccessibilityService() {
         }
     }
 
-
-    private var isMoving = false
     private val touchListener = View.OnTouchListener { view, event ->
         when (event.action) {
             MotionEvent.ACTION_DOWN -> {
@@ -133,34 +133,39 @@ class FloatingImageService : AccessibilityService() {
         if (!::windowManager.isInitialized) {
             windowManager = getSystemService(Context.WINDOW_SERVICE) as WindowManager
         }
+        val filter = IntentFilter().apply {
+            addAction(ACTION_SHOW_FLOATING_IMAGE)
+        }
+        registerReceiver(floatingImageReceiver, filter)
     }
 
     override fun onDestroy() {
         unregisterReceiver(floatingImageReceiver)
-        super.onDestroy()
         hideFloatingImage()
+        super.onDestroy()
     }
 
     override fun onInterrupt() {}
 
     private fun showFloatingImage(x: Int, y: Int) {
-        windowManager = getSystemService(Context.WINDOW_SERVICE) as WindowManager
+        //windowManager = getSystemService(Context.WINDOW_SERVICE) as WindowManager
 
         params.x = x
         params.y = y
 
         val layoutInflater = getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
         floatingImageLayout = layoutInflater.inflate(R.layout.floating_image_layout, null)
-        floatingImageView = floatingImageLayout.findViewById(R.id.floating_image_view)
+        floatingImageView = floatingImageLayout?.findViewById(R.id.floating_image_view)
 
-        floatingImageLayout.setOnTouchListener(touchListener)
+        floatingImageLayout?.setOnTouchListener(touchListener)
 
-        windowManager.addView(floatingImageLayout, params)
+        floatingImageLayout?.let { windowManager.addView(it, params) }
     }
 
     private fun hideFloatingImage() {
-        if (::windowManager.isInitialized) {
-            windowManager.removeView(floatingImageLayout)
+        floatingImageLayout?.let {
+            windowManager.removeView(it)
+            floatingImageLayout = null
         }
     }
 

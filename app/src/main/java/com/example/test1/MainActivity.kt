@@ -8,7 +8,6 @@ import android.os.Bundle
 import android.os.Parcelable
 import android.provider.Settings
 import android.widget.Button
-import android.widget.ImageView
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
@@ -60,12 +59,12 @@ class MainActivity : AppCompatActivity() {
             startEpisodeIntent(packageName)
             setArray("Naver")
 
-            val intent = Intent(ACTION_SHOW_FLOATING_IMAGE)
-            intent.putExtra("targetPositions", targetPositions)
-            sendBroadcast(intent)
+            //val serviceIntent = Intent(this, FloatingImageService::class.java)
+            //startService(serviceIntent)
 
-            val serviceIntent = Intent(this, FloatingImageService::class.java)
-            startService(serviceIntent)
+            val intent = Intent(ACTION_SHOW_FLOATING_IMAGE)
+            intent.putParcelableArrayListExtra("targetPositions", targetPositions)
+            sendBroadcast(intent)
         }
     }
     private fun requestOverlayPermission() {
@@ -107,10 +106,11 @@ class MainActivity : AppCompatActivity() {
     private fun startFloatingImageService() {
         val intent = Intent(this, FloatingImageService::class.java)
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            startForegroundService(intent)
-        } else {
             startService(intent)
-        }
+        } //else {
+          //  this.startService(intent)
+        //}
+
 
     }
     private fun setArray(arrayName: String){
@@ -125,7 +125,7 @@ class MainActivity : AppCompatActivity() {
                     targetPositions.add(Coord(coordinates[0], coordinates[1]))
                 }
             }
-
+                println(targetPositions.toString())
         } else {
             showToast("Error: Array not found!")
         }
@@ -133,7 +133,7 @@ class MainActivity : AppCompatActivity() {
 
 
 
-    fun startEpisodeIntent(packageName: String) {
+    private fun startEpisodeIntent(packageName: String) {
         val intent = packageManager.getLaunchIntentForPackage(packageName)
         if (intent != null) {
             startActivity(intent)
