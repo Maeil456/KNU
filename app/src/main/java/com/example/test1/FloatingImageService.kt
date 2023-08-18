@@ -18,13 +18,10 @@ import kotlinx.android.parcel.Parcelize
 
 class FloatingImageService : AccessibilityService() {
 
-    @Parcelize
-    data class Coord(val x: Int, val y: Int) : Parcelable
-
     private lateinit var windowManager: WindowManager
     private var floatingImageLayout: View? = null
     private var floatingImageView: ImageView? = null
-    private var targetPositions = ArrayList<Coord>()
+    private var targetPositions = ArrayList<MainActivity.Coord>()
     private var isMoving = false
     private var currentPositionIndex = 0
     private var isShowing = false
@@ -56,12 +53,13 @@ class FloatingImageService : AccessibilityService() {
         override fun onReceive(context: Context, intent: Intent) {
             if (intent.action == ACTION_SHOW_FLOATING_IMAGE) {
                 val positions = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-                    intent.getParcelableArrayListExtra("targetPositions", T::class.java)
+                    intent.getParcelableArrayListExtra("targetPositions", MainActivity.Coord::class.java)
                 } else {
-                    intent.getParcelableArrayListExtra<Coord>("targetPositions")
+                    intent.getParcelableArrayListExtra<MainActivity.Coord>("targetPositions")
                 }
+                println(positions.toString())
                 if (positions != null) {
-                    targetPositions = positions as ArrayList<Coord>
+                    targetPositions = positions as ArrayList<MainActivity.Coord>
                     currentPositionIndex = 0
 
                     if (targetPositions.isNotEmpty()) {
@@ -70,7 +68,6 @@ class FloatingImageService : AccessibilityService() {
                             targetPositions[currentPositionIndex].y
                         )
 
-                        currentPositionIndex = (currentPositionIndex + 1) % targetPositions.size
                     }
                 }
             }
@@ -102,12 +99,19 @@ class FloatingImageService : AccessibilityService() {
             }
             MotionEvent.ACTION_UP -> {
                 if (!isMoving) {
-                    currentPositionIndex = (currentPositionIndex + 1) % targetPositions.size
-                    val targetPosition = targetPositions[currentPositionIndex]
-                    params.x = targetPosition.x
-                    params.y = targetPosition.y
-                    windowManager.updateViewLayout(floatingImageLayout, params)
+                    currentPositionIndex += 1
+
+                    if(currentPositionIndex >= targetPositions.size) {
+                        hideFloatingImage()
+                        currentPositionIndex = 0
+                    } else {
+                        val targetPosition = targetPositions[currentPositionIndex]
+                        params.x = targetPosition.x
+                        params.y = targetPosition.y
+                        windowManager.updateViewLayout(floatingImageLayout, params)
+                    }
                 }
+
             }
         }
         true

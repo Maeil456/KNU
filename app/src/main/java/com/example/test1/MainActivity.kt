@@ -125,7 +125,8 @@ class MainActivity : AppCompatActivity() {
                     targetPositions.add(Coord(coordinates[0], coordinates[1]))
                 }
             }
-                println(targetPositions.toString())
+            println(targetPositions.toString())
+            println(targetPositions.size)
         } else {
             showToast("Error: Array not found!")
         }
