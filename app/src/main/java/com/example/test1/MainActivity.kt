@@ -5,45 +5,43 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
+import android.os.Parcelable
 import android.provider.Settings
-import android.view.MotionEvent
-import android.view.View
-import android.view.ViewGroup
 import android.widget.Button
-import android.widget.ImageView
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
+import kotlinx.parcelize.Parcelize
 
 class MainActivity : AppCompatActivity() {
 
-    private val targetPositions = ArrayList<Pair<Int, Int>>()
+    @Parcelize
+    data class Coord(val x: Int, val y: Int) : Parcelable
+
+    private val targetPositions = ArrayList<Coord>()
+    val image = FloatingImageService()
 
     private val requestOverlayPermissionLauncher =
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
             if (isOverlayPermissionGranted()) {
                 startFloatingImageService()
-            } else {
-                showToast("Please grant overlay permission for proper functionality")
             }
         }
+    companion object {
+        const val ACTION_SHOW_FLOATING_IMAGE = "com.example.test1.SHOW_FLOATING_IMAGE"
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         var currentPositionIndex = 0
 
-        val OVERLAY_PERMISSION_REQUEST_CODE = 1001
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && !Settings.canDrawOverlays(this)) {
-            val intent = Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION, Uri.parse("package:$packageName"))
-            startActivityForResult(intent, OVERLAY_PERMISSION_REQUEST_CODE)
-        }
-
         if (!isOverlayPermissionGranted()) {
             requestOverlayPermission()
         } else {
             startFloatingImageService()
         }
+
 
         val btnEpisode1 = findViewById<Button>(R.id.btnfavor)
         val btnEpisode2 = findViewById<Button>(R.id.btnsearch)
@@ -53,6 +51,7 @@ class MainActivity : AppCompatActivity() {
         val btnEpisode6 = findViewById<Button>(R.id.btnyoutube)
         val btnEpisode7 = findViewById<Button>(R.id.btndaum)
         val btnEpisode8 = findViewById<Button>(R.id.btnetc)
+        // Add more buttons for each episode as needed
 
         btnEpisode2.setOnClickListener {
             val intent = Intent(this@MainActivity, SearchActivity::class.java)
@@ -67,10 +66,14 @@ class MainActivity : AppCompatActivity() {
         btnEpisode4.setOnClickListener {
             val packageName = "com.nhn.android.search"
             startEpisodeIntent(packageName)
-            if(isOverlayPermissionGranted()) {
-                val serviceIntent = Intent(this, FloatingImageService::class.java)
-                startService(serviceIntent)
-            }
+            setArray("Naver")
+
+            //val serviceIntent = Intent(this, FloatingImageService::class.java)
+            //startService(serviceIntent)
+
+            val intent = Intent(ACTION_SHOW_FLOATING_IMAGE)
+            intent.putParcelableArrayListExtra("targetPositions", targetPositions)
+            sendBroadcast(intent)
         }
         btnEpisode5.setOnClickListener {
             val packageName = "com.woowahan.baemin"
@@ -90,8 +93,8 @@ class MainActivity : AppCompatActivity() {
             val serviceIntent = Intent(this, FloatingImageService::class.java)
             startService(serviceIntent)
         }
-    }
 
+    }
     private fun requestOverlayPermission() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             val intent = Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION, Uri.parse("package:$packageName"))
@@ -106,14 +109,15 @@ class MainActivity : AppCompatActivity() {
             true
         }
     }
-
     private fun isAccessibilityServiceEnabled(): Boolean {
         val enabledServices = Settings.Secure.getString(
             contentResolver,
             Settings.Secure.ENABLED_ACCESSIBILITY_SERVICES
-        ) ?: return false
+        )?:return false
         val services = enabledServices.split(":".toRegex()).toTypedArray()
-        val expectedComponentName = ComponentName(packageName, FloatingImageService::class.java.name).flattenToString()
+        val packageName = packageName
+        val className = FloatingImageService::class.java.name
+        val expectedComponentName = ComponentName(packageName, className).flattenToString()
 
         for (service in services) {
             if (service.equals(expectedComponentName, ignoreCase = true)) {
@@ -122,54 +126,54 @@ class MainActivity : AppCompatActivity() {
         }
         return false
     }
-
     private fun openAccessibilitySettings() {
         val intent = Intent(Settings.ACTION_ACCESSIBILITY_SETTINGS)
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
         startActivity(intent)
     }
-
     private fun startFloatingImageService() {
-        if (!isAccessibilityServiceEnabled()) {
-            openAccessibilitySettings()
-        } else {
-            val intent = Intent(this, FloatingImageService::class.java)
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                startForegroundService(intent)
-            } else {
-                startService(intent)
-            }
-        }
+        val intent = Intent(this, FloatingImageService::class.java)
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            startService(intent)
+        } //else {
+        //  this.startService(intent)
+        //}
+
+
     }
-
-    private fun setArray(arrayName: String) {
+    private fun setArray(arrayName: String){
         val resourceId = resources.getIdentifier(arrayName, "array", packageName)
-        targetPositions.clear()
 
-        if (resourceId != 0) {
+        if (resourceId != 0) { // Check if the resource exists
             val positionsStringArray = resources.getStringArray(resourceId)
+
             for (positionString in positionsStringArray) {
                 val coordinates = positionString.split(",").map { it.trim().toInt() }
                 if (coordinates.size == 2) {
-                    val pair = coordinates[0] to coordinates[1]
-                    targetPositions.add(pair)
+                    targetPositions.add(Coord(coordinates[0], coordinates[1]))
                 }
             }
+            println(targetPositions.toString())
+            println(targetPositions.size)
         } else {
             showToast("Error: Array not found!")
         }
     }
 
+
+
     private fun startEpisodeIntent(packageName: String) {
-        val launchIntent = packageManager.getLaunchIntentForPackage(packageName)
-        if (launchIntent != null) {
-            startActivity(launchIntent)
+        val intent = packageManager.getLaunchIntentForPackage(packageName)
+        if (intent != null) {
+            startActivity(intent)
         } else {
+            // Handle the case when the target app is not installed
+            // You can show an error message or direct the user to install the app
             val link = "https://play.google.com/store/apps/details?id=$packageName"
-            val marketIntent = Intent(Intent.ACTION_VIEW).apply {
+            val intent = Intent(Intent.ACTION_VIEW).apply {
                 data = Uri.parse(link)
             }
-            startActivity(marketIntent)
+            startActivity(intent)
         }
     }
 

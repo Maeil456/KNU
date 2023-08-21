@@ -1,26 +1,127 @@
 package com.example.test1
 
 import android.accessibilityservice.AccessibilityService
+import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
+import android.content.IntentFilter
 import android.graphics.PixelFormat
+import android.icu.lang.UCharacter.GraphemeClusterBreak.T
 import android.os.Build
+import android.os.Parcelable
 import android.view.*
 import android.widget.ImageView
 import android.view.accessibility.AccessibilityEvent
 import android.widget.Button
 import android.widget.Toast
+import com.example.test1.MainActivity.Companion.ACTION_SHOW_FLOATING_IMAGE
 import kotlin.collections.ArrayList
+import kotlinx.android.parcel.Parcelize
 
 class FloatingImageService : AccessibilityService() {
+
     private lateinit var windowManager: WindowManager
-    private lateinit var floatingImageLayout: View
-    private lateinit var floatingImageView: ImageView
+    private var floatingImageLayout: View? = null
+    private var floatingImageView: ImageView? = null
     private lateinit var bubbleView: View
-    private lateinit var targetPositions: ArrayList<Pair<Int, Int>>
+    private var targetPositions = ArrayList<MainActivity.Coord>()
+    private var isMoving = false
     private var currentPositionIndex = 0
     private var isShowing = false
-    private lateinit var btnGoToApp: Button  // 앱 메인 화면으로 돌아가기 버튼
+    private lateinit var btnGoToApp: Button
+
+    private var initX = 0
+    private var initY = 0
+    private val touchSlopSquare = 100 * 100
+    private val params = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+        WindowManager.LayoutParams(
+            WindowManager.LayoutParams.WRAP_CONTENT,
+            WindowManager.LayoutParams.WRAP_CONTENT,
+            WindowManager.LayoutParams.TYPE_APPLICATION_OVERLAY,
+            WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE or WindowManager.LayoutParams.FLAG_LAYOUT_IN_SCREEN,
+            PixelFormat.TRANSLUCENT
+        )
+    } else {
+        WindowManager.LayoutParams(
+            WindowManager.LayoutParams.WRAP_CONTENT,
+            WindowManager.LayoutParams.WRAP_CONTENT,
+            WindowManager.LayoutParams.TYPE_PHONE,
+            WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE or WindowManager.LayoutParams.FLAG_LAYOUT_IN_SCREEN,
+            PixelFormat.TRANSLUCENT
+        )
+    }.apply {
+        gravity = Gravity.TOP or Gravity.START
+    }
+
+    private val floatingImageReceiver = object : BroadcastReceiver() {
+        override fun onReceive(context: Context, intent: Intent) {
+            if (intent.action == ACTION_SHOW_FLOATING_IMAGE) {
+                val positions = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+                    intent.getParcelableArrayListExtra("targetPositions", MainActivity.Coord::class.java)
+                } else {
+                    intent.getParcelableArrayListExtra<MainActivity.Coord>("targetPositions")
+                }
+                println(positions.toString())
+                if (positions != null) {
+                    targetPositions = positions as ArrayList<MainActivity.Coord>
+                    currentPositionIndex = 0
+
+                    if (targetPositions.isNotEmpty()) {
+                        showFloatingImage(
+                            targetPositions[currentPositionIndex].x,
+                            targetPositions[currentPositionIndex].y
+                        )
+
+                    }
+                }
+            }
+        }
+    }
+
+    private val touchListener = View.OnTouchListener { view, event ->
+        when (event.action) {
+            MotionEvent.ACTION_DOWN -> {
+                isMoving = false
+                initX = event.rawX.toInt()
+                initY = event.rawY.toInt()
+            }
+            MotionEvent.ACTION_MOVE -> {
+                if (!isMoving) {
+                    val dX = event.rawX.toInt() - initX
+                    val dY = event.rawY.toInt() - initY
+                    if (dX * dX + dY * dY > touchSlopSquare) {
+                        isMoving = true
+                    }
+                }
+                if (isMoving) {
+                    val x = event.rawX.toInt() - initX + params.x
+                    val y = event.rawY.toInt() - initY + params.y
+                    params.x = x
+                    params.y = y
+                    windowManager.updateViewLayout(floatingImageLayout, params)
+                }
+            }
+            MotionEvent.ACTION_UP -> {
+                btnGoToApp.visibility = View.VISIBLE
+                if (!isMoving) {
+                    currentPositionIndex += 1
+
+                    if(currentPositionIndex >= targetPositions.size) {
+                        hideFloatingImage()
+                        currentPositionIndex = 0
+                    } else {
+                        val targetPosition = targetPositions[currentPositionIndex]
+                        params.x = targetPosition.x
+                        params.y = targetPosition.y
+                        windowManager.updateViewLayout(floatingImageLayout, params)
+                    }
+                }
+
+            }
+        }
+        true
+    }
+
     override fun onAccessibilityEvent(event: AccessibilityEvent?) {
         if (event?.packageName == "com.kakao.talk" || event?.packageName == "com.nhn.android.search") {
             if (!isShowing) {
@@ -35,26 +136,22 @@ class FloatingImageService : AccessibilityService() {
             }
         }
     }
+
     override fun onCreate() {
         super.onCreate()
+        if (!::windowManager.isInitialized) {
+            windowManager = getSystemService(WINDOW_SERVICE) as WindowManager
+        }
+        val filter = IntentFilter().apply {
+            addAction(ACTION_SHOW_FLOATING_IMAGE)
+        }
+        registerReceiver(floatingImageReceiver, filter)
 
-        // 공통 WindowManager 초기화
-        windowManager = getSystemService(Context.WINDOW_SERVICE) as WindowManager
-
-        // FloatingImageService 초기화
-        targetPositions = arrayListOf()
-
-        // BubbleService 초기화
         bubbleView = LayoutInflater.from(this).inflate(R.layout.layout_bubble, null)
+        btnGoToApp = bubbleView.findViewById(R.id.btnGoToMain)
         val bubbleParams = createLayoutParams()
         windowManager.addView(bubbleView, bubbleParams)
     }
-    override fun onDestroy() {
-        super.onDestroy()
-        hideFloatingImage()
-        windowManager.removeView(bubbleView)
-    }
-
     private fun createLayoutParams(): WindowManager.LayoutParams {
         return WindowManager.LayoutParams(
             WindowManager.LayoutParams.WRAP_CONTENT,
@@ -64,25 +161,31 @@ class FloatingImageService : AccessibilityService() {
             PixelFormat.TRANSLUCENT
         )
     }
-    override fun onInterrupt() {
-        // Handle service interruption if needed
-    }
-    private fun showFloatingImage(x: Int, y: Int) {
-        val localWindowManager = windowManager ?: return
 
-        val params = createLayoutParams()
-        params.gravity = Gravity.TOP or Gravity.START
+    override fun onDestroy() {
+        windowManager.removeView(bubbleView)
+        unregisterReceiver(floatingImageReceiver)
+        hideFloatingImage()
+        super.onDestroy()
+    }
+
+    override fun onInterrupt() {}
+
+    private fun showFloatingImage(x: Int, y: Int) {
+        //windowManager = getSystemService(Context.WINDOW_SERVICE) as WindowManager
+
         params.x = x
         params.y = y
 
-        val layoutInflater = getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
+        val layoutInflater = getSystemService(LAYOUT_INFLATER_SERVICE) as LayoutInflater
         floatingImageLayout = layoutInflater.inflate(R.layout.floating_image_layout, null)
-        floatingImageView = floatingImageLayout.findViewById(R.id.floating_image_view)
-        floatingImageView.setImageResource(R.drawable.pin)
-        floatingImageView = floatingImageLayout.findViewById(R.id.floating_image_view)
-        btnGoToApp = floatingImageLayout.findViewById(R.id.btnGoToMain)
+        floatingImageView = floatingImageLayout?.findViewById(R.id.floating_image_view)
 
-        floatingImageView.visibility = View.VISIBLE
+        floatingImageLayout?.setOnTouchListener(touchListener)
+
+        floatingImageLayout?.let { windowManager.addView(it, params) }
+
+
         btnGoToApp.visibility = View.GONE
 
         btnGoToApp.setOnClickListener {
@@ -90,60 +193,32 @@ class FloatingImageService : AccessibilityService() {
             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
             startActivity(intent)
         }
-
-        floatingImageView.setOnTouchListener(object : View.OnTouchListener {
-            private var initialX: Int = 0
-            private var initialY: Int = 0
-            private var initialTouchX: Float = 0f
-            private var initialTouchY: Float = 0f
-
-            override fun onTouch(v: View?, event: MotionEvent): Boolean {
-                when (event.action) {
-                    MotionEvent.ACTION_DOWN -> {
-                        initialX = params.x
-                        initialY = params.y
-                        initialTouchX = event.rawX
-                        initialTouchY = event.rawY
-                        return true
-                    }
-                    MotionEvent.ACTION_MOVE -> {
-                        val offsetX = event.rawX - initialTouchX
-                        val offsetY = event.rawY - initialTouchY
-                        params.x = initialX + offsetX.toInt()
-                        params.y = initialY + offsetY.toInt()
-                        windowManager.updateViewLayout(floatingImageLayout, params)
-                        return true
-                    }
-                    MotionEvent.ACTION_UP -> {
-                        btnGoToApp.visibility = View.VISIBLE
-                        if (currentPositionIndex < targetPositions.size) {
-                            val targetPosition = targetPositions[currentPositionIndex]
-                            params.x = targetPosition.first
-                            params.y = targetPosition.second
-                            windowManager.updateViewLayout(floatingImageLayout, params)
-
-                            currentPositionIndex++
-                        } else {
-                            stopSelf()
-                        }
-                        return true
-                    }
-                }
-                return false
-            }
-        })
-
-        windowManager.addView(floatingImageLayout, params)
     }
 
 
     private fun hideFloatingImage() {
-        if(::floatingImageLayout.isInitialized) {
-            windowManager.removeView(floatingImageLayout)
+        floatingImageLayout?.let {
+            windowManager.removeView(it)
+            floatingImageLayout = null
         }
+    }
+
+    override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
+        val intentFilter = IntentFilter()
+        intentFilter.addAction(ACTION_SHOW_FLOATING_IMAGE)
+        registerReceiver(floatingImageReceiver, intentFilter)
+
+
+        return START_STICKY
     }
 
     private fun showToast(message: String) {
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
+    }
+
+    fun showFloatingArray(arrayList: ArrayList<Pair<Int, Int>>) {
+        for ((x, y) in arrayList) {
+            showFloatingImage(x, y)
+        }
     }
 }
