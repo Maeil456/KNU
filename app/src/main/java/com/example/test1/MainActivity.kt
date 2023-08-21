@@ -33,7 +33,11 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         var currentPositionIndex = 0
 
-
+        val OVERLAY_PERMISSION_REQUEST_CODE = 1001
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && !Settings.canDrawOverlays(this)) {
+            val intent = Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION, Uri.parse("package:$packageName"))
+            startActivityForResult(intent, OVERLAY_PERMISSION_REQUEST_CODE)
+        }
 
         if (!isOverlayPermissionGranted()) {
             requestOverlayPermission()
@@ -63,8 +67,10 @@ class MainActivity : AppCompatActivity() {
         btnEpisode4.setOnClickListener {
             val packageName = "com.nhn.android.search"
             startEpisodeIntent(packageName)
-            val serviceIntent = Intent(this, FloatingImageService::class.java)
-            startService(serviceIntent)
+            if(isOverlayPermissionGranted()) {
+                val serviceIntent = Intent(this, FloatingImageService::class.java)
+                startService(serviceIntent)
+            }
         }
         btnEpisode5.setOnClickListener {
             val packageName = "com.woowahan.baemin"
