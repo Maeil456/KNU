@@ -3,10 +3,24 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content">
 
+    <!--
     <ImageView
         android:id="@+id/floating_image_view"
-        android:layout_width="200dp"
-        android:layout_height="200dp"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
         android:src="@drawable/pin" />
+    기본 이미지-->
+    <ImageView
+        android:id="@+id/textBox1"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:src="@drawable/Text_Box1" />
+
+    <ImageView
+        android:id="@+id/pin"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:src="@drawable/pin" />
+
 
 </FrameLayout>

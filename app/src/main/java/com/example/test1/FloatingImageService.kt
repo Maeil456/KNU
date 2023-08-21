@@ -25,6 +25,8 @@ class FloatingImageService : AccessibilityService() {
     private var isMoving = false
     private var currentPositionIndex = 0
     private var isShowing = false
+    private var imageIndex: ArrayList<String> = arrayListOf()
+
 
     private var initX = 0
     private var initY = 0
@@ -58,8 +60,10 @@ class FloatingImageService : AccessibilityService() {
                     intent.getParcelableArrayListExtra<MainActivity.Coord>("targetPositions")
                 }
                 println(positions.toString())
-                if (positions != null) {
+                val imageposition = intent.getStringArrayListExtra("imageIndex")
+                if (positions != null && imageposition != null) {
                     targetPositions = positions as ArrayList<MainActivity.Coord>
+                    imageIndex = imageposition
                     currentPositionIndex = 0
 
                     if (targetPositions.isNotEmpty()) {
@@ -152,14 +156,14 @@ class FloatingImageService : AccessibilityService() {
     override fun onInterrupt() {}
 
     private fun showFloatingImage(x: Int, y: Int) {
-        //windowManager = getSystemService(Context.WINDOW_SERVICE) as WindowManager
-
         params.x = x
         params.y = y
+        val tmp = imageIndex[currentPositionIndex]
+        val floatingimage = R.id.$tmp
 
         val layoutInflater = getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
         floatingImageLayout = layoutInflater.inflate(R.layout.floating_image_layout, null)
-        floatingImageView = floatingImageLayout?.findViewById(R.id.floating_image_view)
+        floatingImageView = floatingImageLayout?.findViewById(R.id.pin)
 
         floatingImageLayout?.setOnTouchListener(touchListener)
 

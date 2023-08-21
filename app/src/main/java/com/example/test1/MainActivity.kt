@@ -18,6 +18,7 @@ class MainActivity : AppCompatActivity() {
     @Parcelize
     data class Coord(val x: Int, val y: Int) : Parcelable
 
+    private var imageIndex: ArrayList<String> = arrayListOf()
     private val targetPositions = ArrayList<Coord>()
     val image = FloatingImageService()
 
@@ -57,13 +58,12 @@ class MainActivity : AppCompatActivity() {
         btnEpisode2.setOnClickListener {
             val packageName = "com.nhn.android.search"
             startEpisodeIntent(packageName)
-            setArray("Naver")
-
-            //val serviceIntent = Intent(this, FloatingImageService::class.java)
-            //startService(serviceIntent)
+            setArray("Naver_search")
+            setImage("Naver_search_image")
 
             val intent = Intent(ACTION_SHOW_FLOATING_IMAGE)
             intent.putParcelableArrayListExtra("targetPositions", targetPositions)
+            intent.putStringArrayListExtra("imageIndex",imageIndex)
             sendBroadcast(intent)
         }
     }
@@ -127,6 +127,19 @@ class MainActivity : AppCompatActivity() {
             }
             println(targetPositions.toString())
             println(targetPositions.size)
+        } else {
+            showToast("Error: Array not found!")
+        }
+    }
+
+    private fun setImage(arrayName: String){
+        val resourceId = resources.getIdentifier(arrayName, "array", packageName)
+
+        if (resourceId != 0) { // Check if the resource exists
+            val imageStringArray = resources.getStringArray(resourceId)
+            for (imageString in imageStringArray) {
+                imageIndex.add(imageString)
+            }
         } else {
             showToast("Error: Array not found!")
         }
