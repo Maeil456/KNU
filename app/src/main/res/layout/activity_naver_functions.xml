@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/btnNaverFunction1"
+            android:layout_width="0dp"
+            android:layout_height="175dp"
+            android:layout_weight="1"
+            android:text="검색하기" />
+
+        <Button
+            android:id="@+id/btnNaverFunction2"
+            android:layout_width="0dp"
+            android:layout_height="175dp"
+            android:layout_weight="1"
+            android:text="주식 보기" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/btnNaverFunction3"
+            android:layout_width="0dp"
+            android:layout_height="175dp"
+            android:layout_weight="1"
+            android:text="날씨 보기" />
+
+        <Button
+            android:id="@+id/btnNaverFunction4"
+            android:layout_width="0dp"
+            android:layout_height="175dp"
+            android:layout_weight="1"
+            android:text="메일보기,보내기" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/btnNaverFunction5"
+            android:layout_width="0dp"
+            android:layout_height="175dp"
+            android:layout_weight="1"
+            android:text="뉴스보기" />
+
+        <Button
+            android:id="@+id/btnNaverFunction6"
+            android:layout_width="0dp"
+            android:layout_height="175dp"
+            android:layout_weight="1"
+            android:text="쇼핑하기" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/btnNaverFunction7"
+            android:layout_width="0dp"
+            android:layout_height="175dp"
+            android:layout_weight="1"
+            android:text="지도보기" />
+
+        <Button
+            android:id="@+id/btnNaverFunction8"
+            android:layout_width="0dp"
+            android:layout_height="175dp"
+            android:layout_weight="1"
+            android:text="더보기" />
+
+    </LinearLayout>
+
+
+
+
+</LinearLayout>
