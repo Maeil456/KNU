@@ -20,6 +20,7 @@ class MainActivity : AppCompatActivity() {
 
     private var imageIndex: ArrayList<String> = arrayListOf()
     private val targetPositions = ArrayList<Coord>()
+    private val targetSizes = ArrayList<Coord>()
     val image = FloatingImageService()
 
     private val requestOverlayPermissionLauncher =
@@ -59,10 +60,12 @@ class MainActivity : AppCompatActivity() {
             val packageName = "com.nhn.android.search"
             startEpisodeIntent(packageName)
             setArray("Naver_search")
+            setArray2("Naver_search_imageSize")
             setImage("Naver_search_image")
 
             val intent = Intent(ACTION_SHOW_FLOATING_IMAGE)
             intent.putParcelableArrayListExtra("targetPositions", targetPositions)
+            intent.putParcelableArrayListExtra("targetSizes", targetSizes)
             intent.putStringArrayListExtra("imageIndex",imageIndex)
             sendBroadcast(intent)
         }
@@ -140,12 +143,30 @@ class MainActivity : AppCompatActivity() {
             for (imageString in imageStringArray) {
                 imageIndex.add(imageString)
             }
+            println(imageIndex.toString())
+            println(imageIndex.size)
         } else {
             showToast("Error: Array not found!")
         }
     }
 
+    private fun setArray2(arrayName: String){
+        val resourceId = resources.getIdentifier(arrayName, "array", packageName)
 
+        if (resourceId != 0) { // Check if the resource exists
+            val sizeStringArray = resources.getStringArray(resourceId)
+
+            for (sizeString in sizeStringArray) {
+                val coordinates = sizeString.split(",").map { it.trim().toInt() }
+                if (coordinates.size == 2) {
+                    targetSizes.add(Coord(coordinates[0], coordinates[1]))
+                }
+            }
+
+        } else {
+            showToast("Error: Array not found!")
+        }
+    }
 
     private fun startEpisodeIntent(packageName: String) {
         val intent = packageManager.getLaunchIntentForPackage(packageName)

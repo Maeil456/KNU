@@ -4,18 +4,25 @@
         <item>100,200</item>
         <item>300,400</item>
         <item>500,600</item>
-        <!-- Add more positions if needed -->
+
     </string-array>
+
     <string-array name="Naver_search">
         <item>300,500</item>
         <item>300,1150</item>
 
-        <!-- Add more positions if needed -->
     </string-array>
+
     <string-array name="Naver_search_image">
         <item>pin</item>
-        <item>textBox1</item>
+        <item>testbox_one</item>
 
-        <!-- Add more positions if needed -->
     </string-array>
+
+    <string-array name="Naver_search_imageSize">
+        <item>300,300</item>
+        <item>1000,300</item>
+
+    </string-array>
+
 </resources>
