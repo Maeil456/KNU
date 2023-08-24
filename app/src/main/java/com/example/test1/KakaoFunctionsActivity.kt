@@ -9,32 +9,67 @@ import androidx.appcompat.app.AppCompatActivity
 
 class KakaoFunctionsActivity : AppCompatActivity() {
 
+    private var imageIndex: ArrayList<String> = arrayListOf()
+    private val targetPositions = ArrayList<MainActivity.Coord>()
+    private val targetSizes = ArrayList<MainActivity.Coord>()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_kakao_functions)
 
         val btnKakaoFunction1 = findViewById<Button>(R.id.btnKakaoFunction1)
+        val btnKakaoFunction2 = findViewById<Button>(R.id.btnKakaoFunction2)
+        val btnKakaoFunction3 = findViewById<Button>(R.id.btnKakaoFunction3)
+        val btnKakaoFunction4 = findViewById<Button>(R.id.btnKakaoFunction4)
+        val btnKakaoFunction5 = findViewById<Button>(R.id.btnKakaoFunction5)
+        val btnKakaoFunction6 = findViewById<Button>(R.id.btnKakaoFunction6)
+        val btnKakaoFunction7 = findViewById<Button>(R.id.btnKakaoFunction7)
+
         btnKakaoFunction1.setOnClickListener {
             val packageName = "com.kakao.talk"
             startEpisodeIntent(packageName)
-            val serviceIntent = Intent(this, FloatingImageService::class.java)
-            startService(serviceIntent)
+            setArray("Naver_search")
+            setArray2("Naver_search_imageSize")
+            setImage("Naver_search_image")
+
+            val intent = Intent(MainActivity.ACTION_SHOW_FLOATING_IMAGE)
+            intent.putParcelableArrayListExtra("targetPositions", targetPositions)
+            intent.putParcelableArrayListExtra("targetSizes", targetSizes)
+            intent.putStringArrayListExtra("imageIndex",imageIndex)
+            sendBroadcast(intent)
+            RecentOptionsManager.addOption("문자 보내기")
         }
-        val btnKakaoFunction2 = findViewById<Button>(R.id.btnKakaoFunction2)
+
         btnKakaoFunction2.setOnClickListener {
             val packageName = "com.kakao.talk"
             startEpisodeIntent(packageName)
-            val serviceIntent = Intent(this, FloatingImageService::class.java)
-            startService(serviceIntent)
+            setArray("Naver_search")
+            setArray2("Naver_search_imageSize")
+            setImage("Naver_search_image")
+
+            val intent = Intent(MainActivity.ACTION_SHOW_FLOATING_IMAGE)
+            intent.putParcelableArrayListExtra("targetPositions", targetPositions)
+            intent.putParcelableArrayListExtra("targetSizes", targetSizes)
+            intent.putStringArrayListExtra("imageIndex",imageIndex)
+            sendBroadcast(intent)
+            RecentOptionsManager.addOption("영상 통화")
         }
-        val btnKakaoFunction3 = findViewById<Button>(R.id.btnKakaoFunction3)
+
         btnKakaoFunction3.setOnClickListener {
             val packageName = "com.kakao.talk"
             startEpisodeIntent(packageName)
-            val serviceIntent = Intent(this, FloatingImageService::class.java)
-            startService(serviceIntent)
+            setArray("Naver_search")
+            setArray2("Naver_search_imageSize")
+            setImage("Naver_search_image")
+
+            val intent = Intent(MainActivity.ACTION_SHOW_FLOATING_IMAGE)
+            intent.putParcelableArrayListExtra("targetPositions", targetPositions)
+            intent.putParcelableArrayListExtra("targetSizes", targetSizes)
+            intent.putStringArrayListExtra("imageIndex",imageIndex)
+            sendBroadcast(intent)
+            RecentOptionsManager.addOption("음성 통화")
         }
-        val btnKakaoFunction4 = findViewById<Button>(R.id.btnKakaoFunction4)
+
         btnKakaoFunction4.setOnClickListener {
             val packageName = "https://weather.naver.com/today/15133580?cpName=KMA"
             val naverWeatherIntent = Intent(Intent.ACTION_VIEW, Uri.parse(packageName))
@@ -48,43 +83,124 @@ class KakaoFunctionsActivity : AppCompatActivity() {
             }
             val serviceIntent = Intent(this, FloatingImageService::class.java)
             startService(serviceIntent)
+            RecentOptionsManager.addOption("선물 하기")
         }
-        val btnKakaoFunction5 = findViewById<Button>(R.id.btnKakaoFunction5)
+
         btnKakaoFunction5.setOnClickListener {
             val packageName = "com.kakao.talk"
             startEpisodeIntent(packageName)
-            val serviceIntent = Intent(this, FloatingImageService::class.java)
-            startService(serviceIntent)
+            setArray("Naver_search")
+            setArray2("Naver_search_imageSize")
+            setImage("Naver_search_image")
+
+            val intent = Intent(MainActivity.ACTION_SHOW_FLOATING_IMAGE)
+            intent.putParcelableArrayListExtra("targetPositions", targetPositions)
+            intent.putParcelableArrayListExtra("targetSizes", targetSizes)
+            intent.putStringArrayListExtra("imageIndex",imageIndex)
+            sendBroadcast(intent)
+            RecentOptionsManager.addOption("프로필 설정하기")
         }
-        val btnKakaoFunction6 = findViewById<Button>(R.id.btnKakaoFunction6)
+
         btnKakaoFunction6.setOnClickListener {
             val packageName = "com.kakao.talk"
             startEpisodeIntent(packageName)
-            val serviceIntent = Intent(this, FloatingImageService::class.java)
-            startService(serviceIntent)
+            setArray("Naver_search")
+            setArray2("Naver_search_imageSize")
+            setImage("Naver_search_image")
+
+            val intent = Intent(MainActivity.ACTION_SHOW_FLOATING_IMAGE)
+            intent.putParcelableArrayListExtra("targetPositions", targetPositions)
+            intent.putParcelableArrayListExtra("targetSizes", targetSizes)
+            intent.putStringArrayListExtra("imageIndex",imageIndex)
+            sendBroadcast(intent)
+            RecentOptionsManager.addOption("쇼핑 하기")
         }
-        val btnKakaoFunction7 = findViewById<Button>(R.id.btnKakaoFunction7)
+
         btnKakaoFunction7.setOnClickListener {
             val packageName = "com.kakao.talk"
             startEpisodeIntent(packageName)
-            val serviceIntent = Intent(this, FloatingImageService::class.java)
-            startService(serviceIntent)
+            setArray("Naver_search")
+            setArray2("Naver_search_imageSize")
+            setImage("Naver_search_image")
+
+            val intent = Intent(MainActivity.ACTION_SHOW_FLOATING_IMAGE)
+            intent.putParcelableArrayListExtra("targetPositions", targetPositions)
+            intent.putParcelableArrayListExtra("targetSizes", targetSizes)
+            intent.putStringArrayListExtra("imageIndex",imageIndex)
+            sendBroadcast(intent)
+            RecentOptionsManager.addOption("친구 추가")
         }
 
+    }
 
-        // 다른 버튼들에 대한 클릭 리스너도 설정합니다.
+    private fun setArray(arrayName: String) {
+        val resourceId = resources.getIdentifier(arrayName, "array", packageName)
+
+
+        if (resourceId != 0) {
+            val positionsStringArray = resources.getStringArray(resourceId)
+            for (positionString in positionsStringArray) {
+                val coordinates = positionString.split(",").map { it.trim().toInt() }
+                if (coordinates.size == 2) {
+                    targetPositions.add(MainActivity.Coord(coordinates[0], coordinates[1]))
+                }
+            }
+            println(targetPositions.toString())
+            println(targetPositions.size)
+        } else {
+            showToast("Error: Array not found!")
+        }
+    }
+    private fun setArray2(arrayName: String){
+        val resourceId = resources.getIdentifier(arrayName, "array", packageName)
+
+        targetSizes.clear()
+
+        if (resourceId != 0) { // Check if the resource exists
+            val sizeStringArray = resources.getStringArray(resourceId)
+
+            for (sizeString in sizeStringArray) {
+                val coordinates = sizeString.split(",").map { it.trim().toInt() }
+                if (coordinates.size == 2) {
+                    targetSizes.add(MainActivity.Coord(coordinates[0], coordinates[1]))
+                }
+            }
+            println(targetSizes.toString())
+            println(targetSizes.size)
+            println("Log From setArray2")
+        } else {
+            showToast("Error: Array not found!")
+        }
+    }
+    private fun setImage(arrayName: String){
+        val resourceId = resources.getIdentifier(arrayName, "array", packageName)
+
+        if (resourceId != 0) { // Check if the resource exists
+            val imageStringArray = resources.getStringArray(resourceId)
+            for (imageString in imageStringArray) {
+                imageIndex.add(imageString)
+            }
+        } else {
+            showToast("Error: Array not found!")
+        }
     }
 
     private fun startEpisodeIntent(packageName: String) {
-        val launchIntent = packageManager.getLaunchIntentForPackage(packageName)
-        if (launchIntent != null) {
-            startActivity(launchIntent)
+        val intent = packageManager.getLaunchIntentForPackage(packageName)
+        if (intent != null) {
+            startActivity(intent)
         } else {
+            // Handle the case when the target app is not installed
+            // You can show an error message or direct the user to install the app
             val link = "https://play.google.com/store/apps/details?id=$packageName"
-            val marketIntent = Intent(Intent.ACTION_VIEW).apply {
+            val intent = Intent(Intent.ACTION_VIEW).apply {
                 data = Uri.parse(link)
             }
-            startActivity(marketIntent)
+            startActivity(intent)
         }
+    }
+
+    private fun showToast(message: String) {
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
     }
 }

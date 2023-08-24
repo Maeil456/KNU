@@ -13,18 +13,18 @@
         android:orientation="horizontal">
 
         <Button
-            android:id="@+id/btnKakaoFunction1"
+            android:id="@+id/btnFavorFunction1"
             android:layout_width="0dp"
             android:layout_height="175dp"
             android:layout_weight="1"
-            android:text="문자 보내기" />
+            android:text="0" />
 
         <Button
-            android:id="@+id/btnKakaoFunction2"
+            android:id="@+id/btnFavorFunction2"
             android:layout_width="0dp"
             android:layout_height="175dp"
             android:layout_weight="1"
-            android:text="영상 통화" />
+            android:text="0" />
 
     </LinearLayout>
 
@@ -36,18 +36,18 @@
         android:orientation="horizontal">
 
         <Button
-            android:id="@+id/btnKakaoFunction3"
+            android:id="@+id/btnFavorFunction3"
             android:layout_width="0dp"
             android:layout_height="175dp"
             android:layout_weight="1"
-            android:text="음성 통화" />
+            android:text="0" />
 
         <Button
-            android:id="@+id/btnKakaoFunction4"
+            android:id="@+id/btnFavorFunction4"
             android:layout_width="0dp"
             android:layout_height="175dp"
             android:layout_weight="1"
-            android:text="선물 하기" />
+            android:text="0" />
 
     </LinearLayout>
 
@@ -59,18 +59,18 @@
         android:orientation="horizontal">
 
         <Button
-            android:id="@+id/btnKakaoFunction5"
+            android:id="@+id/btnFavorFunction5"
             android:layout_width="0dp"
             android:layout_height="175dp"
             android:layout_weight="1"
-            android:text="프로필 설정하기" />
+            android:text="0" />
 
         <Button
-            android:id="@+id/btnKakaoFunction6"
+            android:id="@+id/btnFavorFunction6"
             android:layout_width="0dp"
             android:layout_height="175dp"
             android:layout_weight="1"
-            android:text="쇼핑 하기" />
+            android:text="0" />
 
     </LinearLayout>
 
@@ -82,18 +82,18 @@
         android:orientation="horizontal">
 
         <Button
-            android:id="@+id/btnKakaoFunction7"
+            android:id="@+id/btnFavorFunction7"
             android:layout_width="0dp"
             android:layout_height="175dp"
             android:layout_weight="1"
-            android:text="친구 추가" />
+            android:text="0" />
 
         <Button
-            android:id="@+id/btnKakaoFunction8"
+            android:id="@+id/btnFavorFunction8"
             android:layout_width="0dp"
             android:layout_height="175dp"
             android:layout_weight="1"
-            android:text="더보기" />
+            android:text="0" />
 
     </LinearLayout>
 
