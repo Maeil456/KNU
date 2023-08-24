@@ -17,7 +17,7 @@
             android:layout_width="0dp"
             android:layout_height="175dp"
             android:layout_weight="1"
-            android:text="문자보내기" />
+            android:text="문자 보내기" />
 
         <Button
             android:id="@+id/btnKakaoFunction2"
@@ -47,7 +47,7 @@
             android:layout_width="0dp"
             android:layout_height="175dp"
             android:layout_weight="1"
-            android:text="선물하기" />
+            android:text="선물 하기" />
 
     </LinearLayout>
 
@@ -70,7 +70,7 @@
             android:layout_width="0dp"
             android:layout_height="175dp"
             android:layout_weight="1"
-            android:text="쇼핑하기" />
+            android:text="쇼핑 하기" />
 
     </LinearLayout>
 
@@ -86,7 +86,7 @@
             android:layout_width="0dp"
             android:layout_height="175dp"
             android:layout_weight="1"
-            android:text="친구추가" />
+            android:text="친구 추가" />
 
         <Button
             android:id="@+id/btnKakaoFunction8"

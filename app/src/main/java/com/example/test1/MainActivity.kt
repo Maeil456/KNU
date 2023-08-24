@@ -61,9 +61,15 @@ class MainActivity : AppCompatActivity() {
         val btnEpisode7 = findViewById<Button>(R.id.btndaum)
         val btnEpisode8 = findViewById<Button>(R.id.btnetc)
 
+        btnEpisode1.setOnClickListener {
+            val intent = Intent(this@MainActivity, FavorActivity::class.java)
+            startActivity(intent)
+        }
+
         btnEpisode2.setOnClickListener {
             val intent = Intent(this@MainActivity, SearchActivity::class.java)
             startActivity(intent)
+            RecentOptionsManager.addOption("검색하기")
         }
 
         btnEpisode3.setOnClickListener {
@@ -72,10 +78,8 @@ class MainActivity : AppCompatActivity() {
         }
 
         btnEpisode4.setOnClickListener {
-            val packageName = "com.nhn.android.search"
-            startEpisodeIntent(packageName)
-            val serviceIntent = Intent(this, FloatingImageService::class.java)
-            startService(serviceIntent)
+            val intent = Intent(this, NaverFunctionActivity::class.java)
+            startActivity(intent)
         }
         btnEpisode5.setOnClickListener {
             val packageName = "com.nhn.android.search"

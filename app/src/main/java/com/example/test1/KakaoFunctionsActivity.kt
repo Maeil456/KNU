@@ -19,6 +19,7 @@ class KakaoFunctionsActivity : AppCompatActivity() {
             startEpisodeIntent(packageName)
             val serviceIntent = Intent(this, FloatingImageService::class.java)
             startService(serviceIntent)
+            RecentOptionsManager.addOption("문자 보내기")
         }
         val btnKakaoFunction2 = findViewById<Button>(R.id.btnKakaoFunction2)
         btnKakaoFunction2.setOnClickListener {
@@ -26,6 +27,7 @@ class KakaoFunctionsActivity : AppCompatActivity() {
             startEpisodeIntent(packageName)
             val serviceIntent = Intent(this, FloatingImageService::class.java)
             startService(serviceIntent)
+            RecentOptionsManager.addOption("영상 통화")
         }
         val btnKakaoFunction3 = findViewById<Button>(R.id.btnKakaoFunction3)
         btnKakaoFunction3.setOnClickListener {
@@ -33,6 +35,7 @@ class KakaoFunctionsActivity : AppCompatActivity() {
             startEpisodeIntent(packageName)
             val serviceIntent = Intent(this, FloatingImageService::class.java)
             startService(serviceIntent)
+            RecentOptionsManager.addOption("음성 통화")
         }
         val btnKakaoFunction4 = findViewById<Button>(R.id.btnKakaoFunction4)
         btnKakaoFunction4.setOnClickListener {
@@ -48,6 +51,7 @@ class KakaoFunctionsActivity : AppCompatActivity() {
             }
             val serviceIntent = Intent(this, FloatingImageService::class.java)
             startService(serviceIntent)
+            RecentOptionsManager.addOption("선물 하기")
         }
         val btnKakaoFunction5 = findViewById<Button>(R.id.btnKakaoFunction5)
         btnKakaoFunction5.setOnClickListener {
@@ -55,6 +59,7 @@ class KakaoFunctionsActivity : AppCompatActivity() {
             startEpisodeIntent(packageName)
             val serviceIntent = Intent(this, FloatingImageService::class.java)
             startService(serviceIntent)
+            RecentOptionsManager.addOption("프로필 설정하기")
         }
         val btnKakaoFunction6 = findViewById<Button>(R.id.btnKakaoFunction6)
         btnKakaoFunction6.setOnClickListener {
@@ -62,6 +67,7 @@ class KakaoFunctionsActivity : AppCompatActivity() {
             startEpisodeIntent(packageName)
             val serviceIntent = Intent(this, FloatingImageService::class.java)
             startService(serviceIntent)
+            RecentOptionsManager.addOption("쇼핑 하기")
         }
         val btnKakaoFunction7 = findViewById<Button>(R.id.btnKakaoFunction7)
         btnKakaoFunction7.setOnClickListener {
@@ -69,6 +75,7 @@ class KakaoFunctionsActivity : AppCompatActivity() {
             startEpisodeIntent(packageName)
             val serviceIntent = Intent(this, FloatingImageService::class.java)
             startService(serviceIntent)
+            RecentOptionsManager.addOption("친구 추가")
         }
 
 

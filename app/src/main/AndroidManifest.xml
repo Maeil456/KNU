@@ -47,6 +47,7 @@
         <activity android:name=".SearchActivity"></activity>
         <activity android:name=".KakaoFunctionsActivity"></activity>
         <activity android:name=".NaverFunctionActivity"></activity>
+        <activity android:name=".FavorActivity"></activity>
     </application>
 
 </manifest>

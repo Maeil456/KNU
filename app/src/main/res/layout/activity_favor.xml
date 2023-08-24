@@ -13,18 +13,18 @@
         android:orientation="horizontal">
 
         <Button
-            android:id="@+id/btnNaverFunction1"
+            android:id="@+id/btnFavorFunction1"
             android:layout_width="0dp"
             android:layout_height="175dp"
             android:layout_weight="1"
-            android:text="네이버 검색 하기" />
+            android:text="0" />
 
         <Button
-            android:id="@+id/btnNaverFunction2"
+            android:id="@+id/btnFavorFunction2"
             android:layout_width="0dp"
             android:layout_height="175dp"
             android:layout_weight="1"
-            android:text="주식 보기" />
+            android:text="0" />
 
     </LinearLayout>
 
@@ -36,18 +36,18 @@
         android:orientation="horizontal">
 
         <Button
-            android:id="@+id/btnNaverFunction3"
+            android:id="@+id/btnFavorFunction3"
             android:layout_width="0dp"
             android:layout_height="175dp"
             android:layout_weight="1"
-            android:text="날씨 보기" />
+            android:text="0" />
 
         <Button
-            android:id="@+id/btnNaverFunction4"
+            android:id="@+id/btnFavorFunction4"
             android:layout_width="0dp"
             android:layout_height="175dp"
             android:layout_weight="1"
-            android:text="메일보기,보내기" />
+            android:text="0" />
 
     </LinearLayout>
 
@@ -59,18 +59,18 @@
         android:orientation="horizontal">
 
         <Button
-            android:id="@+id/btnNaverFunction5"
+            android:id="@+id/btnFavorFunction5"
             android:layout_width="0dp"
             android:layout_height="175dp"
             android:layout_weight="1"
-            android:text="뉴스 보기" />
+            android:text="0" />
 
         <Button
-            android:id="@+id/btnNaverFunction6"
+            android:id="@+id/btnFavorFunction6"
             android:layout_width="0dp"
             android:layout_height="175dp"
             android:layout_weight="1"
-            android:text="쇼핑 하기" />
+            android:text="0" />
 
     </LinearLayout>
 
@@ -82,18 +82,18 @@
         android:orientation="horizontal">
 
         <Button
-            android:id="@+id/btnNaverFunction7"
+            android:id="@+id/btnFavorFunction7"
             android:layout_width="0dp"
             android:layout_height="175dp"
             android:layout_weight="1"
-            android:text="지도 보기" />
+            android:text="0" />
 
         <Button
-            android:id="@+id/btnNaverFunction8"
+            android:id="@+id/btnFavorFunction8"
             android:layout_width="0dp"
             android:layout_height="175dp"
             android:layout_weight="1"
-            android:text="더보기" />
+            android:text="0" />
 
     </LinearLayout>
 
