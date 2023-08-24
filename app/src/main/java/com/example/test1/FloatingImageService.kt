@@ -28,7 +28,6 @@ class FloatingImageService : AccessibilityService() {
     private var isMoving = false
     private var currentPositionIndex = 0
     private var isShowing = false
-    private var wasPaused = false
 
     companion object {
         const val ACTION_HIDE_IMAGE = "com.example.test1.ACTION_HIDE_IMAGE"
