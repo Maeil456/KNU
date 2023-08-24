@@ -1,7 +1,10 @@
 package com.example.test1
 
+import android.content.BroadcastReceiver
 import android.content.ComponentName
+import android.content.Context
 import android.content.Intent
+import android.content.IntentFilter
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
@@ -21,7 +24,6 @@ class MainActivity : AppCompatActivity() {
     private var imageIndex: ArrayList<String> = arrayListOf()
     private val targetPositions = ArrayList<Coord>()
     private val targetSizes = ArrayList<Coord>()
-    val image = FloatingImageService()
 
     private val requestOverlayPermissionLauncher =
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
@@ -36,7 +38,6 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        var currentPositionIndex = 0
 
         if (!isOverlayPermissionGranted()) {
             requestOverlayPermission()
@@ -70,6 +71,8 @@ class MainActivity : AppCompatActivity() {
             sendBroadcast(intent)
         }
     }
+
+
     private fun requestOverlayPermission() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             val intent = Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION, Uri.parse("package:$packageName"))
@@ -84,40 +87,17 @@ class MainActivity : AppCompatActivity() {
             true
         }
     }
-    private fun isAccessibilityServiceEnabled(): Boolean {
-        val enabledServices = Settings.Secure.getString(
-            contentResolver,
-            Settings.Secure.ENABLED_ACCESSIBILITY_SERVICES
-        )?:return false
-        val services = enabledServices.split(":".toRegex()).toTypedArray()
-        val packageName = packageName
-        val className = FloatingImageService::class.java.name
-        val expectedComponentName = ComponentName(packageName, className).flattenToString()
 
-        for (service in services) {
-            if (service.equals(expectedComponentName, ignoreCase = true)) {
-                return true
-            }
-        }
-        return false
-    }
-    private fun openAccessibilitySettings() {
-        val intent = Intent(Settings.ACTION_ACCESSIBILITY_SETTINGS)
-        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-        startActivity(intent)
-    }
     private fun startFloatingImageService() {
         val intent = Intent(this, FloatingImageService::class.java)
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             startService(intent)
-        } //else {
-          //  this.startService(intent)
-        //}
-
-
+        }
     }
     private fun setArray(arrayName: String){
         val resourceId = resources.getIdentifier(arrayName, "array", packageName)
+
+        targetPositions.clear()
 
         if (resourceId != 0) { // Check if the resource exists
             val positionsStringArray = resources.getStringArray(resourceId)
@@ -130,28 +110,18 @@ class MainActivity : AppCompatActivity() {
             }
             println(targetPositions.toString())
             println(targetPositions.size)
+            println("Log From setArray")
         } else {
             showToast("Error: Array not found!")
         }
     }
 
-    private fun setImage(arrayName: String){
-        val resourceId = resources.getIdentifier(arrayName, "array", packageName)
 
-        if (resourceId != 0) { // Check if the resource exists
-            val imageStringArray = resources.getStringArray(resourceId)
-            for (imageString in imageStringArray) {
-                imageIndex.add(imageString)
-            }
-            println(imageIndex.toString())
-            println(imageIndex.size)
-        } else {
-            showToast("Error: Array not found!")
-        }
-    }
 
     private fun setArray2(arrayName: String){
         val resourceId = resources.getIdentifier(arrayName, "array", packageName)
+
+        targetSizes.clear()
 
         if (resourceId != 0) { // Check if the resource exists
             val sizeStringArray = resources.getStringArray(resourceId)
@@ -162,7 +132,27 @@ class MainActivity : AppCompatActivity() {
                     targetSizes.add(Coord(coordinates[0], coordinates[1]))
                 }
             }
+            println(targetSizes.toString())
+            println(targetSizes.size)
+            println("Log From setArray2")
+        } else {
+            showToast("Error: Array not found!")
+        }
+    }
 
+    private fun setImage(arrayName: String){
+        val resourceId = resources.getIdentifier(arrayName, "array", packageName)
+
+        imageIndex.clear()
+
+        if (resourceId != 0) { // Check if the resource exists
+            val imageStringArray = resources.getStringArray(resourceId)
+            for (imageString in imageStringArray) {
+                imageIndex.add(imageString)
+            }
+            println(imageIndex.toString())
+            println(imageIndex.size)
+            println("Log From setImage")
         } else {
             showToast("Error: Array not found!")
         }
@@ -185,6 +175,37 @@ class MainActivity : AppCompatActivity() {
 
     private fun showToast(message: String) {
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
+    }
+
+
+    override fun onResume() {
+        super.onResume()
+        val hideImageIntent = Intent(FloatingImageService.ACTION_HIDE_IMAGE)
+        sendBroadcast(hideImageIntent)
+    }
+
+    private fun isAccessibilityServiceEnabled(): Boolean {
+        val enabledServices = Settings.Secure.getString(
+            contentResolver,
+            Settings.Secure.ENABLED_ACCESSIBILITY_SERVICES
+        )?:return false
+        val services = enabledServices.split(":".toRegex()).toTypedArray()
+        val packageName = packageName
+        val className = FloatingImageService::class.java.name
+        val expectedComponentName = ComponentName(packageName, className).flattenToString()
+
+        for (service in services) {
+            if (service.equals(expectedComponentName, ignoreCase = true)) {
+                return true
+            }
+        }
+        return false
+    }
+
+    private fun openAccessibilitySettings() {
+        val intent = Intent(Settings.ACTION_ACCESSIBILITY_SETTINGS)
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+        startActivity(intent)
     }
 }
 

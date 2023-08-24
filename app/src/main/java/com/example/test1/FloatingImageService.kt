@@ -6,15 +6,16 @@ import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
 import android.graphics.PixelFormat
-import android.icu.lang.UCharacter.GraphemeClusterBreak.T
 import android.os.Build
-import android.os.Parcelable
-import android.view.*
-import android.widget.ImageView
+import android.view.Gravity
+import android.view.LayoutInflater
+import android.view.MotionEvent
+import android.view.View
+import android.view.WindowManager
 import android.view.accessibility.AccessibilityEvent
+import android.widget.ImageView
 import android.widget.Toast
 import com.example.test1.MainActivity.Companion.ACTION_SHOW_FLOATING_IMAGE
-import kotlinx.android.parcel.Parcelize
 
 class FloatingImageService : AccessibilityService() {
 
@@ -27,8 +28,11 @@ class FloatingImageService : AccessibilityService() {
     private var isMoving = false
     private var currentPositionIndex = 0
     private var isShowing = false
+    private var wasPaused = false
 
-
+    companion object {
+        const val ACTION_HIDE_IMAGE = "com.example.test1.ACTION_HIDE_IMAGE"
+    }
 
     private var initX = 0
     private var initY = 0
@@ -61,13 +65,19 @@ class FloatingImageService : AccessibilityService() {
                 } else {
                     intent.getParcelableArrayListExtra<MainActivity.Coord>("targetPositions")
                 }
+
                 val sizes = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
                     intent.getParcelableArrayListExtra("targetSizes", MainActivity.Coord::class.java)
                 } else {
                     intent.getParcelableArrayListExtra<MainActivity.Coord>("targetSizes")
                 }
-                println(positions.toString())
+
                 val imageposition = intent.getStringArrayListExtra("imageIndex")
+
+                println(positions.toString())
+                println(sizes.toString())
+                println(imageposition.toString())
+
                 if (positions != null && imageposition != null && sizes != null) {
                     targetPositions = positions
                     imageIndex = imageposition
@@ -83,6 +93,14 @@ class FloatingImageService : AccessibilityService() {
 
                     }
                 }
+            }
+        }
+    }
+
+    private val hideImageReceiver = object : BroadcastReceiver() {
+        override fun onReceive(context: Context?, intent: Intent?) {
+            if (intent?.action == ACTION_HIDE_IMAGE) {
+                hideFloatingImage()
             }
         }
     }
@@ -123,7 +141,6 @@ class FloatingImageService : AccessibilityService() {
 
                         params.x = targetPosition.x
                         params.y = targetPosition.y
-                        println(imageIndex[currentPositionIndex].toString())
 
                         floatingImageView?.setImageResource(resourceId)
 
@@ -167,9 +184,11 @@ class FloatingImageService : AccessibilityService() {
 
     override fun onDestroy() {
         unregisterReceiver(floatingImageReceiver)
+        unregisterReceiver(hideImageReceiver)
         hideFloatingImage()
         super.onDestroy()
     }
+
 
     override fun onInterrupt() {}
 
@@ -184,8 +203,6 @@ class FloatingImageService : AccessibilityService() {
 
         val resourceId= resources.getIdentifier(imageIndex[currentPositionIndex], "drawable", packageName)
         floatingImageView?.setImageResource(resourceId)
-
-        println(imageIndex[currentPositionIndex])
 
         floatingImageView?.setOnTouchListener(touchListener)
 
@@ -206,8 +223,9 @@ class FloatingImageService : AccessibilityService() {
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
         val intentFilter = IntentFilter()
         intentFilter.addAction(ACTION_SHOW_FLOATING_IMAGE)
+        intentFilter.addAction(ACTION_HIDE_IMAGE)
         registerReceiver(floatingImageReceiver, intentFilter)
-
+        registerReceiver(hideImageReceiver, intentFilter)
 
         return START_STICKY
     }
@@ -216,14 +234,14 @@ class FloatingImageService : AccessibilityService() {
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
     }
 
-    fun View.setHeight(value: Int) {
+    private fun View.setHeight(value: Int) {
         val lp = layoutParams
         lp?.let {
             lp.height = value
             layoutParams = lp
         }
     }
-    fun View.setWidth(value: Int) {
+    private fun View.setWidth(value: Int) {
         val lp = layoutParams
         lp?.let {
             lp.width = value
