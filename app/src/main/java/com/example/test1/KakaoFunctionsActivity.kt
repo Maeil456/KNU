@@ -203,4 +203,10 @@ class KakaoFunctionsActivity : AppCompatActivity() {
     private fun showToast(message: String) {
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
     }
+
+    override fun onResume() {
+        super.onResume()
+        val hideImageIntent = Intent(FloatingImageService.ACTION_HIDE_IMAGE)
+        sendBroadcast(hideImageIntent)
+    }
 }
