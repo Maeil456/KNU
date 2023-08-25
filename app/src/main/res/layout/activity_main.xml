@@ -19,7 +19,7 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:text="즐겨찾기" />
+            android:text="최근 사용한 기능" />
 
         <Button
             android:id="@+id/btnsearch"
@@ -41,14 +41,14 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:text="kakao" />
+            android:text="카카오톡" />
 
         <Button
             android:id="@+id/btnnaver"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:text="naver" />
+            android:text="네이버" />
     </LinearLayout>
 
     <!-- 세 번째 행 -->
