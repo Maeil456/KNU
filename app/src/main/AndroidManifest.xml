@@ -48,6 +48,8 @@
         <activity android:name=".KakaoFunctionsActivity"></activity>
         <activity android:name=".NaverFunctionActivity"></activity>
         <activity android:name=".FavorActivity"></activity>
+        <activity android:name=".NewsFunctionActivity"></activity>
+
     </application>
 
 </manifest>

@@ -1,23 +1,14 @@
 package com.example.test1
 
-import android.content.ComponentName
 import android.content.Intent
 import android.net.Uri
-import android.os.Build
 import android.os.Bundle
-import android.os.Parcelable
-import android.provider.Settings
-import android.view.MotionEvent
-import android.view.View
-import android.view.ViewGroup
 import android.widget.Button
-import android.widget.ImageView
 import android.widget.Toast
-import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
-import kotlinx.android.parcel.Parcelize
 
-class NaverFunctionActivity : AppCompatActivity() {
+
+class NewsFunctionActivity : AppCompatActivity() {
 
     private var imageIndex: ArrayList<String> = arrayListOf()
     private val targetPositions = ArrayList<MainActivity.Coord>()
@@ -25,19 +16,16 @@ class NaverFunctionActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_naver_functions)
+        setContentView(R.layout.activity_news)
 
-        val btnEpisode1 = findViewById<Button>(R.id.btnNaverFunction1)
-        val btnEpisode2 = findViewById<Button>(R.id.btnNaverFunction2)
-        val btnEpisode3 = findViewById<Button>(R.id.btnNaverFunction3)
-        val btnEpisode4 = findViewById<Button>(R.id.btnNaverFunction4)
-        val btnEpisode5 = findViewById<Button>(R.id.btnNaverFunction5)
-        val btnEpisode6 = findViewById<Button>(R.id.btnNaverFunction6)
-        val btnEpisode7 = findViewById<Button>(R.id.btnNaverFunction7)
-        //val btnEpisode8 = findViewById<Button>(R.id.btnNaverFunction8)
+        val btnEpisode1 = findViewById<Button>(R.id.btnpolit)
+        val btnEpisode2 = findViewById<Button>(R.id.btnceleb)
+        val btnEpisode3 = findViewById<Button>(R.id.btnsports)
+        val btnEpisode4 = findViewById<Button>(R.id.btnecono)
 
         btnEpisode1.setOnClickListener {
             val packageName = "com.nhn.android.search"
+            val url = "https://news.naver.com/main/main.naver?mode=LSD&mid=shm&sid1=100"
             setArray("Naver_search")
             setArray2("Naver_search_imageSize")
             setImage("Naver_search_image")
@@ -47,13 +35,14 @@ class NaverFunctionActivity : AppCompatActivity() {
             intent.putParcelableArrayListExtra("targetSizes", targetSizes)
             intent.putStringArrayListExtra("imageIndex",imageIndex)
             sendBroadcast(intent)
-            startEpisodeIntent(packageName)
-            RecentOptionsManager.addOption("네이버 검색 하기")
+
+            startLinkIntent(packageName,url)
+            RecentOptionsManager.addOption("정치/사회 뉴스보기")
         }
 
         btnEpisode2.setOnClickListener {
             val packageName = "com.nhn.android.search"
-            startEpisodeIntent(packageName)
+            val url = "https://entertain.naver.com/home"
             setArray("Naver_search")
             setArray2("Naver_search_imageSize")
             setImage("Naver_search_image")
@@ -63,12 +52,14 @@ class NaverFunctionActivity : AppCompatActivity() {
             intent.putParcelableArrayListExtra("targetSizes", targetSizes)
             intent.putStringArrayListExtra("imageIndex",imageIndex)
             sendBroadcast(intent)
-            RecentOptionsManager.addOption("주식 보기")
+
+            startLinkIntent(packageName,url)
+            RecentOptionsManager.addOption("연예 뉴스보기")
         }
 
         btnEpisode3.setOnClickListener {
             val packageName = "com.nhn.android.search"
-            startEpisodeIntent(packageName)
+            val url = "https://sports.news.naver.com/index"
             setArray("Naver_search")
             setArray2("Naver_search_imageSize")
             setImage("Naver_search_image")
@@ -78,12 +69,14 @@ class NaverFunctionActivity : AppCompatActivity() {
             intent.putParcelableArrayListExtra("targetSizes", targetSizes)
             intent.putStringArrayListExtra("imageIndex",imageIndex)
             sendBroadcast(intent)
-            RecentOptionsManager.addOption("날씨 보기")
+
+            startLinkIntent(packageName,url)
+            RecentOptionsManager.addOption("스포츠 뉴스보기")
         }
 
         btnEpisode4.setOnClickListener {
             val packageName = "com.nhn.android.search"
-            startEpisodeIntent(packageName)
+            val url = "https://news.naver.com/main/main.naver?mode=LSD&mid=shm&sid1=101"
             setArray("Naver_search")
             setArray2("Naver_search_imageSize")
             setImage("Naver_search_image")
@@ -93,42 +86,13 @@ class NaverFunctionActivity : AppCompatActivity() {
             intent.putParcelableArrayListExtra("targetSizes", targetSizes)
             intent.putStringArrayListExtra("imageIndex",imageIndex)
             sendBroadcast(intent)
-            RecentOptionsManager.addOption("메일보기,보내기")
-        }
-        btnEpisode5.setOnClickListener {
-            val intent = Intent(this@NaverFunctionActivity, NewsFunctionActivity::class.java)
-            startActivity(intent)
-            RecentOptionsManager.addOption("뉴스보기")
-        }
-        btnEpisode6.setOnClickListener {
-            val packageName = "com.nhn.android.search"
-            startEpisodeIntent(packageName)
-            setArray("Naver_search")
-            setArray2("Naver_search_imageSize")
-            setImage("Naver_search_image")
 
-            val intent = Intent(MainActivity.ACTION_SHOW_FLOATING_IMAGE)
-            intent.putParcelableArrayListExtra("targetPositions", targetPositions)
-            intent.putParcelableArrayListExtra("targetSizes", targetSizes)
-            intent.putStringArrayListExtra("imageIndex",imageIndex)
-            sendBroadcast(intent)
-            RecentOptionsManager.addOption("쇼핑 하기")
-        }
-        btnEpisode7.setOnClickListener {
-            val packageName = "com.nhn.android.search"
-            startEpisodeIntent(packageName)
-            setArray("Naver_search")
-            setArray2("Naver_search_imageSize")
-            setImage("Naver_search_image")
+            startLinkIntent(packageName,url)
+            RecentOptionsManager.addOption("경제 뉴스보기")
+            }
 
-            val intent = Intent(MainActivity.ACTION_SHOW_FLOATING_IMAGE)
-            intent.putParcelableArrayListExtra("targetPositions", targetPositions)
-            intent.putParcelableArrayListExtra("targetSizes", targetSizes)
-            intent.putStringArrayListExtra("imageIndex",imageIndex)
-            sendBroadcast(intent)
-            RecentOptionsManager.addOption("지도 보기")
         }
-    }
+
 
     private fun setArray(arrayName: String) {
         val resourceId = resources.getIdentifier(arrayName, "array", packageName)
@@ -194,6 +158,22 @@ class NaverFunctionActivity : AppCompatActivity() {
                 data = Uri.parse(link)
             }
             startActivity(intent)
+        }
+    }
+
+    private fun startLinkIntent(packageName: String,url: String) {
+        val appIntent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
+        appIntent.setPackage(packageName)
+        if (appIntent.resolveActivity(packageManager) != null) {
+            // 네이버 앱이 설치되어 있으면 네이버 앱으로 URL을 엽니다.
+            startActivity(appIntent)
+        } else {
+            val link = "https://play.google.com/store/apps/details?id=$packageName"
+            val appIntent = Intent(Intent.ACTION_VIEW).apply {
+                data = Uri.parse(link)
+            }
+            val serviceIntent = Intent(this, FloatingImageService::class.java)
+            startService(serviceIntent)
         }
     }
 
