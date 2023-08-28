@@ -49,7 +49,7 @@ class MainActivity : AppCompatActivity() {
         val btnEpisode5 = findViewById<Button>(R.id.btndelivery)
         val btnEpisode6 = findViewById<Button>(R.id.btnyoutube)
         val btnEpisode7 = findViewById<Button>(R.id.btndaum)
-        //val btnEpisode8 = findViewById<Button>(R.id.btnetc)
+        val btnEpisode8 = findViewById<Button>(R.id.btnetc)
 
         btnEpisode1.setOnClickListener {
             val intent = Intent(this@MainActivity, FavorActivity::class.java)
@@ -109,6 +109,21 @@ class MainActivity : AppCompatActivity() {
             intent.putStringArrayListExtra("imageIndex",imageIndex)
             sendBroadcast(intent)
         }
+        btnEpisode8.setOnClickListener {
+            val packageName = "com.nhn.android.search"
+            startEpisodeIntent(packageName)
+            setArray("Naver_search")
+            setArray2("Naver_search_imageSize")
+            setImage("Naver_search_image")
+
+            val intent = Intent(ACTION_SHOW_FLOATING_IMAGE)
+            intent.putParcelableArrayListExtra("targetPositions", targetPositions)
+            intent.putParcelableArrayListExtra("targetSizes", targetSizes)
+            intent.putStringArrayListExtra("imageIndex",imageIndex)
+            sendBroadcast(intent)
+            val intentB = Intent(this, BubbleService::class.java)
+            startService(intentB)
+        }
     }
 
 
@@ -129,9 +144,9 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun startFloatingImageService() {
-        val intent = Intent(this, FloatingImageService::class.java)
+        val intentF = Intent(this, FloatingImageService::class.java)
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            startService(intent)
+            startService(intentF)
         }
     }
 
