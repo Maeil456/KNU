@@ -4,7 +4,9 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.view.inputmethod.EditorInfo
+import android.widget.ArrayAdapter
 import android.widget.EditText
+import android.widget.ListView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 
@@ -13,6 +15,7 @@ class SearchActivity : AppCompatActivity() {
     private var imageIndex: ArrayList<String> = arrayListOf()
     private val targetPositions = ArrayList<MainActivity.Coord>()
     private val targetSizes = ArrayList<MainActivity.Coord>()
+    private lateinit var searchResultsAdapter: ArrayAdapter<String>
 
     private val actions = mapOf(
         "문자 보내기" to { val packageName = "com.kakao.talk"
@@ -26,13 +29,33 @@ class SearchActivity : AppCompatActivity() {
             intent.putParcelableArrayListExtra("targetSizes", targetSizes)
             intent.putStringArrayListExtra("imageIndex",imageIndex)
             sendBroadcast(intent) },
-        "영상 통화" to { /* "영상 통화" 버튼의 액션 */ },
+        "영상 통화" to { val packageName = "com.kakao.talk"
+            startEpisodeIntent(packageName)
+            setArray("Naver_search")
+            setArray2("Naver_search_imageSize")
+            setImage("Naver_search_image")
+
+            val intent = Intent(MainActivity.ACTION_SHOW_FLOATING_IMAGE)
+            intent.putParcelableArrayListExtra("targetPositions", targetPositions)
+            intent.putParcelableArrayListExtra("targetSizes", targetSizes)
+            intent.putStringArrayListExtra("imageIndex",imageIndex)
+            sendBroadcast(intent) },
+
+
         // ... 다른 버튼들 ...
     )
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_seacrh)
 
+        searchResultsAdapter = ArrayAdapter(this, android.R.layout.simple_list_item_1, mutableListOf())
+        val searchResultsListView = findViewById<ListView>(R.id.searchResultsListView)
+        searchResultsListView.adapter = searchResultsAdapter
+
+        searchResultsListView.setOnItemClickListener { _, _, position, _ ->
+            val selectedAction = searchResultsAdapter.getItem(position)
+            actions[selectedAction]?.invoke()
+        }
         // 검색 EditText 참조 및 검색 기능 구현
         val searchEditText = findViewById<EditText>(R.id.searchEditText)
 
@@ -48,8 +71,15 @@ class SearchActivity : AppCompatActivity() {
         }
     }
     private fun search(query: String) {
-        Toast.makeText(this, "검색 함수 호출됨: $query", Toast.LENGTH_SHORT).show()
-        actions[query]?.invoke() ?: showToast("검색 결과가 없습니다.")
+        val matchingResults = actions.keys.filter { it.contains(query, ignoreCase = true) }
+
+        if (matchingResults.isNotEmpty()) {
+            searchResultsAdapter.clear()
+            searchResultsAdapter.addAll(matchingResults)
+            searchResultsAdapter.notifyDataSetChanged()
+        } else {
+            showToast("검색 결과가 없습니다.")
+        }
     }
 
     private fun showToast(message: String) {
