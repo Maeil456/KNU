@@ -1,6 +1,7 @@
 package com.example.test1
 
 import android.content.Intent
+import android.content.Intent.FLAG_ACTIVITY_NEW_TASK
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.Button
@@ -38,8 +39,10 @@ class BubbleService : FloatingBubbleService() {
 
         layout.findViewById<Button>(R.id.btnGoToMain).setOnClickListener {bubbleView:View?->
             val intent = Intent(this, MainActivity::class.java)
-            startActivity(intent)
             action.popToBubble()
+            startActivity(intent.addFlags(FLAG_ACTIVITY_NEW_TASK))
+            val intentB = Intent(this, BubbleService::class.java)
+            stopService(intentB)
         }
 
         layout.findViewById<Button>(R.id.btnHelpImage).setOnClickListener {bubbleView:View?->
@@ -52,6 +55,6 @@ class BubbleService : FloatingBubbleService() {
 
             .view(layout)
 
-            .dimAmount(0.8f)
+            .dimAmount(0.3f)
     }
 }
