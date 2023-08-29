@@ -28,10 +28,17 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
+
     kotlinOptions {
         jvmTarget = '1.8'
     }
 }
+allprojects {
+    repositories {
+        maven {url "https://maven.google.com"}
+    }
+}
+
 
 dependencies {
 
@@ -43,5 +50,7 @@ dependencies {
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.5'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
-    implementation "org.jetbrains.kotlin:kotlin-parcelize-runtime:1.8.0"
+    implementation 'org.jetbrains.kotlin:kotlin-parcelize-runtime:1.8.0'
+    implementation "io.github.torrydo:floating-bubble-view:0.5.6"
+    implementation 'androidx.cardview:cardview:1.0.0'
 }
