@@ -71,7 +71,7 @@ class MainActivity : AppCompatActivity() {
             startActivity(intent)
         }
         btnEpisode5.setOnClickListener {
-            val packageName = "com.woowahan.baemin"
+            val packageName = "com.sampleapp"
             startEpisodeIntent(packageName)
             setArray("Naver_search")
             setArray2("Naver_search_imageSize")

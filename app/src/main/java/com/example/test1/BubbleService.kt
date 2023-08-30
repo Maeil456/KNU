@@ -2,16 +2,26 @@ package com.example.test1
 
 import android.content.Intent
 import android.content.Intent.FLAG_ACTIVITY_NEW_TASK
+import android.text.Layout
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.Button
+import android.widget.ImageView
+import android.widget.LinearLayout
 import androidx.core.content.getSystemService
+import com.torrydo.floatingbubbleview.BubbleBehavior
 import com.torrydo.floatingbubbleview.ExpandableView
 import com.torrydo.floatingbubbleview.FloatingBubble
 import com.torrydo.floatingbubbleview.FloatingBubbleService
 import com.torrydo.floatingbubbleview.viewx.ViewHelper
 
+
+
 class BubbleService : FloatingBubbleService() {
+
+    companion object {
+        const val ACTION_IMAGE_FROM_FIRST = "com.example.test1.IMAGE_FROM_FIRST"
+    }
     override fun setupBubble(action: FloatingBubble.Action): FloatingBubble.Builder {
 
         // You can create your own view manually, or using this helper class that I specially designed for you 💖
@@ -30,6 +40,8 @@ class BubbleService : FloatingBubbleService() {
 
             .startLocation(50,700)
 
+            .behavior(BubbleBehavior.DYNAMIC_CLOSE_BUBBLE)
+
 
     }
 
@@ -46,8 +58,16 @@ class BubbleService : FloatingBubbleService() {
         }
 
         layout.findViewById<Button>(R.id.btnHelpImage).setOnClickListener {bubbleView:View?->
-            val intent = Intent(this, MainActivity::class.java)
-            startActivity(intent)
+            val intent = Intent(ACTION_IMAGE_FROM_FIRST)
+            sendBroadcast(intent)
+            action.popToBubble()
+        }
+
+        layout.findViewById<ImageView>(R.id.exit).setOnClickListener {bubbleView:View?->
+            action.popToBubble()
+        }
+
+        layout.findViewById<View>(R.id.backview).setOnClickListener {bubbleView:View?->
             action.popToBubble()
         }
 
@@ -55,6 +75,5 @@ class BubbleService : FloatingBubbleService() {
 
             .view(layout)
 
-            .dimAmount(0.3f)
     }
 }
