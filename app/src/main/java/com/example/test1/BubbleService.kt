@@ -9,6 +9,7 @@ import android.widget.Button
 import android.widget.ImageView
 import android.widget.LinearLayout
 import androidx.core.content.getSystemService
+import com.torrydo.floatingbubbleview.BubbleBehavior
 import com.torrydo.floatingbubbleview.ExpandableView
 import com.torrydo.floatingbubbleview.FloatingBubble
 import com.torrydo.floatingbubbleview.FloatingBubbleService
@@ -38,6 +39,8 @@ class BubbleService : FloatingBubbleService() {
             .bubble(bubbleView)
 
             .startLocation(50,700)
+
+            .behavior(BubbleBehavior.DYNAMIC_CLOSE_BUBBLE)
 
 
     }
