@@ -15,6 +15,7 @@ import android.view.WindowManager
 import android.view.accessibility.AccessibilityEvent
 import android.widget.ImageView
 import android.widget.Toast
+import com.example.test1.BubbleService.Companion.ACTION_IMAGE_FROM_FIRST
 import com.example.test1.MainActivity.Companion.ACTION_SHOW_FLOATING_IMAGE
 
 class FloatingImageService : AccessibilityService() {
@@ -92,6 +93,23 @@ class FloatingImageService : AccessibilityService() {
 
                     }
                 }
+            }
+            if(intent.action == ACTION_IMAGE_FROM_FIRST){
+                println("I got it!")
+
+                currentPositionIndex = 0
+                hideFloatingImage()
+
+                if(targetPositions.isNotEmpty()){
+
+                    showFloatingImage(
+                        targetPositions[currentPositionIndex].x,
+                        targetPositions[currentPositionIndex].y
+                    )
+                }else{
+                    println("Oh Nyo")
+                }
+
             }
         }
     }
@@ -177,6 +195,7 @@ class FloatingImageService : AccessibilityService() {
         }
         val filter = IntentFilter().apply {
             addAction(ACTION_SHOW_FLOATING_IMAGE)
+            addAction(ACTION_IMAGE_FROM_FIRST)
         }
         registerReceiver(floatingImageReceiver, filter)
     }
@@ -223,6 +242,7 @@ class FloatingImageService : AccessibilityService() {
         val intentFilter = IntentFilter()
         intentFilter.addAction(ACTION_SHOW_FLOATING_IMAGE)
         intentFilter.addAction(ACTION_HIDE_IMAGE)
+        intentFilter.addAction(ACTION_IMAGE_FROM_FIRST)
         registerReceiver(floatingImageReceiver, intentFilter)
         registerReceiver(hideImageReceiver, intentFilter)
 
