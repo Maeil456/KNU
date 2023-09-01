@@ -1,21 +1,11 @@
 package com.example.test1
 
-import android.content.ComponentName
 import android.content.Intent
 import android.net.Uri
-import android.os.Build
 import android.os.Bundle
-import android.os.Parcelable
-import android.provider.Settings
-import android.view.MotionEvent
-import android.view.View
-import android.view.ViewGroup
 import android.widget.Button
-import android.widget.ImageView
 import android.widget.Toast
-import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
-import kotlinx.android.parcel.Parcelize
 
 class NaverFunctionActivity : AppCompatActivity() {
 
@@ -42,7 +32,7 @@ class NaverFunctionActivity : AppCompatActivity() {
             setArray2("Naver_search_imageSize")
             setImage("Naver_search_image")
 
-            val intent = Intent(MainActivity.ACTION_SHOW_FLOATING_IMAGE)
+            val intent = Intent(FloatingImageService.ACTION_SHOW_FLOATING_IMAGE)
             intent.putParcelableArrayListExtra("targetPositions", targetPositions)
             intent.putParcelableArrayListExtra("targetSizes", targetSizes)
             intent.putStringArrayListExtra("imageIndex",imageIndex)
@@ -59,7 +49,7 @@ class NaverFunctionActivity : AppCompatActivity() {
             setArray2("Naver_search_imageSize")
             setImage("Naver_search_image")
 
-            val intent = Intent(MainActivity.ACTION_SHOW_FLOATING_IMAGE)
+            val intent = Intent(FloatingImageService.ACTION_SHOW_FLOATING_IMAGE)
             intent.putParcelableArrayListExtra("targetPositions", targetPositions)
             intent.putParcelableArrayListExtra("targetSizes", targetSizes)
             intent.putStringArrayListExtra("imageIndex",imageIndex)
@@ -76,7 +66,7 @@ class NaverFunctionActivity : AppCompatActivity() {
             setArray2("Naver_search_imageSize")
             setImage("Naver_search_image")
 
-            val intent = Intent(MainActivity.ACTION_SHOW_FLOATING_IMAGE)
+            val intent = Intent(FloatingImageService.ACTION_SHOW_FLOATING_IMAGE)
             intent.putParcelableArrayListExtra("targetPositions", targetPositions)
             intent.putParcelableArrayListExtra("targetSizes", targetSizes)
             intent.putStringArrayListExtra("imageIndex",imageIndex)
@@ -93,7 +83,7 @@ class NaverFunctionActivity : AppCompatActivity() {
             setArray2("Naver_search_imageSize")
             setImage("Naver_search_image")
 
-            val intent = Intent(MainActivity.ACTION_SHOW_FLOATING_IMAGE)
+            val intent = Intent(FloatingImageService.ACTION_SHOW_FLOATING_IMAGE)
             intent.putParcelableArrayListExtra("targetPositions", targetPositions)
             intent.putParcelableArrayListExtra("targetSizes", targetSizes)
             intent.putStringArrayListExtra("imageIndex",imageIndex)
@@ -114,7 +104,7 @@ class NaverFunctionActivity : AppCompatActivity() {
             setArray2("Naver_search_imageSize")
             setImage("Naver_search_image")
 
-            val intent = Intent(MainActivity.ACTION_SHOW_FLOATING_IMAGE)
+            val intent = Intent(FloatingImageService.ACTION_SHOW_FLOATING_IMAGE)
             intent.putParcelableArrayListExtra("targetPositions", targetPositions)
             intent.putParcelableArrayListExtra("targetSizes", targetSizes)
             intent.putStringArrayListExtra("imageIndex",imageIndex)
@@ -130,7 +120,7 @@ class NaverFunctionActivity : AppCompatActivity() {
             setArray2("Naver_search_imageSize")
             setImage("Naver_search_image")
 
-            val intent = Intent(MainActivity.ACTION_SHOW_FLOATING_IMAGE)
+            val intent = Intent(FloatingImageService.ACTION_SHOW_FLOATING_IMAGE)
             intent.putParcelableArrayListExtra("targetPositions", targetPositions)
             intent.putParcelableArrayListExtra("targetSizes", targetSizes)
             intent.putStringArrayListExtra("imageIndex",imageIndex)
@@ -215,7 +205,7 @@ class NaverFunctionActivity : AppCompatActivity() {
 
     override fun onResume() {
         super.onResume()
-        val hideImageIntent = Intent(FloatingImageService.ACTION_HIDE_IMAGE)
+        val hideImageIntent = Intent(MainActivity.ACTION_HIDE_IMAGE)
         sendBroadcast(hideImageIntent)
     }
 }

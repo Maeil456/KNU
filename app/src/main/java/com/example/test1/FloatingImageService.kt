@@ -16,7 +16,7 @@ import android.view.accessibility.AccessibilityEvent
 import android.widget.ImageView
 import android.widget.Toast
 import com.example.test1.BubbleService.Companion.ACTION_IMAGE_FROM_FIRST
-import com.example.test1.MainActivity.Companion.ACTION_SHOW_FLOATING_IMAGE
+import com.example.test1.MainActivity.Companion.ACTION_HIDE_IMAGE
 
 class FloatingImageService : AccessibilityService() {
 
@@ -31,7 +31,7 @@ class FloatingImageService : AccessibilityService() {
     private var isShowing = false
 
     companion object {
-        const val ACTION_HIDE_IMAGE = "com.example.test1.ACTION_HIDE_IMAGE"
+        const val ACTION_SHOW_FLOATING_IMAGE = "com.example.test1.SHOW_FLOATING_IMAGE"
     }
 
     private var initX = 0
