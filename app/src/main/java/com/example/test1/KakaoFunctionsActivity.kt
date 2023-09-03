@@ -32,7 +32,7 @@ class KakaoFunctionsActivity : AppCompatActivity() {
             setArray2("Naver_search_imageSize")
             setImage("Naver_search_image")
 
-            val intent = Intent(MainActivity.ACTION_SHOW_FLOATING_IMAGE)
+            val intent = Intent(FloatingImageService.ACTION_SHOW_FLOATING_IMAGE)
             intent.putParcelableArrayListExtra("targetPositions", targetPositions)
             intent.putParcelableArrayListExtra("targetSizes", targetSizes)
             intent.putStringArrayListExtra("imageIndex",imageIndex)
@@ -47,7 +47,7 @@ class KakaoFunctionsActivity : AppCompatActivity() {
             setArray2("Naver_search_imageSize")
             setImage("Naver_search_image")
 
-            val intent = Intent(MainActivity.ACTION_SHOW_FLOATING_IMAGE)
+            val intent = Intent(FloatingImageService.ACTION_SHOW_FLOATING_IMAGE)
             intent.putParcelableArrayListExtra("targetPositions", targetPositions)
             intent.putParcelableArrayListExtra("targetSizes", targetSizes)
             intent.putStringArrayListExtra("imageIndex",imageIndex)
@@ -62,7 +62,7 @@ class KakaoFunctionsActivity : AppCompatActivity() {
             setArray2("Naver_search_imageSize")
             setImage("Naver_search_image")
 
-            val intent = Intent(MainActivity.ACTION_SHOW_FLOATING_IMAGE)
+            val intent = Intent(FloatingImageService.ACTION_SHOW_FLOATING_IMAGE)
             intent.putParcelableArrayListExtra("targetPositions", targetPositions)
             intent.putParcelableArrayListExtra("targetSizes", targetSizes)
             intent.putStringArrayListExtra("imageIndex",imageIndex)
@@ -93,7 +93,7 @@ class KakaoFunctionsActivity : AppCompatActivity() {
             setArray2("Naver_search_imageSize")
             setImage("Naver_search_image")
 
-            val intent = Intent(MainActivity.ACTION_SHOW_FLOATING_IMAGE)
+            val intent = Intent(FloatingImageService.ACTION_SHOW_FLOATING_IMAGE)
             intent.putParcelableArrayListExtra("targetPositions", targetPositions)
             intent.putParcelableArrayListExtra("targetSizes", targetSizes)
             intent.putStringArrayListExtra("imageIndex",imageIndex)
@@ -108,7 +108,7 @@ class KakaoFunctionsActivity : AppCompatActivity() {
             setArray2("Naver_search_imageSize")
             setImage("Naver_search_image")
 
-            val intent = Intent(MainActivity.ACTION_SHOW_FLOATING_IMAGE)
+            val intent = Intent(FloatingImageService.ACTION_SHOW_FLOATING_IMAGE)
             intent.putParcelableArrayListExtra("targetPositions", targetPositions)
             intent.putParcelableArrayListExtra("targetSizes", targetSizes)
             intent.putStringArrayListExtra("imageIndex",imageIndex)
@@ -123,7 +123,7 @@ class KakaoFunctionsActivity : AppCompatActivity() {
             setArray2("Naver_search_imageSize")
             setImage("Naver_search_image")
 
-            val intent = Intent(MainActivity.ACTION_SHOW_FLOATING_IMAGE)
+            val intent = Intent(FloatingImageService.ACTION_SHOW_FLOATING_IMAGE)
             intent.putParcelableArrayListExtra("targetPositions", targetPositions)
             intent.putParcelableArrayListExtra("targetSizes", targetSizes)
             intent.putStringArrayListExtra("imageIndex",imageIndex)
@@ -206,7 +206,7 @@ class KakaoFunctionsActivity : AppCompatActivity() {
 
     override fun onResume() {
         super.onResume()
-        val hideImageIntent = Intent(FloatingImageService.ACTION_HIDE_IMAGE)
+        val hideImageIntent = Intent(MainActivity.ACTION_HIDE_IMAGE)
         sendBroadcast(hideImageIntent)
     }
 }

@@ -11,6 +11,7 @@ import android.widget.Button
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
+import com.example.test1.FloatingImageService.Companion.ACTION_SHOW_FLOATING_IMAGE
 import kotlinx.android.parcel.Parcelize
 
 class MainActivity : AppCompatActivity() {
@@ -28,8 +29,9 @@ class MainActivity : AppCompatActivity() {
                 startFloatingImageService()
             }
         }
+
     companion object {
-        const val ACTION_SHOW_FLOATING_IMAGE = "com.example.test1.SHOW_FLOATING_IMAGE"
+        const val ACTION_HIDE_IMAGE = "com.example.test1.ACTION_HIDE_IMAGE"
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -236,7 +238,7 @@ class MainActivity : AppCompatActivity() {
 
     override fun onResume() {
         super.onResume()
-        val hideImageIntent = Intent(FloatingImageService.ACTION_HIDE_IMAGE)
+        val hideImageIntent = Intent(ACTION_HIDE_IMAGE)
         sendBroadcast(hideImageIntent)
     }
 

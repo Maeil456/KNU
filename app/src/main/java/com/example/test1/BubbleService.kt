@@ -1,20 +1,20 @@
 package com.example.test1
 
+import android.content.BroadcastReceiver
+import android.content.Context
 import android.content.Intent
 import android.content.Intent.FLAG_ACTIVITY_NEW_TASK
-import android.text.Layout
+import android.content.IntentFilter
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.Button
 import android.widget.ImageView
-import android.widget.LinearLayout
-import androidx.core.content.getSystemService
+import com.example.test1.MainActivity.Companion.ACTION_HIDE_IMAGE
 import com.torrydo.floatingbubbleview.BubbleBehavior
 import com.torrydo.floatingbubbleview.ExpandableView
 import com.torrydo.floatingbubbleview.FloatingBubble
 import com.torrydo.floatingbubbleview.FloatingBubbleService
 import com.torrydo.floatingbubbleview.viewx.ViewHelper
-
 
 
 class BubbleService : FloatingBubbleService() {
@@ -75,5 +75,24 @@ class BubbleService : FloatingBubbleService() {
 
             .view(layout)
 
+    }
+    override fun onCreate() {
+        super.onCreate()
+        val filter = IntentFilter().apply {
+            addAction(ACTION_HIDE_IMAGE)
+        }
+        registerReceiver(hideBubbleReceiver, filter)
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        unregisterReceiver(hideBubbleReceiver)
+    }
+    private val hideBubbleReceiver = object : BroadcastReceiver() {
+        override fun onReceive(context: Context?, intent: Intent?) {
+            if (intent?.action == ACTION_HIDE_IMAGE) {
+                stopSelf()
+            }
+        }
     }
 }
