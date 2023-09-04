@@ -28,6 +28,7 @@ class NaverFunctionActivity : AppCompatActivity() {
 
         btnEpisode1.setOnClickListener {
             val packageName = "com.nhn.android.search"
+            val url = "https://www.naver.com"
             setArray("Naver_search")
             setArray2("Naver_search_imageSize")
             setImage("Naver_search_image")
@@ -37,13 +38,16 @@ class NaverFunctionActivity : AppCompatActivity() {
             intent.putParcelableArrayListExtra("targetSizes", targetSizes)
             intent.putStringArrayListExtra("imageIndex",imageIndex)
             sendBroadcast(intent)
-            startEpisodeIntent(packageName)
+
+            startLinkIntent(packageName,url)
+            val intentB = Intent(this, BubbleService::class.java)
+            startService(intentB)
             RecentOptionsManager.addOption("네이버 검색 하기")
         }
 
         btnEpisode2.setOnClickListener {
             val packageName = "com.nhn.android.search"
-            startEpisodeIntent(packageName)
+            val url = "https://finance.naver.com"
             setArray("Naver_search")
             setArray2("Naver_search_imageSize")
             setImage("Naver_search_image")
@@ -53,22 +57,16 @@ class NaverFunctionActivity : AppCompatActivity() {
             intent.putParcelableArrayListExtra("targetSizes", targetSizes)
             intent.putStringArrayListExtra("imageIndex",imageIndex)
             sendBroadcast(intent)
+
+            startLinkIntent(packageName,url)
+            val intentB = Intent(this, BubbleService::class.java)
+            startService(intentB)
             RecentOptionsManager.addOption("주식 보기")
         }
 
         btnEpisode3.setOnClickListener {
-            val packageName = "https://weather.naver.com/today/15133580?cpName=KMA"
-            val naverWeatherIntent = Intent(Intent.ACTION_VIEW, Uri.parse(packageName))
-            naverWeatherIntent.setPackage("com.nhn.android.search")
-            if (naverWeatherIntent.resolveActivity(packageManager) != null) {
-                // 네이버 앱이 설치되어 있으면 네이버 앱으로 URL을 엽니다.
-                startActivity(naverWeatherIntent)
-            } else {
-                // 네이버 앱이 설치되어 있지 않다면, 사용자에게 앱 설치를 제안하는 다른 처리를 할 수 있습니다.
-                Toast.makeText(this, "네이버 앱이 설치되어 있지 않습니다.", Toast.LENGTH_SHORT).show()
-            }
-            val serviceIntent = Intent(this, FloatingImageService::class.java)
-            startService(serviceIntent)
+            val packageName = "com.nhn.android.search"
+            val url = "https://weather.naver.com"
             setArray("Naver_search")
             setArray2("Naver_search_imageSize")
             setImage("Naver_search_image")
@@ -78,12 +76,16 @@ class NaverFunctionActivity : AppCompatActivity() {
             intent.putParcelableArrayListExtra("targetSizes", targetSizes)
             intent.putStringArrayListExtra("imageIndex",imageIndex)
             sendBroadcast(intent)
+
+            startLinkIntent(packageName,url)
+            val intentB = Intent(this, BubbleService::class.java)
+            startService(intentB)
             RecentOptionsManager.addOption("날씨 보기")
         }
 
         btnEpisode4.setOnClickListener {
             val packageName = "com.nhn.android.search"
-            startEpisodeIntent(packageName)
+            val url = "https://mail.naver.com"
             setArray("Naver_search")
             setArray2("Naver_search_imageSize")
             setImage("Naver_search_image")
@@ -93,6 +95,10 @@ class NaverFunctionActivity : AppCompatActivity() {
             intent.putParcelableArrayListExtra("targetSizes", targetSizes)
             intent.putStringArrayListExtra("imageIndex",imageIndex)
             sendBroadcast(intent)
+
+            startLinkIntent(packageName,url)
+            val intentB = Intent(this, BubbleService::class.java)
+            startService(intentB)
             RecentOptionsManager.addOption("메일보기,보내기")
         }
         btnEpisode5.setOnClickListener {
@@ -102,7 +108,7 @@ class NaverFunctionActivity : AppCompatActivity() {
         }
         btnEpisode6.setOnClickListener {
             val packageName = "com.nhn.android.search"
-            startEpisodeIntent(packageName)
+            val url = "https://shopping.naver.com"
             setArray("Naver_search")
             setArray2("Naver_search_imageSize")
             setImage("Naver_search_image")
@@ -112,10 +118,14 @@ class NaverFunctionActivity : AppCompatActivity() {
             intent.putParcelableArrayListExtra("targetSizes", targetSizes)
             intent.putStringArrayListExtra("imageIndex",imageIndex)
             sendBroadcast(intent)
+
+            startLinkIntent(packageName,url)
+            val intentB = Intent(this, BubbleService::class.java)
+            startService(intentB)
             RecentOptionsManager.addOption("쇼핑 하기")
         }
         btnEpisode7.setOnClickListener {
-            val packageName = "com.nhn.android.search"
+            val packageName = "com.nhn.android.nmap"
             startEpisodeIntent(packageName)
             setArray("Naver_search")
             setArray2("Naver_search_imageSize")
@@ -194,6 +204,22 @@ class NaverFunctionActivity : AppCompatActivity() {
                 data = Uri.parse(link)
             }
             startActivity(intent)
+        }
+    }
+
+    private fun startLinkIntent(packageName: String,url: String) {
+        val appIntent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
+        appIntent.setPackage(packageName)
+        if (appIntent.resolveActivity(packageManager) != null) {
+            // 네이버 앱이 설치되어 있으면 네이버 앱으로 URL을 엽니다.
+            startActivity(appIntent)
+        } else {
+            val link = "https://play.google.com/store/apps/details?id=$packageName"
+            val appIntent = Intent(Intent.ACTION_VIEW).apply {
+                data = Uri.parse(link)
+            }
+            val serviceIntent = Intent(this, FloatingImageService::class.java)
+            startService(serviceIntent)
         }
     }
 
