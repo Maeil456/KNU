@@ -2,12 +2,15 @@ package com.example.test1
 
 import android.content.Intent
 import android.net.Uri
+import android.os.Build
 import android.os.Bundle
+import android.provider.Settings
 import android.view.inputmethod.EditorInfo
 import android.widget.ArrayAdapter
 import android.widget.EditText
 import android.widget.ListView
 import android.widget.Toast
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 
 class SearchActivity : AppCompatActivity() {
@@ -17,9 +20,15 @@ class SearchActivity : AppCompatActivity() {
     private val targetSizes = ArrayList<MainActivity.Coord>()
     private lateinit var searchResultsAdapter: ArrayAdapter<String>
 
+    private val requestOverlayPermissionLauncher =
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+            if (isOverlayPermissionGranted()) {
+                startFloatingImageService()
+            }
+        }
+
     private val actions = mapOf(
         "카카오톡 문자 보내기" to { val packageName = "com.kakao.talk"
-            startEpisodeIntent(packageName)
             setArray("Naver_search")
             setArray2("Naver_search_imageSize")
             setImage("Naver_search_image")
@@ -28,9 +37,11 @@ class SearchActivity : AppCompatActivity() {
             intent.putParcelableArrayListExtra("targetPositions", targetPositions)
             intent.putParcelableArrayListExtra("targetSizes", targetSizes)
             intent.putStringArrayListExtra("imageIndex",imageIndex)
-            sendBroadcast(intent) },
+            sendBroadcast(intent)
+            startMainIntent(packageName)
+            val intentB = Intent(this, BubbleService::class.java)
+            startService(intentB) },
         "카카오톡 영상 통화" to { val packageName = "com.kakao.talk"
-            startEpisodeIntent(packageName)
             setArray("Naver_search")
             setArray2("Naver_search_imageSize")
             setImage("Naver_search_image")
@@ -39,9 +50,11 @@ class SearchActivity : AppCompatActivity() {
             intent.putParcelableArrayListExtra("targetPositions", targetPositions)
             intent.putParcelableArrayListExtra("targetSizes", targetSizes)
             intent.putStringArrayListExtra("imageIndex",imageIndex)
-            sendBroadcast(intent) },
+            sendBroadcast(intent)
+            startMainIntent(packageName)
+            val intentB = Intent(this, BubbleService::class.java)
+            startService(intentB) },
         "카카오톡 음성 통화" to { val packageName = "com.kakao.talk"
-            startEpisodeIntent(packageName)
             setArray("Naver_search")
             setArray2("Naver_search_imageSize")
             setImage("Naver_search_image")
@@ -50,7 +63,10 @@ class SearchActivity : AppCompatActivity() {
             intent.putParcelableArrayListExtra("targetPositions", targetPositions)
             intent.putParcelableArrayListExtra("targetSizes", targetSizes)
             intent.putStringArrayListExtra("imageIndex",imageIndex)
-            sendBroadcast(intent) },
+            sendBroadcast(intent)
+            startMainIntent(packageName)
+            val intentB = Intent(this, BubbleService::class.java)
+            startService(intentB) },
         "카카오톡 선물 하기" to { val packageName = "com.kakao.talk"
             val url = "https://gift-talk.kakao.com"
             setArray("Naver_search")
@@ -65,9 +81,8 @@ class SearchActivity : AppCompatActivity() {
 
             startLinkIntent(packageName,url)
             val intentB = Intent(this, BubbleService::class.java)
-            startService(intentB) },
+            startService(intentB)},
         "카카오톡 프로필 설정하기" to { val packageName = "com.kakao.talk"
-            startEpisodeIntent(packageName)
             setArray("Naver_search")
             setArray2("Naver_search_imageSize")
             setImage("Naver_search_image")
@@ -76,7 +91,10 @@ class SearchActivity : AppCompatActivity() {
             intent.putParcelableArrayListExtra("targetPositions", targetPositions)
             intent.putParcelableArrayListExtra("targetSizes", targetSizes)
             intent.putStringArrayListExtra("imageIndex",imageIndex)
-            sendBroadcast(intent) },
+            sendBroadcast(intent)
+            startMainIntent(packageName)
+            val intentB = Intent(this, BubbleService::class.java)
+            startService(intentB) },
         "카카오톡 쇼핑 하기" to { val packageName = "com.kakao.talk"
             val url = "https://store.kakao.com/"
             setArray("Naver_search")
@@ -91,9 +109,8 @@ class SearchActivity : AppCompatActivity() {
 
             startLinkIntent(packageName,url)
             val intentB = Intent(this, BubbleService::class.java)
-            startService(intentB) },
+            startService(intentB)},
         "카카오톡 친구 추가" to { val packageName = "com.kakao.talk"
-            startEpisodeIntent(packageName)
             setArray("Naver_search")
             setArray2("Naver_search_imageSize")
             setImage("Naver_search_image")
@@ -102,7 +119,11 @@ class SearchActivity : AppCompatActivity() {
             intent.putParcelableArrayListExtra("targetPositions", targetPositions)
             intent.putParcelableArrayListExtra("targetSizes", targetSizes)
             intent.putStringArrayListExtra("imageIndex",imageIndex)
-            sendBroadcast(intent)},
+            sendBroadcast(intent)
+            startMainIntent(packageName)
+            val intentB = Intent(this, BubbleService::class.java)
+            startService(intentB)},
+
         "네이버 검색 하기" to { val packageName = "com.nhn.android.search"
             val url = "https://www.naver.com"
             setArray("Naver_search")
@@ -114,12 +135,11 @@ class SearchActivity : AppCompatActivity() {
             intent.putParcelableArrayListExtra("targetSizes", targetSizes)
             intent.putStringArrayListExtra("imageIndex",imageIndex)
             sendBroadcast(intent)
-
             startLinkIntent(packageName,url)
             val intentB = Intent(this, BubbleService::class.java)
             startService(intentB)},
         "네이버 주식 보기" to { val packageName = "com.nhn.android.search"
-            val url = "https://finance.naver.com"
+            val url = "https://m.stock.naver.com/"
             setArray("Naver_search")
             setArray2("Naver_search_imageSize")
             setImage("Naver_search_image")
@@ -129,12 +149,11 @@ class SearchActivity : AppCompatActivity() {
             intent.putParcelableArrayListExtra("targetSizes", targetSizes)
             intent.putStringArrayListExtra("imageIndex",imageIndex)
             sendBroadcast(intent)
-
             startLinkIntent(packageName,url)
             val intentB = Intent(this, BubbleService::class.java)
             startService(intentB)},
         "네이버 날씨 보기" to { val packageName = "com.nhn.android.search"
-            val url = "https://weather.naver.com"
+            val url = "https://weather.naver.com/"
             setArray("Naver_search")
             setArray2("Naver_search_imageSize")
             setImage("Naver_search_image")
@@ -144,27 +163,11 @@ class SearchActivity : AppCompatActivity() {
             intent.putParcelableArrayListExtra("targetSizes", targetSizes)
             intent.putStringArrayListExtra("imageIndex",imageIndex)
             sendBroadcast(intent)
-
-            startLinkIntent(packageName,url)
-            val intentB = Intent(this, BubbleService::class.java)
-            startService(intentB)},
-        "네이버 날씨 보기" to { val packageName = "com.nhn.android.search"
-            val url = "https://weather.naver.com"
-            setArray("Naver_search")
-            setArray2("Naver_search_imageSize")
-            setImage("Naver_search_image")
-
-            val intent = Intent(FloatingImageService.ACTION_SHOW_FLOATING_IMAGE)
-            intent.putParcelableArrayListExtra("targetPositions", targetPositions)
-            intent.putParcelableArrayListExtra("targetSizes", targetSizes)
-            intent.putStringArrayListExtra("imageIndex",imageIndex)
-            sendBroadcast(intent)
-
             startLinkIntent(packageName,url)
             val intentB = Intent(this, BubbleService::class.java)
             startService(intentB)},
         "네이버 메일보기,보내기" to { val packageName = "com.nhn.android.search"
-            val url = "https://mail.naver.com"
+            val url = "https://mail.naver.com/v2/folders/0/all"
             setArray("Naver_search")
             setArray2("Naver_search_imageSize")
             setImage("Naver_search_image")
@@ -174,29 +177,13 @@ class SearchActivity : AppCompatActivity() {
             intent.putParcelableArrayListExtra("targetSizes", targetSizes)
             intent.putStringArrayListExtra("imageIndex",imageIndex)
             sendBroadcast(intent)
-
-            startLinkIntent(packageName,url)
-            val intentB = Intent(this, BubbleService::class.java)
-            startService(intentB)},
-        "네이버 메일보기,보내기" to { val packageName = "com.nhn.android.search"
-            val url = "https://mail.naver.com"
-            setArray("Naver_search")
-            setArray2("Naver_search_imageSize")
-            setImage("Naver_search_image")
-
-            val intent = Intent(FloatingImageService.ACTION_SHOW_FLOATING_IMAGE)
-            intent.putParcelableArrayListExtra("targetPositions", targetPositions)
-            intent.putParcelableArrayListExtra("targetSizes", targetSizes)
-            intent.putStringArrayListExtra("imageIndex",imageIndex)
-            sendBroadcast(intent)
-
             startLinkIntent(packageName,url)
             val intentB = Intent(this, BubbleService::class.java)
             startService(intentB)},
         "네이버 뉴스보기" to { val intent = Intent(this@SearchActivity, NewsFunctionActivity::class.java)
             startActivity(intent)},
         "네이버 쇼핑 하기" to { val packageName = "com.nhn.android.search"
-            val url = "https://shopping.naver.com"
+            val url = "https://shopping.naver.com/home"
             setArray("Naver_search")
             setArray2("Naver_search_imageSize")
             setImage("Naver_search_image")
@@ -206,12 +193,10 @@ class SearchActivity : AppCompatActivity() {
             intent.putParcelableArrayListExtra("targetSizes", targetSizes)
             intent.putStringArrayListExtra("imageIndex",imageIndex)
             sendBroadcast(intent)
-
             startLinkIntent(packageName,url)
             val intentB = Intent(this, BubbleService::class.java)
             startService(intentB)},
         "네이버 지도 보기" to { val packageName = "com.nhn.android.nmap"
-            startEpisodeIntent(packageName)
             setArray("Naver_search")
             setArray2("Naver_search_imageSize")
             setImage("Naver_search_image")
@@ -220,7 +205,55 @@ class SearchActivity : AppCompatActivity() {
             intent.putParcelableArrayListExtra("targetPositions", targetPositions)
             intent.putParcelableArrayListExtra("targetSizes", targetSizes)
             intent.putStringArrayListExtra("imageIndex",imageIndex)
-            sendBroadcast(intent)},
+            sendBroadcast(intent)
+            startEpisodeIntent(packageName)
+            val intentB = Intent(this, BubbleService::class.java)
+            startService(intentB)},
+
+        "배달의 민족" to { checkImageService()
+            val packageName = "com.sampleapp"
+            setArray("Naver_search")
+            setArray2("Naver_search_imageSize")
+            setImage("Naver_search_image")
+
+            val intent = Intent(FloatingImageService.ACTION_SHOW_FLOATING_IMAGE)
+            intent.putParcelableArrayListExtra("targetPositions", targetPositions)
+            intent.putParcelableArrayListExtra("targetSizes", targetSizes)
+            intent.putStringArrayListExtra("imageIndex",imageIndex)
+            sendBroadcast(intent)
+            startTestIntent(packageName)
+            val intentB = Intent(this, BubbleService::class.java)
+            startService(intentB)},
+
+        "유튜브" to { checkImageService()
+            val packageName = "com.google.android.youtube"
+            setArray("Naver_search")
+            setArray2("Naver_search_imageSize")
+            setImage("Naver_search_image")
+
+            val intent = Intent(FloatingImageService.ACTION_SHOW_FLOATING_IMAGE)
+            intent.putParcelableArrayListExtra("targetPositions", targetPositions)
+            intent.putParcelableArrayListExtra("targetSizes", targetSizes)
+            intent.putStringArrayListExtra("imageIndex",imageIndex)
+            sendBroadcast(intent)
+            startEpisodeIntent(packageName)
+            val intentB = Intent(this, BubbleService::class.java)
+            startService(intentB)},
+
+        "다음" to { checkImageService()
+            val packageName = "net.daum.android.mail"
+            setArray("Naver_search")
+            setArray2("Naver_search_imageSize")
+            setImage("Naver_search_image")
+
+            val intent = Intent(FloatingImageService.ACTION_SHOW_FLOATING_IMAGE)
+            intent.putParcelableArrayListExtra("targetPositions", targetPositions)
+            intent.putParcelableArrayListExtra("targetSizes", targetSizes)
+            intent.putStringArrayListExtra("imageIndex",imageIndex)
+            sendBroadcast(intent)
+            startEpisodeIntent(packageName)
+            val intentB = Intent(this, BubbleService::class.java)
+            startService(intentB)},
 
 
 
@@ -337,6 +370,22 @@ class SearchActivity : AppCompatActivity() {
             startActivity(intent)
         }
     }
+    private fun startMainIntent(packageName: String) {
+        val intent = Intent(Intent.ACTION_MAIN)
+        intent.addCategory(Intent.CATEGORY_LAUNCHER)
+        intent.setPackage(packageName)
+        if (intent != null) {
+            startActivity(intent)
+        } else {
+            // Handle the case when the target app is not installed
+            // You can show an error message or direct the user to install the app
+            val link = "https://play.google.com/store/apps/details?id=$packageName"
+            val intent = Intent(Intent.ACTION_VIEW).apply {
+                data = Uri.parse(link)
+            }
+            startActivity(intent)
+        }
+    }
     private fun startLinkIntent(packageName: String,url: String) {
         val appIntent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
         appIntent.setPackage(packageName)
@@ -350,6 +399,49 @@ class SearchActivity : AppCompatActivity() {
             }
             val serviceIntent = Intent(this, FloatingImageService::class.java)
             startService(serviceIntent)
+        }
+    }
+    private fun requestOverlayPermission() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            val intent = Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION, Uri.parse("package:$packageName"))
+            requestOverlayPermissionLauncher.launch(intent)
+        }
+    }
+
+    private fun isOverlayPermissionGranted(): Boolean {
+        return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            Settings.canDrawOverlays(this)
+        } else {
+            true
+        }
+    }
+    private fun checkImageService(){
+        if (!isOverlayPermissionGranted()) {
+            requestOverlayPermission()
+        } else {
+            startFloatingImageService()
+        }
+    }
+    private fun startFloatingImageService() {
+        val intentF = Intent(this, FloatingImageService::class.java)
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            startService(intentF)
+        }
+    }
+    private fun startTestIntent(packageName: String) {
+        val intent = Intent(Intent.ACTION_MAIN)
+        //intent.addCategory(Intent.CATEGORY_LAUNCHER)
+        intent.setPackage(packageName)
+        if (intent != null) {
+            startActivity(intent)
+        } else {
+            // Handle the case when the target app is not installed
+            // You can show an error message or direct the user to install the app
+            val link = "https://play.google.com/store/apps/details?id=$packageName"
+            val intent = Intent(Intent.ACTION_VIEW).apply {
+                data = Uri.parse(link)
+            }
+            startActivity(intent)
         }
     }
 

@@ -38,7 +38,6 @@ class NaverFunctionActivity : AppCompatActivity() {
             intent.putParcelableArrayListExtra("targetSizes", targetSizes)
             intent.putStringArrayListExtra("imageIndex",imageIndex)
             sendBroadcast(intent)
-
             startLinkIntent(packageName,url)
             val intentB = Intent(this, BubbleService::class.java)
             startService(intentB)
@@ -47,7 +46,7 @@ class NaverFunctionActivity : AppCompatActivity() {
 
         btnEpisode2.setOnClickListener {
             val packageName = "com.nhn.android.search"
-            val url = "https://finance.naver.com"
+            val url = "https://m.stock.naver.com/"
             setArray("Naver_search")
             setArray2("Naver_search_imageSize")
             setImage("Naver_search_image")
@@ -57,7 +56,6 @@ class NaverFunctionActivity : AppCompatActivity() {
             intent.putParcelableArrayListExtra("targetSizes", targetSizes)
             intent.putStringArrayListExtra("imageIndex",imageIndex)
             sendBroadcast(intent)
-
             startLinkIntent(packageName,url)
             val intentB = Intent(this, BubbleService::class.java)
             startService(intentB)
@@ -66,7 +64,7 @@ class NaverFunctionActivity : AppCompatActivity() {
 
         btnEpisode3.setOnClickListener {
             val packageName = "com.nhn.android.search"
-            val url = "https://weather.naver.com"
+            val url = "https://weather.naver.com/"
             setArray("Naver_search")
             setArray2("Naver_search_imageSize")
             setImage("Naver_search_image")
@@ -76,7 +74,6 @@ class NaverFunctionActivity : AppCompatActivity() {
             intent.putParcelableArrayListExtra("targetSizes", targetSizes)
             intent.putStringArrayListExtra("imageIndex",imageIndex)
             sendBroadcast(intent)
-
             startLinkIntent(packageName,url)
             val intentB = Intent(this, BubbleService::class.java)
             startService(intentB)
@@ -85,7 +82,7 @@ class NaverFunctionActivity : AppCompatActivity() {
 
         btnEpisode4.setOnClickListener {
             val packageName = "com.nhn.android.search"
-            val url = "https://mail.naver.com"
+            val url = "https://mail.naver.com/v2/folders/0/all"
             setArray("Naver_search")
             setArray2("Naver_search_imageSize")
             setImage("Naver_search_image")
@@ -95,7 +92,6 @@ class NaverFunctionActivity : AppCompatActivity() {
             intent.putParcelableArrayListExtra("targetSizes", targetSizes)
             intent.putStringArrayListExtra("imageIndex",imageIndex)
             sendBroadcast(intent)
-
             startLinkIntent(packageName,url)
             val intentB = Intent(this, BubbleService::class.java)
             startService(intentB)
@@ -108,7 +104,7 @@ class NaverFunctionActivity : AppCompatActivity() {
         }
         btnEpisode6.setOnClickListener {
             val packageName = "com.nhn.android.search"
-            val url = "https://shopping.naver.com"
+            val url = "https://shopping.naver.com/home"
             setArray("Naver_search")
             setArray2("Naver_search_imageSize")
             setImage("Naver_search_image")
@@ -118,7 +114,6 @@ class NaverFunctionActivity : AppCompatActivity() {
             intent.putParcelableArrayListExtra("targetSizes", targetSizes)
             intent.putStringArrayListExtra("imageIndex",imageIndex)
             sendBroadcast(intent)
-
             startLinkIntent(packageName,url)
             val intentB = Intent(this, BubbleService::class.java)
             startService(intentB)
@@ -126,7 +121,6 @@ class NaverFunctionActivity : AppCompatActivity() {
         }
         btnEpisode7.setOnClickListener {
             val packageName = "com.nhn.android.nmap"
-            startEpisodeIntent(packageName)
             setArray("Naver_search")
             setArray2("Naver_search_imageSize")
             setImage("Naver_search_image")
@@ -136,6 +130,9 @@ class NaverFunctionActivity : AppCompatActivity() {
             intent.putParcelableArrayListExtra("targetSizes", targetSizes)
             intent.putStringArrayListExtra("imageIndex",imageIndex)
             sendBroadcast(intent)
+            startEpisodeIntent(packageName)
+            val intentB = Intent(this, BubbleService::class.java)
+            startService(intentB)
             RecentOptionsManager.addOption("지도 보기")
         }
     }
