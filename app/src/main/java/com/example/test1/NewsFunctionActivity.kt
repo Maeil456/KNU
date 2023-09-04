@@ -154,21 +154,6 @@ class NewsFunctionActivity : AppCompatActivity() {
         }
     }
 
-    private fun startEpisodeIntent(packageName: String) {
-        val intent = packageManager.getLaunchIntentForPackage(packageName)
-        if (intent != null) {
-            startActivity(intent)
-        } else {
-            // Handle the case when the target app is not installed
-            // You can show an error message or direct the user to install the app
-            val link = "https://play.google.com/store/apps/details?id=$packageName"
-            val intent = Intent(Intent.ACTION_VIEW).apply {
-                data = Uri.parse(link)
-            }
-            startActivity(intent)
-        }
-    }
-
     private fun startLinkIntent(packageName: String,url: String) {
         val appIntent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
         appIntent.setPackage(packageName)
