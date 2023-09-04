@@ -54,27 +54,31 @@ class MainActivity : AppCompatActivity() {
         val btnEpisode8 = findViewById<Button>(R.id.btnetc)
 
         btnEpisode1.setOnClickListener {
+            checkImageService()
             val intent = Intent(this@MainActivity, FavorActivity::class.java)
             startActivity(intent)
         }
 
         btnEpisode2.setOnClickListener {
+            checkImageService()
             val intent = Intent(this@MainActivity, SearchActivity::class.java)
             startActivity(intent)
         }
 
         btnEpisode3.setOnClickListener {
+            checkImageService()
             val intent = Intent(this, KakaoFunctionsActivity::class.java)
             startActivity(intent)
         }
 
         btnEpisode4.setOnClickListener {
+            checkImageService()
             val intent = Intent(this, NaverFunctionActivity::class.java)
             startActivity(intent)
         }
         btnEpisode5.setOnClickListener {
+            checkImageService()
             val packageName = "com.sampleapp"
-            startEpisodeIntent(packageName)
             setArray("Naver_search")
             setArray2("Naver_search_imageSize")
             setImage("Naver_search_image")
@@ -84,47 +88,62 @@ class MainActivity : AppCompatActivity() {
             intent.putParcelableArrayListExtra("targetSizes", targetSizes)
             intent.putStringArrayListExtra("imageIndex",imageIndex)
             sendBroadcast(intent)
-        }
-        btnEpisode6.setOnClickListener {
-            val packageName = "com.google.android.youtube"
-            startEpisodeIntent(packageName)
-            setArray("Naver_search")
-            setArray2("Naver_search_imageSize")
-            setImage("Naver_search_image")
-
-            val intent = Intent(ACTION_SHOW_FLOATING_IMAGE)
-            intent.putParcelableArrayListExtra("targetPositions", targetPositions)
-            intent.putParcelableArrayListExtra("targetSizes", targetSizes)
-            intent.putStringArrayListExtra("imageIndex",imageIndex)
-            sendBroadcast(intent)
-        }
-        btnEpisode7.setOnClickListener {
-            val packageName = "net.daum.android.mail"
-            startEpisodeIntent(packageName)
-            setArray("Naver_search")
-            setArray2("Naver_search_imageSize")
-            setImage("Naver_search_image")
-
-            val intent = Intent(ACTION_SHOW_FLOATING_IMAGE)
-            intent.putParcelableArrayListExtra("targetPositions", targetPositions)
-            intent.putParcelableArrayListExtra("targetSizes", targetSizes)
-            intent.putStringArrayListExtra("imageIndex",imageIndex)
-            sendBroadcast(intent)
-        }
-        btnEpisode8.setOnClickListener {
-            val packageName = "com.nhn.android.search"
-            startEpisodeIntent(packageName)
-            setArray("Naver_search")
-            setArray2("Naver_search_imageSize")
-            setImage("Naver_search_image")
-
-            val intent = Intent(ACTION_SHOW_FLOATING_IMAGE)
-            intent.putParcelableArrayListExtra("targetPositions", targetPositions)
-            intent.putParcelableArrayListExtra("targetSizes", targetSizes)
-            intent.putStringArrayListExtra("imageIndex",imageIndex)
-            sendBroadcast(intent)
+            startTestIntent(packageName)
             val intentB = Intent(this, BubbleService::class.java)
             startService(intentB)
+            RecentOptionsManager.addOption("배달의 민족")
+
+        }
+        btnEpisode6.setOnClickListener {
+            checkImageService()
+            val packageName = "com.google.android.youtube"
+            setArray("Naver_search")
+            setArray2("Naver_search_imageSize")
+            setImage("Naver_search_image")
+
+            val intent = Intent(ACTION_SHOW_FLOATING_IMAGE)
+            intent.putParcelableArrayListExtra("targetPositions", targetPositions)
+            intent.putParcelableArrayListExtra("targetSizes", targetSizes)
+            intent.putStringArrayListExtra("imageIndex",imageIndex)
+            sendBroadcast(intent)
+            startEpisodeIntent(packageName)
+            val intentB = Intent(this, BubbleService::class.java)
+            startService(intentB)
+            RecentOptionsManager.addOption("유튜브")
+        }
+        btnEpisode7.setOnClickListener {
+            checkImageService()
+            val packageName = "net.daum.android.mail"
+            setArray("Naver_search")
+            setArray2("Naver_search_imageSize")
+            setImage("Naver_search_image")
+
+            val intent = Intent(ACTION_SHOW_FLOATING_IMAGE)
+            intent.putParcelableArrayListExtra("targetPositions", targetPositions)
+            intent.putParcelableArrayListExtra("targetSizes", targetSizes)
+            intent.putStringArrayListExtra("imageIndex",imageIndex)
+            sendBroadcast(intent)
+            startEpisodeIntent(packageName)
+            val intentB = Intent(this, BubbleService::class.java)
+            startService(intentB)
+            RecentOptionsManager.addOption("다음")
+        }
+        btnEpisode8.setOnClickListener {
+            checkImageService()
+            val packageName = "com.nhn.android.search"
+            setArray("Naver_search")
+            setArray2("Naver_search_imageSize")
+            setImage("Naver_search_image")
+
+            val intent = Intent(ACTION_SHOW_FLOATING_IMAGE)
+            intent.putParcelableArrayListExtra("targetPositions", targetPositions)
+            intent.putParcelableArrayListExtra("targetSizes", targetSizes)
+            intent.putStringArrayListExtra("imageIndex",imageIndex)
+            sendBroadcast(intent)
+            startEpisodeIntent(packageName)
+            val intentB = Intent(this, BubbleService::class.java)
+            startService(intentB)
+            RecentOptionsManager.addOption("메인 테스트")
         }
     }
 
@@ -242,28 +261,29 @@ class MainActivity : AppCompatActivity() {
         sendBroadcast(hideImageIntent)
     }
 
-    private fun isAccessibilityServiceEnabled(): Boolean {
-        val enabledServices = Settings.Secure.getString(
-            contentResolver,
-            Settings.Secure.ENABLED_ACCESSIBILITY_SERVICES
-        )?:return false
-        val services = enabledServices.split(":".toRegex()).toTypedArray()
-        val packageName = packageName
-        val className = FloatingImageService::class.java.name
-        val expectedComponentName = ComponentName(packageName, className).flattenToString()
-
-        for (service in services) {
-            if (service.equals(expectedComponentName, ignoreCase = true)) {
-                return true
-            }
+    private fun checkImageService(){
+        if (!isOverlayPermissionGranted()) {
+            requestOverlayPermission()
+        } else {
+            startFloatingImageService()
         }
-        return false
     }
 
-    private fun openAccessibilitySettings() {
-        val intent = Intent(Settings.ACTION_ACCESSIBILITY_SETTINGS)
-        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-        startActivity(intent)
+    private fun startTestIntent(packageName: String) {
+        val intent = Intent(Intent.ACTION_MAIN)
+        //intent.addCategory(Intent.CATEGORY_LAUNCHER)
+        intent.setPackage(packageName)
+        if (intent != null) {
+            startActivity(intent)
+        } else {
+            // Handle the case when the target app is not installed
+            // You can show an error message or direct the user to install the app
+            val link = "https://play.google.com/store/apps/details?id=$packageName"
+            val intent = Intent(Intent.ACTION_VIEW).apply {
+                data = Uri.parse(link)
+            }
+            startActivity(intent)
+        }
     }
 }
 

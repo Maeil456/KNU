@@ -15,7 +15,8 @@ class SearchActivity : AppCompatActivity() {
     private val targetSizes = ArrayList<MainActivity.Coord>()
 
     private val actions = mapOf(
-        "문자 보내기" to { val packageName = "com.kakao.talk"
+        "문자 보내기" to {
+            val packageName = "com.kakao.talk"
             startEpisodeIntent(packageName)
             setArray("Naver_search")
             setArray2("Naver_search_imageSize")
