@@ -20,6 +20,10 @@ import com.example.test1.MainActivity.Companion.ACTION_HIDE_IMAGE
 
 class FloatingImageService : AccessibilityService() {
 
+    companion object {
+        const val ACTION_SHOW_FLOATING_IMAGE = "com.example.test1.SHOW_FLOATING_IMAGE"
+    }
+
     private lateinit var windowManager: WindowManager
     private var floatingImageLayout: View? = null
     private var floatingImageView: ImageView? = null
@@ -29,14 +33,10 @@ class FloatingImageService : AccessibilityService() {
     private var isMoving = false
     private var currentPositionIndex = 0
     private var isShowing = false
-
-    companion object {
-        const val ACTION_SHOW_FLOATING_IMAGE = "com.example.test1.SHOW_FLOATING_IMAGE"
-    }
-
     private var initX = 0
     private var initY = 0
     private val touchSlopSquare = 100 * 100
+
     private val params = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
         WindowManager.LayoutParams(
             WindowManager.LayoutParams.WRAP_CONTENT,
@@ -95,27 +95,16 @@ class FloatingImageService : AccessibilityService() {
                 }
             }
             if(intent.action == ACTION_IMAGE_FROM_FIRST){
-                println("I got it!")
-
                 currentPositionIndex = 0
                 hideFloatingImage()
-
                 if(targetPositions.isNotEmpty()){
 
                     showFloatingImage(
                         targetPositions[currentPositionIndex].x,
                         targetPositions[currentPositionIndex].y
                     )
-                }else{
-                    println("Oh Nyo")
                 }
-
             }
-        }
-    }
-
-    private val hideImageReceiver = object : BroadcastReceiver() {
-        override fun onReceive(context: Context?, intent: Intent?) {
             if (intent?.action == ACTION_HIDE_IMAGE) {
                 hideFloatingImage()
             }
@@ -173,20 +162,7 @@ class FloatingImageService : AccessibilityService() {
         true
     }
 
-    override fun onAccessibilityEvent(event: AccessibilityEvent?) {
-        if (event?.packageName == "com.kakao.talk" || event?.packageName == "com.nhn.android.search") {
-            if (!isShowing) {
-                showFloatingImage(100, 200)
-                showToast("Good!")
-                isShowing = true
-            }
-        } else {
-            if (isShowing) {
-                hideFloatingImage()
-                isShowing = false
-            }
-        }
-    }
+    override fun onAccessibilityEvent(event: AccessibilityEvent?) {}
 
     override fun onCreate() {
         super.onCreate()
@@ -196,13 +172,13 @@ class FloatingImageService : AccessibilityService() {
         val filter = IntentFilter().apply {
             addAction(ACTION_SHOW_FLOATING_IMAGE)
             addAction(ACTION_IMAGE_FROM_FIRST)
+            addAction(ACTION_HIDE_IMAGE)
         }
         registerReceiver(floatingImageReceiver, filter)
     }
 
     override fun onDestroy() {
         unregisterReceiver(floatingImageReceiver)
-        unregisterReceiver(hideImageReceiver)
         hideFloatingImage()
         super.onDestroy()
     }
@@ -244,7 +220,6 @@ class FloatingImageService : AccessibilityService() {
         intentFilter.addAction(ACTION_HIDE_IMAGE)
         intentFilter.addAction(ACTION_IMAGE_FROM_FIRST)
         registerReceiver(floatingImageReceiver, intentFilter)
-        registerReceiver(hideImageReceiver, intentFilter)
 
         return START_STICKY
     }

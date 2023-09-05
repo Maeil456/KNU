@@ -2,6 +2,7 @@ package com.example.test1
 
 import android.content.Intent
 import android.net.Uri
+import android.os.Build
 import android.os.Bundle
 import android.widget.Button
 import android.widget.Toast
@@ -29,6 +30,7 @@ class NewsFunctionActivity : AppCompatActivity() {
             setArray("Naver_search")
             setArray2("Naver_search_imageSize")
             setImage("Naver_search_image")
+            startFloatingImageService()
 
             val intent = Intent(FloatingImageService.ACTION_SHOW_FLOATING_IMAGE)
             intent.putParcelableArrayListExtra("targetPositions", targetPositions)
@@ -48,6 +50,7 @@ class NewsFunctionActivity : AppCompatActivity() {
             setArray("Naver_search")
             setArray2("Naver_search_imageSize")
             setImage("Naver_search_image")
+            startFloatingImageService()
 
             val intent = Intent(FloatingImageService.ACTION_SHOW_FLOATING_IMAGE)
             intent.putParcelableArrayListExtra("targetPositions", targetPositions)
@@ -67,6 +70,7 @@ class NewsFunctionActivity : AppCompatActivity() {
             setArray("Naver_search")
             setArray2("Naver_search_imageSize")
             setImage("Naver_search_image")
+            startFloatingImageService()
 
             val intent = Intent(FloatingImageService.ACTION_SHOW_FLOATING_IMAGE)
             intent.putParcelableArrayListExtra("targetPositions", targetPositions)
@@ -86,6 +90,7 @@ class NewsFunctionActivity : AppCompatActivity() {
             setArray("Naver_search")
             setArray2("Naver_search_imageSize")
             setImage("Naver_search_image")
+            startFloatingImageService()
 
             val intent = Intent(FloatingImageService.ACTION_SHOW_FLOATING_IMAGE)
             intent.putParcelableArrayListExtra("targetPositions", targetPositions)
@@ -169,7 +174,12 @@ class NewsFunctionActivity : AppCompatActivity() {
             startService(serviceIntent)
         }
     }
-
+    private fun startFloatingImageService() {
+        val intentF = Intent(this, FloatingImageService::class.java)
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            startService(intentF)
+        }
+    }
     private fun showToast(message: String) {
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
     }
