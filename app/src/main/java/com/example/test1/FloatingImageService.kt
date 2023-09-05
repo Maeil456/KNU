@@ -113,34 +113,12 @@ class FloatingImageService : AccessibilityService() {
 
     private val touchListener = View.OnTouchListener { view, event ->
         when (event.action) {
-            MotionEvent.ACTION_DOWN -> {
-                isMoving = false
-                initX = event.rawX.toInt()
-                initY = event.rawY.toInt()
-            }
-            MotionEvent.ACTION_MOVE -> {
-                if (!isMoving) {
-                    val dX = event.rawX.toInt() - initX
-                    val dY = event.rawY.toInt() - initY
-                    if (dX * dX + dY * dY > touchSlopSquare) {
-                        isMoving = true
-                    }
-                }
-                if (isMoving) {
-                    val x = event.rawX.toInt() - initX + params.x
-                    val y = event.rawY.toInt() - initY + params.y
-                    params.x = x
-                    params.y = y
-                    windowManager.updateViewLayout(floatingImageLayout, params)
-                }
-            }
             MotionEvent.ACTION_UP -> {
-                if (!isMoving) {
-                    currentPositionIndex += 1
+                currentPositionIndex += 1
 
-                    if(currentPositionIndex >= targetPositions.size) {
-                        hideFloatingImage()
-                        currentPositionIndex = 0
+                if(currentPositionIndex >= targetPositions.size) {
+                    hideFloatingImage()
+                    currentPositionIndex = 0
                     } else {
                         val targetPosition = targetPositions[currentPositionIndex]
                         val resourceId= resources.getIdentifier(imageIndex[currentPositionIndex], "drawable", packageName)
@@ -155,8 +133,6 @@ class FloatingImageService : AccessibilityService() {
 
                         windowManager.updateViewLayout(floatingImageLayout, params)
                     }
-                }
-
             }
         }
         true
@@ -224,10 +200,6 @@ class FloatingImageService : AccessibilityService() {
         return START_STICKY
     }
 
-    private fun showToast(message: String) {
-        Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
-    }
-
     private fun View.setHeight(value: Int) {
         val lp = layoutParams
         lp?.let {
@@ -241,5 +213,8 @@ class FloatingImageService : AccessibilityService() {
             lp.width = value
             layoutParams = lp
         }
+    }
+    private fun showToast(message: String) {
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
     }
 }
