@@ -1,7 +1,10 @@
 package com.example.test1
 
+import android.content.BroadcastReceiver
 import android.content.ComponentName
+import android.content.Context
 import android.content.Intent
+import android.content.IntentFilter
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
@@ -52,6 +55,11 @@ class MainActivity : AppCompatActivity() {
         val btnEpisode6 = findViewById<Button>(R.id.btnyoutube)
         val btnEpisode7 = findViewById<Button>(R.id.btndaum)
         val btnEpisode8 = findViewById<Button>(R.id.btnetc)
+
+        val filter = IntentFilter().apply {
+            addAction(FavorActivity.ACTION_RECENTLY_BUTTON)
+        }
+        registerReceiver(recentlyButtonReceiver, filter)
 
         btnEpisode1.setOnClickListener {
             checkImageService()
@@ -143,12 +151,36 @@ class MainActivity : AppCompatActivity() {
             startEpisodeIntent(packageName)
             val intentB = Intent(this, BubbleService::class.java)
             startService(intentB)
-            RecentOptionsManager.addOption("메인 테스트")
+            RecentOptionsManager.addOption("더보기메인")
         }
     }
 
+    override fun onDestroy() {
+        super.onDestroy()
+        unregisterReceiver(recentlyButtonReceiver)
+    }
 
+    private val recentlyButtonReceiver = object : BroadcastReceiver() {
+        override fun onReceive(context: Context, intent: Intent) {
+            if (intent.action == FavorActivity.ACTION_RECENTLY_BUTTON) {
+                val appname = intent.getStringExtra("app")
+                val btnNumber = intent.getIntExtra("btn", 9)
+                if(appname=="main") {
+                    if (btnNumber < 9) {
+                        println("intent win")
+                        when (btnNumber) {
+                            5 -> findViewById<Button>(R.id.btndelivery).performClick()
+                            6 -> findViewById<Button>(R.id.btnyoutube).performClick()
+                            7 -> findViewById<Button>(R.id.btndaum).performClick()
+                            8 -> findViewById<Button>(R.id.btnetc).performClick()
+                            else -> println("intent Error")
+                        }
+                    }else println("intent Error")
+                }
+            }
 
+        }
+    }
     private fun requestOverlayPermission() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             val intent = Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION, Uri.parse("package:$packageName"))

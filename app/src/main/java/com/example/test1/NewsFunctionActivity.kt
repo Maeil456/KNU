@@ -1,6 +1,9 @@
 package com.example.test1
 
+import android.content.BroadcastReceiver
+import android.content.Context
 import android.content.Intent
+import android.content.IntentFilter
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
@@ -23,6 +26,11 @@ class NewsFunctionActivity : AppCompatActivity() {
         val btnEpisode2 = findViewById<Button>(R.id.btnceleb)
         val btnEpisode3 = findViewById<Button>(R.id.btnsports)
         val btnEpisode4 = findViewById<Button>(R.id.btnecono)
+
+        val filter = IntentFilter().apply {
+            addAction(FavorActivity.ACTION_RECENTLY_BUTTON)
+        }
+        registerReceiver(recentlyButtonReceiver, filter)
 
         btnEpisode1.setOnClickListener {
             val packageName = "com.nhn.android.search"
@@ -106,6 +114,26 @@ class NewsFunctionActivity : AppCompatActivity() {
 
         }
 
+
+    private val recentlyButtonReceiver = object : BroadcastReceiver() {
+        override fun onReceive(context: Context, intent: Intent) {
+            if (intent.action == FavorActivity.ACTION_RECENTLY_BUTTON) {
+                val appname = intent.getStringExtra("app")
+                val btnNumber = intent.getIntExtra("btn", 9)
+                if (appname == "news") {
+                    if (btnNumber < 9) {
+                        when (btnNumber) {
+                            1 -> findViewById<Button>(R.id.btnpolit).performClick()
+                            2 -> findViewById<Button>(R.id.btnceleb).performClick()
+                            3 -> findViewById<Button>(R.id.btnsports).performClick()
+                            4 -> findViewById<Button>(R.id.btnecono).performClick()
+                            else -> println("intent Error")
+                        }
+                    } else println("intent Error")
+                }
+            }
+        }
+    }
 
     private fun setArray(arrayName: String) {
         val resourceId = resources.getIdentifier(arrayName, "array", packageName)

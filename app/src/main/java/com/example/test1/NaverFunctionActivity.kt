@@ -1,6 +1,10 @@
 package com.example.test1
 
+import android.annotation.SuppressLint
+import android.content.BroadcastReceiver
+import android.content.Context
 import android.content.Intent
+import android.content.IntentFilter
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
@@ -26,6 +30,11 @@ class NaverFunctionActivity : AppCompatActivity() {
         val btnEpisode6 = findViewById<Button>(R.id.btnNaverFunction6)
         val btnEpisode7 = findViewById<Button>(R.id.btnNaverFunction7)
         //val btnEpisode8 = findViewById<Button>(R.id.btnNaverFunction8)
+
+        val filter = IntentFilter().apply {
+            addAction(FavorActivity.ACTION_RECENTLY_BUTTON)
+        }
+        registerReceiver(recentlyButtonReceiver, filter)
 
         btnEpisode1.setOnClickListener {
             val packageName = "com.nhn.android.search"
@@ -144,6 +153,31 @@ class NaverFunctionActivity : AppCompatActivity() {
         }
     }
 
+    private val recentlyButtonReceiver = object : BroadcastReceiver() {
+        override fun onReceive(context: Context, intent: Intent) {
+            if (intent.action == FavorActivity.ACTION_RECENTLY_BUTTON) {
+                val appname = intent.getStringExtra("app")
+                val btnNumber = intent.getIntExtra("btn", 9)
+                if(appname=="naver") {
+                    if (btnNumber < 9) {
+                        println("intent win")
+                        when (btnNumber) {
+                            1 -> findViewById<Button>(R.id.btnNaverFunction1).performClick()
+                            2 -> findViewById<Button>(R.id.btnNaverFunction2).performClick()
+                            3 -> findViewById<Button>(R.id.btnNaverFunction3).performClick()
+                            4 -> findViewById<Button>(R.id.btnNaverFunction4).performClick()
+                            5 -> findViewById<Button>(R.id.btnNaverFunction5).performClick()
+                            6 -> findViewById<Button>(R.id.btnNaverFunction6).performClick()
+                            7 -> findViewById<Button>(R.id.btnNaverFunction7).performClick()
+                            8 -> findViewById<Button>(R.id.btnNaverFunction8).performClick()
+                        }
+                    } else println("intent Error")
+                }
+            }
+
+        }
+    }
+
     private fun setArray(arrayName: String) {
         val resourceId = resources.getIdentifier(arrayName, "array", packageName)
 
@@ -241,4 +275,5 @@ class NaverFunctionActivity : AppCompatActivity() {
         val hideImageIntent = Intent(MainActivity.ACTION_HIDE_IMAGE)
         sendBroadcast(hideImageIntent)
     }
+
 }

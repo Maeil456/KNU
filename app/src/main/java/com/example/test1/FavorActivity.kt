@@ -8,25 +8,157 @@ import androidx.appcompat.app.AppCompatActivity
 
 class FavorActivity : AppCompatActivity() {
 
+
+    companion object {
+        const val ACTION_RECENTLY_BUTTON = "com.example.test1.ACTION_RECENTLY_BUTTON"
+    }
+
     private fun performOptionAction(option: String) {
         when (option) {
+            "배달의 민족" -> {
+                val intent = Intent(ACTION_RECENTLY_BUTTON)
+                intent.putExtra("btn", 5)
+                intent.putExtra("app","main")
+                sendBroadcast(intent)
+            }
+            "유튜브" -> {
+                val intent = Intent(ACTION_RECENTLY_BUTTON)
+                intent.putExtra("btn", 6)
+                intent.putExtra("app","main")
+                sendBroadcast(intent)
+            }
+            "다음" -> {
+                val intent = Intent(ACTION_RECENTLY_BUTTON)
+                intent.putExtra("btn", 7)
+                intent.putExtra("app","main")
+                sendBroadcast(intent)
+            }
+            "더보기메인" -> {
+                val intent = Intent(ACTION_RECENTLY_BUTTON)
+                intent.putExtra("btn", 8)
+                intent.putExtra("app","main")
+                sendBroadcast(intent)
+            }
             "문자 보내기" -> {
-                val packageName = "com.kakao.talk"
-                startEpisodeIntent(packageName)
-                val serviceIntent = Intent(this, FloatingImageService::class.java)
-                startService(serviceIntent)
+                val intent = Intent(ACTION_RECENTLY_BUTTON)
+                intent.putExtra("btn", 1)
+                intent.putExtra("app","kakao")
+                sendBroadcast(intent)
             }
             "영상 통화" -> {
-                val packageName = "com.kakao.talk"
-                startEpisodeIntent(packageName)
-                val serviceIntent = Intent(this, FloatingImageService::class.java)
-                startService(serviceIntent)
+                val intent = Intent(ACTION_RECENTLY_BUTTON)
+                intent.putExtra("btn", 2)
+                intent.putExtra("app","kakao")
+                sendBroadcast(intent)
             }
             "음성 통화" -> {
-                val packageName = "com.kakao.talk"
-                startEpisodeIntent(packageName)
-                val serviceIntent = Intent(this, FloatingImageService::class.java)
-                startService(serviceIntent)
+                val intent = Intent(ACTION_RECENTLY_BUTTON)
+                intent.putExtra("btn", 3)
+                intent.putExtra("app","kakao")
+                sendBroadcast(intent)
+            }
+            "선물 하기" -> {
+                val intent = Intent(ACTION_RECENTLY_BUTTON)
+                intent.putExtra("btn", 4)
+                intent.putExtra("app","kakao")
+                sendBroadcast(intent)
+            }
+            "프로필 설정하기" -> {
+                val intent = Intent(ACTION_RECENTLY_BUTTON)
+                intent.putExtra("btn", 5)
+                intent.putExtra("app","kakao")
+                sendBroadcast(intent)
+            }
+            "쇼핑 하기" -> {
+                val intent = Intent(ACTION_RECENTLY_BUTTON)
+                intent.putExtra("btn", 6)
+                intent.putExtra("app","kakao")
+                sendBroadcast(intent)
+            }
+            "친구 추가" -> {
+                val intent = Intent(ACTION_RECENTLY_BUTTON)
+                intent.putExtra("btn", 7)
+                intent.putExtra("app","kakao")
+                sendBroadcast(intent)
+            }
+            "더보기카카오" -> {
+                val intent = Intent(ACTION_RECENTLY_BUTTON)
+                intent.putExtra("btn", 8)
+                intent.putExtra("app","kakao")
+                sendBroadcast(intent)
+            }
+            "네이버 검색 하기" -> {
+                val intent = Intent(ACTION_RECENTLY_BUTTON)
+                intent.putExtra("btn", 1)
+                intent.putExtra("app","naver")
+                println("good")
+                sendBroadcast(intent)
+            }
+            "주식 보기" -> {
+                val intent = Intent(ACTION_RECENTLY_BUTTON)
+                intent.putExtra("btn", 2)
+                intent.putExtra("app","naver")
+                sendBroadcast(intent)
+            }
+            "날씨 보기" -> {
+                val intent = Intent(ACTION_RECENTLY_BUTTON)
+                intent.putExtra("btn", 3)
+                intent.putExtra("app","naver")
+                sendBroadcast(intent)
+            }
+            "메일보기,보내기" -> {
+                val intent = Intent(ACTION_RECENTLY_BUTTON)
+                intent.putExtra("btn", 4)
+                intent.putExtra("app","naver")
+                sendBroadcast(intent)
+            }
+            "뉴스 보기" -> {
+                val intent = Intent(ACTION_RECENTLY_BUTTON)
+                intent.putExtra("btn", 5)
+                intent.putExtra("app","naver")
+                sendBroadcast(intent)
+            }
+            "쇼핑 하기" -> {
+                val intent = Intent(ACTION_RECENTLY_BUTTON)
+                intent.putExtra("btn", 6)
+                intent.putExtra("app","naver")
+                sendBroadcast(intent)
+            }
+            "지도 보기" -> {
+                val intent = Intent(ACTION_RECENTLY_BUTTON)
+                intent.putExtra("btn", 7)
+                intent.putExtra("app","naver")
+                sendBroadcast(intent)
+            }
+            "더보기네이버" -> {
+                val intent = Intent(ACTION_RECENTLY_BUTTON)
+                intent.putExtra("btn", 8)
+                intent.putExtra("app","naver")
+                sendBroadcast(intent)
+            }
+            "정치/사회 뉴스보기" -> {
+                val intent = Intent(ACTION_RECENTLY_BUTTON)
+                intent.putExtra("btn", 1)
+                intent.putExtra("app","news")
+                sendBroadcast(intent)
+            }
+            "연예 뉴스보기" -> {
+                val intent = Intent(ACTION_RECENTLY_BUTTON)
+                intent.putExtra("btn", 2)
+                intent.putExtra("app","news")
+                sendBroadcast(intent)
+            }
+            "스포츠 뉴스보기" -> {
+                val intent = Intent(ACTION_RECENTLY_BUTTON)
+                intent.putExtra("btn", 3)
+                intent.putExtra("app","news")
+                sendBroadcast(intent)
+            }
+            "경제 뉴스보기" -> {
+                val intent = Intent(ACTION_RECENTLY_BUTTON)
+                intent.putExtra("btn", 4)
+                intent.putExtra("app","news")
+                sendBroadcast(intent)
             }
             // ... 나머지 옵션들에 대한 코드 ...
         }
@@ -95,7 +227,11 @@ class FavorActivity : AppCompatActivity() {
         }
 
     }
-
+    override fun onResume() {
+        super.onResume()
+        val hideImageIntent = Intent(MainActivity.ACTION_HIDE_IMAGE)
+        sendBroadcast(hideImageIntent)
+    }
     private fun startEpisodeIntent(packageName: String) {
         val intent = packageManager.getLaunchIntentForPackage(packageName)
         if (intent != null) {

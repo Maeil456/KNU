@@ -63,6 +63,12 @@ class BubbleService : FloatingBubbleService() {
             action.popToBubble()
         }
 
+        layout.findViewById<Button>(R.id.btnFromStart).setOnClickListener {bubbleView:View?->
+            val intent = Intent(ACTION_IMAGE_FROM_FIRST)
+            sendBroadcast(intent)
+            action.popToBubble()
+        }
+
         layout.findViewById<ImageView>(R.id.exit).setOnClickListener {bubbleView:View?->
             action.popToBubble()
         }

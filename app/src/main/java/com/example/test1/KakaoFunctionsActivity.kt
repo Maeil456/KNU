@@ -1,6 +1,9 @@
 package com.example.test1
 
+import android.content.BroadcastReceiver
+import android.content.Context
 import android.content.Intent
+import android.content.IntentFilter
 import android.net.Uri
 import android.os.Bundle
 import android.widget.Button
@@ -25,6 +28,11 @@ class KakaoFunctionsActivity : AppCompatActivity() {
         val btnKakaoFunction6 = findViewById<Button>(R.id.btnKakaoFunction6)
         val btnKakaoFunction7 = findViewById<Button>(R.id.btnKakaoFunction7)
         val btnKakaoFunction8 = findViewById<Button>(R.id.btnKakaoFunction8)
+
+        val filter = IntentFilter().apply {
+            addAction(FavorActivity.ACTION_RECENTLY_BUTTON)
+        }
+        registerReceiver(recentlyButtonReceiver, filter)
 
         btnKakaoFunction1.setOnClickListener {
             val packageName = "com.kakao.talk"
@@ -167,6 +175,31 @@ class KakaoFunctionsActivity : AppCompatActivity() {
 
     }
 
+    private val recentlyButtonReceiver = object : BroadcastReceiver() {
+        override fun onReceive(context: Context, intent: Intent) {
+            if (intent.action == FavorActivity.ACTION_RECENTLY_BUTTON) {
+                val appname = intent.getStringExtra("app")
+                val btnNumber = intent.getIntExtra("btn", 9)
+                if(appname=="kakao") {
+                    if (btnNumber < 9) {
+                        when (btnNumber) {
+                            1 -> findViewById<Button>(R.id.btnKakaoFunction1).performClick()
+                            2 -> findViewById<Button>(R.id.btnKakaoFunction2).performClick()
+                            3 -> findViewById<Button>(R.id.btnKakaoFunction3).performClick()
+                            4 -> findViewById<Button>(R.id.btnKakaoFunction4).performClick()
+                            5 -> findViewById<Button>(R.id.btnKakaoFunction5).performClick()
+                            6 -> findViewById<Button>(R.id.btnKakaoFunction6).performClick()
+                            7 -> findViewById<Button>(R.id.btnKakaoFunction7).performClick()
+                            8 -> findViewById<Button>(R.id.btnKakaoFunction8).performClick()
+                            else -> println("intent Error")
+                        }
+                    } else println("intent Error")
+                }
+            }
+
+        }
+    }
+
     private fun setArray(arrayName: String) {
         val resourceId = resources.getIdentifier(arrayName, "array", packageName)
 
@@ -275,4 +308,6 @@ class KakaoFunctionsActivity : AppCompatActivity() {
         val hideImageIntent = Intent(MainActivity.ACTION_HIDE_IMAGE)
         sendBroadcast(hideImageIntent)
     }
+
+
 }
