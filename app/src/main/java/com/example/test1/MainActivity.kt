@@ -10,6 +10,8 @@ import android.os.Build
 import android.os.Bundle
 import android.os.Parcelable
 import android.provider.Settings
+import android.view.WindowInsets
+import android.view.WindowManager
 import android.widget.Button
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
@@ -39,7 +41,16 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        supportActionBar?.show()
+
         setContentView(R.layout.activity_main)
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+            window.insetsController?.show(WindowInsets.Type.statusBars())
+        }else{
+            window.clearFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN)
+        }
 
         if (!isOverlayPermissionGranted()) {
             requestOverlayPermission()
