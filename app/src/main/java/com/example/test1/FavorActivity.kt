@@ -3,6 +3,8 @@ package com.example.test1
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuItem
 import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
 
@@ -167,6 +169,10 @@ class FavorActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_favor)
 
+        supportActionBar?.apply {
+            title = "최근 사용한 옵션" // 툴바 제목
+            setDisplayHomeAsUpEnabled(true) // 뒤로 가기 버튼 활성화
+        }
         val btnFavorFunction1: Button = findViewById(R.id.btnFavorFunction1)
         val btnFavorFunction2: Button = findViewById(R.id.btnFavorFunction2)
         val btnFavorFunction3: Button = findViewById(R.id.btnFavorFunction3)
@@ -232,6 +238,7 @@ class FavorActivity : AppCompatActivity() {
         val hideImageIntent = Intent(MainActivity.ACTION_HIDE_IMAGE)
         sendBroadcast(hideImageIntent)
     }
+
     private fun startEpisodeIntent(packageName: String) {
         val intent = packageManager.getLaunchIntentForPackage(packageName)
         if (intent != null) {

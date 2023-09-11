@@ -42,7 +42,10 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        supportActionBar?.show()
+        supportActionBar?.apply {
+            title = "메인 화면" // 툴바 제목
+        // 뒤로 가기 버튼 활성화
+        }
 
         setContentView(R.layout.activity_main)
 

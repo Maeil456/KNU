@@ -266,6 +266,11 @@ class SearchActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_seacrh)
 
+        supportActionBar?.apply {
+            title = "검색하기" // 툴바 제목
+            setDisplayHomeAsUpEnabled(true) // 뒤로 가기 버튼 활성화
+        }
+
         searchResultsAdapter = ArrayAdapter(this, android.R.layout.simple_list_item_1, mutableListOf())
         val searchResultsListView = findViewById<ListView>(R.id.searchResultsListView)
         searchResultsListView.adapter = searchResultsAdapter

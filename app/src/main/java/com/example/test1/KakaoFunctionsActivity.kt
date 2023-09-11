@@ -20,6 +20,11 @@ class KakaoFunctionsActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_kakao_functions)
 
+        supportActionBar?.apply {
+            title = "카카오톡" // 툴바 제목
+            setDisplayHomeAsUpEnabled(true) // 뒤로 가기 버튼 활성화
+        }
+
         val btnKakaoFunction1 = findViewById<Button>(R.id.btnKakaoFunction1)
         val btnKakaoFunction2 = findViewById<Button>(R.id.btnKakaoFunction2)
         val btnKakaoFunction3 = findViewById<Button>(R.id.btnKakaoFunction3)

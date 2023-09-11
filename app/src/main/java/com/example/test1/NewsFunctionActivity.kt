@@ -22,6 +22,11 @@ class NewsFunctionActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_news)
 
+        supportActionBar?.apply {
+            title = "네이버 뉴스" // 툴바 제목
+            setDisplayHomeAsUpEnabled(true) // 뒤로 가기 버튼 활성화
+        }
+
         val btnEpisode1 = findViewById<Button>(R.id.btnpolit)
         val btnEpisode2 = findViewById<Button>(R.id.btnceleb)
         val btnEpisode3 = findViewById<Button>(R.id.btnsports)
