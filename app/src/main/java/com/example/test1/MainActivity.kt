@@ -1,7 +1,6 @@
 package com.example.test1
 
 import android.content.BroadcastReceiver
-import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
@@ -13,6 +12,7 @@ import android.provider.Settings
 import android.view.WindowInsets
 import android.view.WindowManager
 import android.widget.Button
+import android.widget.ImageButton
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
@@ -47,6 +47,8 @@ class MainActivity : AppCompatActivity() {
         // 뒤로 가기 버튼 활성화
         }
 
+        supportActionBar?.hide()
+
         setContentView(R.layout.activity_main)
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
@@ -61,14 +63,14 @@ class MainActivity : AppCompatActivity() {
             startFloatingImageService()
         }
 
-        val btnEpisode1 = findViewById<Button>(R.id.btnfavor)
-        val btnEpisode2 = findViewById<Button>(R.id.btnsearch)
-        val btnEpisode3 = findViewById<Button>(R.id.btnkakao)
-        val btnEpisode4 = findViewById<Button>(R.id.btnnaver)
-        val btnEpisode5 = findViewById<Button>(R.id.btndelivery)
-        val btnEpisode6 = findViewById<Button>(R.id.btnyoutube)
-        val btnEpisode7 = findViewById<Button>(R.id.btndaum)
-        val btnEpisode8 = findViewById<Button>(R.id.btnetc)
+        val btnEpisode1 = findViewById<ImageButton>(R.id.btnfavor)
+        val btnEpisode2 = findViewById<ImageButton>(R.id.btnsearch)
+        val btnEpisode3 = findViewById<ImageButton>(R.id.btnkakao)
+        val btnEpisode4 = findViewById<ImageButton>(R.id.btnnaver)
+        val btnEpisode5 = findViewById<ImageButton>(R.id.btndelivery)
+        val btnEpisode6 = findViewById<ImageButton>(R.id.btnyoutube)
+        val btnEpisode7 = findViewById<ImageButton>(R.id.btndaum)
+        val btnEpisode8 = findViewById<ImageButton>(R.id.btnetc)
 
         val filter = IntentFilter().apply {
             addAction(FavorActivity.ACTION_RECENTLY_BUTTON)

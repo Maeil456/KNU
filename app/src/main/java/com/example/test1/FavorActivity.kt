@@ -3,9 +3,8 @@ package com.example.test1
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
-import android.view.Menu
-import android.view.MenuItem
 import android.widget.Button
+import android.widget.ImageButton
 import androidx.appcompat.app.AppCompatActivity
 
 class FavorActivity : AppCompatActivity() {
@@ -173,63 +172,63 @@ class FavorActivity : AppCompatActivity() {
             title = "최근 사용한 옵션" // 툴바 제목
             setDisplayHomeAsUpEnabled(true) // 뒤로 가기 버튼 활성화
         }
-        val btnFavorFunction1: Button = findViewById(R.id.btnFavorFunction1)
-        val btnFavorFunction2: Button = findViewById(R.id.btnFavorFunction2)
-        val btnFavorFunction3: Button = findViewById(R.id.btnFavorFunction3)
-        val btnFavorFunction4: Button = findViewById(R.id.btnFavorFunction4)
-        val btnFavorFunction5: Button = findViewById(R.id.btnFavorFunction5)
-        val btnFavorFunction6: Button = findViewById(R.id.btnFavorFunction6)
-        val btnFavorFunction7: Button = findViewById(R.id.btnFavorFunction7)
-        val btnFavorFunction8: Button = findViewById(R.id.btnFavorFunction8)
+        val btnFavorFunction1: ImageButton = findViewById(R.id.btnFavorFunction1)
+        val btnFavorFunction2: ImageButton = findViewById(R.id.btnFavorFunction2)
+        val btnFavorFunction3: ImageButton = findViewById(R.id.btnFavorFunction3)
+        val btnFavorFunction4: ImageButton = findViewById(R.id.btnFavorFunction4)
+        val btnFavorFunction5: ImageButton = findViewById(R.id.btnFavorFunction5)
+        val btnFavorFunction6: ImageButton = findViewById(R.id.btnFavorFunction6)
+        val btnFavorFunction7: ImageButton = findViewById(R.id.btnFavorFunction7)
+        val btnFavorFunction8: ImageButton = findViewById(R.id.btnFavorFunction8)
         // 버튼들을 배열에 연결
         val recentOptions = RecentOptionsManager.getRecentOptions()
         if (recentOptions.size > 0) {
-            btnFavorFunction1.text = recentOptions[0]
+            btnFavorFunction1.tag = recentOptions[0]
         }
         if (recentOptions.size > 1) {
-            btnFavorFunction2.text = recentOptions[1]
+            btnFavorFunction2.tag = recentOptions[1]
         }
         if (recentOptions.size > 2) {
-            btnFavorFunction3.text = recentOptions[2]
+            btnFavorFunction3.tag = recentOptions[2]
         }
         if (recentOptions.size > 3) {
-            btnFavorFunction4.text = recentOptions[3]
+            btnFavorFunction4.tag = recentOptions[3]
         }
         if (recentOptions.size > 4) {
-            btnFavorFunction5.text = recentOptions[4]
+            btnFavorFunction5.tag = recentOptions[4]
         }
         if (recentOptions.size > 5) {
-            btnFavorFunction6.text = recentOptions[5]
+            btnFavorFunction6.tag = recentOptions[5]
         }
         if (recentOptions.size > 6) {
-            btnFavorFunction7.text = recentOptions[6]
+            btnFavorFunction7.tag = recentOptions[6]
         }
         if (recentOptions.size > 7) {
-            btnFavorFunction8.text = recentOptions[7]
+            btnFavorFunction8.tag = recentOptions[7]
         }
         btnFavorFunction1.setOnClickListener {
-            performOptionAction(btnFavorFunction1.text.toString())
+            performOptionAction(btnFavorFunction1.tag.toString())
         }
         btnFavorFunction2.setOnClickListener {
-            performOptionAction(btnFavorFunction2.text.toString())
+            performOptionAction(btnFavorFunction2.tag.toString())
         }
         btnFavorFunction3.setOnClickListener {
-            performOptionAction(btnFavorFunction3.text.toString())
+            performOptionAction(btnFavorFunction3.tag.toString())
         }
         btnFavorFunction4.setOnClickListener {
-            performOptionAction(btnFavorFunction4.text.toString())
+            performOptionAction(btnFavorFunction4.tag.toString())
         }
         btnFavorFunction5.setOnClickListener {
-            performOptionAction(btnFavorFunction5.text.toString())
+            performOptionAction(btnFavorFunction5.tag.toString())
         }
         btnFavorFunction6.setOnClickListener {
-            performOptionAction(btnFavorFunction6.text.toString())
+            performOptionAction(btnFavorFunction6.tag.toString())
         }
         btnFavorFunction7.setOnClickListener {
-            performOptionAction(btnFavorFunction7.text.toString())
+            performOptionAction(btnFavorFunction7.tag.toString())
         }
         btnFavorFunction8.setOnClickListener {
-            performOptionAction(btnFavorFunction8.text.toString())
+            performOptionAction(btnFavorFunction8.tag.toString())
         }
 
     }
@@ -252,6 +251,10 @@ class FavorActivity : AppCompatActivity() {
             }
             startActivity(intent)
         }
+    }
+
+    private fun setbtnImage(tag: String){
+
     }
 
 }

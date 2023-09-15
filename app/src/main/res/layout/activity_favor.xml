@@ -1,105 +1,100 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<GridLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:padding="16dp">
+    android:columnCount="2"
+    android:rowCount="4"
+    android:background="@android:color/transparent">
 
-
-    <LinearLayout
-        android:layout_width="match_parent"
+    <!-- 첫 번째 행 -->
+    <ImageButton
+        android:id="@+id/btnFavorFunction1"
+        android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_weight="1"
-        android:gravity="center"
-        android:orientation="horizontal">
+        android:layout_columnWeight="1"
+        android:layout_rowWeight="1"
+        android:scaleType="centerCrop"
+        android:contentDescription="@string/description_btn"
+        android:background="@android:color/transparent"
+/>
 
-        <Button
-            android:id="@+id/btnFavorFunction1"
-            android:layout_width="0dp"
-            android:layout_height="175dp"
-            android:layout_weight="1"
-            android:text="0" />
-
-        <Button
-            android:id="@+id/btnFavorFunction2"
-            android:layout_width="0dp"
-            android:layout_height="175dp"
-            android:layout_weight="1"
-            android:text="0" />
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
+    <ImageButton
+        android:id="@+id/btnFavorFunction2"
+        android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_weight="1"
-        android:gravity="center"
-        android:orientation="horizontal">
+        android:layout_columnWeight="1"
+        android:layout_rowWeight="1"
+        android:scaleType="centerCrop"
+        android:contentDescription="@string/description_btn"
+        android:background="@android:color/transparent"
+        android:src="@drawable/main_bt_02" />
 
-        <Button
-            android:id="@+id/btnFavorFunction3"
-            android:layout_width="0dp"
-            android:layout_height="175dp"
-            android:layout_weight="1"
-            android:text="0" />
-
-        <Button
-            android:id="@+id/btnFavorFunction4"
-            android:layout_width="0dp"
-            android:layout_height="175dp"
-            android:layout_weight="1"
-            android:text="0" />
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
+    <ImageButton
+        android:id="@+id/btnFavorFunction3"
+        android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_weight="1"
-        android:gravity="center"
-        android:orientation="horizontal">
+        android:layout_columnWeight="1"
+        android:layout_rowWeight="1"
+        android:scaleType="centerCrop"
+        android:contentDescription="@string/description_btn"
+        android:background="@android:color/transparent"
+        android:src="@drawable/main_bt_03" />
 
-        <Button
-            android:id="@+id/btnFavorFunction5"
-            android:layout_width="0dp"
-            android:layout_height="175dp"
-            android:layout_weight="1"
-            android:text="0" />
-
-        <Button
-            android:id="@+id/btnFavorFunction6"
-            android:layout_width="0dp"
-            android:layout_height="175dp"
-            android:layout_weight="1"
-            android:text="0" />
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
+    <ImageButton
+        android:id="@+id/btnFavorFunction4"
+        android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_weight="1"
-        android:gravity="center"
-        android:orientation="horizontal">
+        android:layout_columnWeight="1"
+        android:layout_rowWeight="1"
+        android:scaleType="centerCrop"
+        android:contentDescription="@string/description_btn"
+        android:background="@android:color/transparent"
+        android:src="@drawable/main_bt_04"/>
 
-        <Button
-            android:id="@+id/btnFavorFunction7"
-            android:layout_width="0dp"
-            android:layout_height="175dp"
-            android:layout_weight="1"
-            android:text="0" />
+    <ImageButton
+        android:id="@+id/btnFavorFunction5"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_columnWeight="1"
+        android:layout_rowWeight="1"
+        android:scaleType="centerCrop"
+        android:contentDescription="@string/description_btn"
+        android:background="@android:color/transparent"
+        android:src="@drawable/main_bt_05" />
 
-        <Button
-            android:id="@+id/btnFavorFunction8"
-            android:layout_width="0dp"
-            android:layout_height="175dp"
-            android:layout_weight="1"
-            android:text="0" />
+    <ImageButton
+        android:id="@+id/btnFavorFunction6"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_columnWeight="1"
+        android:layout_rowWeight="1"
+        android:scaleType="centerCrop"
+        android:contentDescription="@string/description_btn"
+        android:background="@android:color/transparent"
+        android:src="@drawable/main_bt_06"/>
 
-    </LinearLayout>
+    <ImageButton
+        android:id="@+id/btnFavorFunction7"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_columnWeight="1"
+        android:layout_rowWeight="1"
+        android:scaleType="centerCrop"
+        android:contentDescription="@string/description_btn"
+        android:background="@android:color/transparent"
+        android:src="@drawable/main_bt_07"/>
 
+    <ImageButton
+        android:id="@+id/btnFavorFunction8"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_columnWeight="1"
+        android:layout_rowWeight="1"
+        android:scaleType="centerCrop"
+        android:contentDescription="@string/description_btn"
+        android:background="@android:color/transparent"
+        android:src="@drawable/main_bt_08" />
 
-
-
-</LinearLayout>
-
+</GridLayout>

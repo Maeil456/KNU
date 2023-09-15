@@ -1,126 +1,100 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<GridLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context=".MainActivity">
+    android:columnCount="2"
+    android:rowCount="4"
+    android:background="@android:color/transparent">
 
     <!-- 첫 번째 행 -->
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:orientation="horizontal">
-
-        <Button
+        <ImageButton
             android:id="@+id/btnfavor"
             android:layout_width="0dp"
-            android:layout_height="170dp"
-            android:layout_weight="1"
-            android:backgroundTint="#BEE1FD"
-            android:text="최근 사용한 기능"
-            android:textColor="#000000"
-            android:textSize="22sp" />
+            android:layout_height="0dp"
+            android:layout_columnWeight="1"
+            android:layout_rowWeight="1"
+            android:scaleType="centerCrop"
+            android:contentDescription="@string/description_btn"
+            android:background="@android:color/transparent"
+            android:src="@drawable/main_bt_01"/>
 
-        <Button
+        <ImageButton
             android:id="@+id/btnsearch"
             android:layout_width="0dp"
-            android:layout_height="170dp"
-            android:layout_weight="1"
-            android:backgroundTint="#BEE1FD"
-            android:text="검색하기"
-            android:textColor="#000000"
-            android:textSize="24sp" />
-    </LinearLayout>
+            android:layout_height="0dp"
+            android:layout_columnWeight="1"
+            android:layout_rowWeight="1"
+            android:scaleType="centerCrop"
+            android:contentDescription="@string/description_btn"
+            android:background="@android:color/transparent"
+            android:src="@drawable/main_bt_02" />
 
-    <!-- 두 번째 행 -->
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:orientation="horizontal">
-
-        <Button
+        <ImageButton
             android:id="@+id/btnkakao"
             android:layout_width="0dp"
-            android:layout_height="170dp"
-            android:layout_weight="1"
-            android:backgroundTint="#BEE1FD"
-            android:text="카카오톡"
-            android:textColor="#000000"
-            android:textSize="24sp"
-            tools:textSize="24sp" />
+            android:layout_height="0dp"
+            android:layout_columnWeight="1"
+            android:layout_rowWeight="1"
+            android:scaleType="centerCrop"
+            android:contentDescription="@string/description_btn"
+            android:background="@android:color/transparent"
+            android:src="@drawable/main_bt_03" />
 
-        <Button
+        <ImageButton
             android:id="@+id/btnnaver"
             android:layout_width="0dp"
-            android:layout_height="170dp"
-            android:layout_weight="1"
-            android:backgroundTint="#BEE1FD"
-            android:text="네이버"
-            android:textColor="#000000"
-            android:textSize="24sp"
-            tools:textSize="24sp" />
-    </LinearLayout>
+            android:layout_height="0dp"
+            android:layout_columnWeight="1"
+            android:layout_rowWeight="1"
+            android:scaleType="centerCrop"
+            android:contentDescription="@string/description_btn"
+            android:background="@android:color/transparent"
+            android:src="@drawable/main_bt_04"/>
 
-    <!-- 세 번째 행 -->
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:orientation="horizontal">
-
-        <Button
+        <ImageButton
             android:id="@+id/btndelivery"
             android:layout_width="0dp"
-            android:layout_height="170dp"
-            android:layout_weight="1"
-            android:backgroundTint="#BEE1FD"
-            android:text="배달의 민족"
-            android:textColor="#000000"
-            android:textSize="24sp"
-            android:textStyle="normal"
-            tools:textSize="24sp" />
+            android:layout_height="0dp"
+            android:layout_columnWeight="1"
+            android:layout_rowWeight="1"
+            android:scaleType="centerCrop"
+            android:contentDescription="@string/description_btn"
+            android:background="@android:color/transparent"
+            android:src="@drawable/main_bt_05" />
 
-        <Button
+        <ImageButton
             android:id="@+id/btnyoutube"
             android:layout_width="0dp"
-            android:layout_height="170dp"
-            android:layout_weight="1"
-            android:backgroundTint="#BEE1FD"
-            android:text="유튜브"
-            android:textColor="#000000"
-            android:textSize="24sp" />
-    </LinearLayout>
+            android:layout_height="0dp"
+            android:layout_columnWeight="1"
+            android:layout_rowWeight="1"
+            android:scaleType="centerCrop"
+            android:contentDescription="@string/description_btn"
+            android:background="@android:color/transparent"
+            android:src="@drawable/main_bt_06"/>
 
-    <!-- 네 번째 행 -->
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:orientation="horizontal">
-
-        <Button
+        <ImageButton
             android:id="@+id/btndaum"
             android:layout_width="0dp"
-            android:layout_height="170dp"
-            android:layout_weight="1"
-            android:backgroundTint="#BEE1FD"
-            android:text="다음"
-            android:textColor="#000000"
-            android:textSize="24sp" />
+            android:layout_height="0dp"
+            android:layout_columnWeight="1"
+            android:layout_rowWeight="1"
+            android:scaleType="centerCrop"
+            android:contentDescription="@string/description_btn"
+            android:background="@android:color/transparent"
+            android:src="@drawable/main_bt_07"/>
 
-        <Button
+        <ImageButton
             android:id="@+id/btnetc"
             android:layout_width="0dp"
-            android:layout_height="170dp"
-            android:layout_weight="1"
-            android:backgroundTint="#BEE1FD"
-            android:text="더보기메인"
-            android:textColor="#000000"
-            android:textSize="24sp" />
-    </LinearLayout>
+            android:layout_height="0dp"
+            android:layout_columnWeight="1"
+            android:layout_rowWeight="1"
+            android:scaleType="centerCrop"
+            android:contentDescription="@string/description_btn"
+            android:background="@android:color/transparent"
+            android:src="@drawable/main_bt_08" />
 
-</LinearLayout>
+</GridLayout>
