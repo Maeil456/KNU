@@ -92,7 +92,6 @@ class KakaoFunctionsActivity : AppCompatActivity() {
 
         btnKakaoFunction4.setOnClickListener {
             val packageName = "com.kakao.talk"
-            val url = "https://gift-talk.kakao.com"
             setArray("Naver_search")
             setArray2("Naver_search_imageSize")
             setImage("Naver_search_image")
@@ -103,7 +102,7 @@ class KakaoFunctionsActivity : AppCompatActivity() {
             intent.putStringArrayListExtra("imageIndex",imageIndex)
             sendBroadcast(intent)
 
-            startLinkIntent(packageName,url)
+            startMainIntent(packageName)
             val intentB = Intent(this, BubbleService::class.java)
             startService(intentB)
             RecentOptionsManager.addOption("선물 하기")
@@ -128,7 +127,6 @@ class KakaoFunctionsActivity : AppCompatActivity() {
 
         btnKakaoFunction6.setOnClickListener {
             val packageName = "com.kakao.talk"
-            val url = "https://store.kakao.com/"
             setArray("Naver_search")
             setArray2("Naver_search_imageSize")
             setImage("Naver_search_image")
@@ -139,7 +137,7 @@ class KakaoFunctionsActivity : AppCompatActivity() {
             intent.putStringArrayListExtra("imageIndex",imageIndex)
             sendBroadcast(intent)
 
-            startLinkIntent(packageName,url)
+            startMainIntent(packageName)
             val intentB = Intent(this, BubbleService::class.java)
             startService(intentB)
             RecentOptionsManager.addOption("쇼핑 하기")

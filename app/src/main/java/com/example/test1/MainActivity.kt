@@ -110,7 +110,7 @@ class MainActivity : AppCompatActivity() {
             intent.putParcelableArrayListExtra("targetSizes", targetSizes)
             intent.putStringArrayListExtra("imageIndex",imageIndex)
             sendBroadcast(intent)
-            startTestIntent(packageName)
+            startEpisodeIntent(packageName)
             val intentB = Intent(this, BubbleService::class.java)
             startService(intentB)
             RecentOptionsManager.addOption("배달의 민족")
@@ -315,22 +315,6 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun startTestIntent(packageName: String) {
-        val intent = Intent(Intent.ACTION_MAIN)
-        //intent.addCategory(Intent.CATEGORY_LAUNCHER)
-        intent.setPackage(packageName)
-        if (intent != null) {
-            startActivity(intent)
-        } else {
-            // Handle the case when the target app is not installed
-            // You can show an error message or direct the user to install the app
-            val link = "https://play.google.com/store/apps/details?id=$packageName"
-            val intent = Intent(Intent.ACTION_VIEW).apply {
-                data = Uri.parse(link)
-            }
-            startActivity(intent)
-        }
-    }
 }
 
 

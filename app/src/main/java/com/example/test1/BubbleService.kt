@@ -5,6 +5,7 @@ import android.content.Context
 import android.content.Intent
 import android.content.Intent.FLAG_ACTIVITY_NEW_TASK
 import android.content.IntentFilter
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.Button
@@ -19,6 +20,8 @@ import com.torrydo.floatingbubbleview.viewx.ViewHelper
 
 class BubbleService : FloatingBubbleService() {
 
+    private var isDrag:Boolean = false
+    private var downTime: Long = 0
     companion object {
         const val ACTION_IMAGE_FROM_FIRST = "com.example.test1.IMAGE_FROM_FIRST"
     }
@@ -42,6 +45,23 @@ class BubbleService : FloatingBubbleService() {
 
             .behavior(BubbleBehavior.DYNAMIC_CLOSE_BUBBLE)
 
+            .addFloatingBubbleListener(object : FloatingBubble.Listener {
+                override fun onUp(x: Float, y: Float) {
+                    downTime = System.currentTimeMillis()
+                    isDrag = false
+                }
+                override fun onDown(x: Float, y: Float) {
+                    val elapsedTime = System.currentTimeMillis() - downTime
+
+                    if (elapsedTime > 500) {  // 500ms가 넘었다면 드래그로 판단합니다.
+                        isDrag = true
+                        Log.d("MyTouchListener", "This was a drag action.")
+                    } else {
+                        action.navigateToExpandableView()
+                        Log.d("MyTouchListener", "This was a click action.")
+                    }
+                }
+            })
 
     }
 
@@ -58,12 +78,6 @@ class BubbleService : FloatingBubbleService() {
         }
 
         layout.findViewById<Button>(R.id.btnHelpImage).setOnClickListener {bubbleView:View?->
-            val intent = Intent(ACTION_IMAGE_FROM_FIRST)
-            sendBroadcast(intent)
-            action.popToBubble()
-        }
-
-        layout.findViewById<Button>(R.id.btnFromStart).setOnClickListener {bubbleView:View?->
             val intent = Intent(ACTION_IMAGE_FROM_FIRST)
             sendBroadcast(intent)
             action.popToBubble()
