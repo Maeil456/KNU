@@ -13,12 +13,12 @@
         android:id="@+id/btnFavorFunction1"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_columnWeight="1"
         android:layout_rowWeight="1"
-        android:scaleType="centerCrop"
-        android:contentDescription="@string/description_btn"
+        android:layout_columnWeight="1"
         android:background="@android:color/transparent"
-/>
+        android:contentDescription="@string/description_btn"
+        android:scaleType="centerCrop"
+        android:src="@drawable/main_bt_01" />
 
     <ImageButton
         android:id="@+id/btnFavorFunction2"

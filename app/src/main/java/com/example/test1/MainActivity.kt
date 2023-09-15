@@ -65,8 +65,8 @@ class MainActivity : AppCompatActivity() {
 
         val btnEpisode1 = findViewById<ImageButton>(R.id.btnfavor)
         val btnEpisode2 = findViewById<ImageButton>(R.id.btnsearch)
-        val btnEpisode3 = findViewById<ImageButton>(R.id.btnkakao)
-        val btnEpisode4 = findViewById<ImageButton>(R.id.btnnaver)
+        val btnEpisode3 = findViewById<ImageButton>(R.id.btnnaver)
+        val btnEpisode4 = findViewById<ImageButton>(R.id.btnkakao)
         val btnEpisode5 = findViewById<ImageButton>(R.id.btndelivery)
         val btnEpisode6 = findViewById<ImageButton>(R.id.btnyoutube)
         val btnEpisode7 = findViewById<ImageButton>(R.id.btndaum)
@@ -91,13 +91,13 @@ class MainActivity : AppCompatActivity() {
 
         btnEpisode3.setOnClickListener {
             checkImageService()
-            val intent = Intent(this, KakaoFunctionsActivity::class.java)
+            val intent = Intent(this, NaverFunctionActivity::class.java)
             startActivity(intent)
         }
 
         btnEpisode4.setOnClickListener {
             checkImageService()
-            val intent = Intent(this, NaverFunctionActivity::class.java)
+            val intent = Intent(this, KakaoFunctionsActivity::class.java)
             startActivity(intent)
         }
         btnEpisode5.setOnClickListener {
@@ -185,10 +185,10 @@ class MainActivity : AppCompatActivity() {
                     if (btnNumber < 9) {
                         println("intent win")
                         when (btnNumber) {
-                            5 -> findViewById<Button>(R.id.btndelivery).performClick()
-                            6 -> findViewById<Button>(R.id.btnyoutube).performClick()
-                            7 -> findViewById<Button>(R.id.btndaum).performClick()
-                            8 -> findViewById<Button>(R.id.btnetc).performClick()
+                            5 -> findViewById<ImageButton>(R.id.btndelivery).performClick()
+                            6 -> findViewById<ImageButton>(R.id.btnyoutube).performClick()
+                            7 -> findViewById<ImageButton>(R.id.btndaum).performClick()
+                            8 -> findViewById<ImageButton>(R.id.btnetc).performClick()
                             else -> println("intent Error")
                         }
                     }else println("intent Error")

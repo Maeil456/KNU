@@ -8,6 +8,7 @@ import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.widget.Button
+import android.widget.ImageButton
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 
@@ -26,14 +27,14 @@ class NaverFunctionActivity : AppCompatActivity() {
             setDisplayHomeAsUpEnabled(true) // 뒤로 가기 버튼 활성화
         }
 
-        val btnEpisode1 = findViewById<Button>(R.id.btnNaverFunction1)
-        val btnEpisode2 = findViewById<Button>(R.id.btnNaverFunction2)
-        val btnEpisode3 = findViewById<Button>(R.id.btnNaverFunction3)
-        val btnEpisode4 = findViewById<Button>(R.id.btnNaverFunction4)
-        val btnEpisode5 = findViewById<Button>(R.id.btnNaverFunction5)
-        val btnEpisode6 = findViewById<Button>(R.id.btnNaverFunction6)
-        val btnEpisode7 = findViewById<Button>(R.id.btnNaverFunction7)
-        //val btnEpisode8 = findViewById<Button>(R.id.btnNaverFunction8)
+        val btnEpisode1 = findViewById<ImageButton>(R.id.btnNaverFunction1)
+        val btnEpisode2 = findViewById<ImageButton>(R.id.btnNaverFunction2)
+        val btnEpisode3 = findViewById<ImageButton>(R.id.btnNaverFunction3)
+        val btnEpisode4 = findViewById<ImageButton>(R.id.btnNaverFunction4)
+        val btnEpisode5 = findViewById<ImageButton>(R.id.btnNaverFunction5)
+        val btnEpisode6 = findViewById<ImageButton>(R.id.btnNaverFunction6)
+        val btnEpisode7 = findViewById<ImageButton>(R.id.btnNaverFunction7)
+        //val btnEpisode8 = findViewById<ImageButton>(R.id.btnNaverFunction8)
 
         val filter = IntentFilter().apply {
             addAction(FavorActivity.ACTION_RECENTLY_BUTTON)
@@ -166,14 +167,14 @@ class NaverFunctionActivity : AppCompatActivity() {
                     if (btnNumber < 9) {
                         println("intent win")
                         when (btnNumber) {
-                            1 -> findViewById<Button>(R.id.btnNaverFunction1).performClick()
-                            2 -> findViewById<Button>(R.id.btnNaverFunction2).performClick()
-                            3 -> findViewById<Button>(R.id.btnNaverFunction3).performClick()
-                            4 -> findViewById<Button>(R.id.btnNaverFunction4).performClick()
-                            5 -> findViewById<Button>(R.id.btnNaverFunction5).performClick()
-                            6 -> findViewById<Button>(R.id.btnNaverFunction6).performClick()
-                            7 -> findViewById<Button>(R.id.btnNaverFunction7).performClick()
-                            8 -> findViewById<Button>(R.id.btnNaverFunction8).performClick()
+                            1 -> findViewById<ImageButton>(R.id.btnNaverFunction1).performClick()
+                            2 -> findViewById<ImageButton>(R.id.btnNaverFunction2).performClick()
+                            3 -> findViewById<ImageButton>(R.id.btnNaverFunction3).performClick()
+                            4 -> findViewById<ImageButton>(R.id.btnNaverFunction4).performClick()
+                            5 -> findViewById<ImageButton>(R.id.btnNaverFunction5).performClick()
+                            6 -> findViewById<ImageButton>(R.id.btnNaverFunction6).performClick()
+                            7 -> findViewById<ImageButton>(R.id.btnNaverFunction7).performClick()
+                            8 -> findViewById<ImageButton>(R.id.btnNaverFunction8).performClick()
                         }
                     } else println("intent Error")
                 }

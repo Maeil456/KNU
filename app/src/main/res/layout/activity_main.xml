@@ -9,92 +9,92 @@
     android:background="@android:color/transparent">
 
     <!-- 첫 번째 행 -->
-        <ImageButton
-            android:id="@+id/btnfavor"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_columnWeight="1"
-            android:layout_rowWeight="1"
-            android:scaleType="centerCrop"
-            android:contentDescription="@string/description_btn"
-            android:background="@android:color/transparent"
-            android:src="@drawable/main_bt_01"/>
+    <ImageButton
+        android:id="@+id/btnfavor"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_columnWeight="1"
+        android:layout_rowWeight="1"
+        android:scaleType="centerCrop"
+        android:contentDescription="@string/description_btn"
+        android:background="@android:color/transparent"
+        android:src="@drawable/main_bt_01"/>
 
-        <ImageButton
-            android:id="@+id/btnsearch"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_columnWeight="1"
-            android:layout_rowWeight="1"
-            android:scaleType="centerCrop"
-            android:contentDescription="@string/description_btn"
-            android:background="@android:color/transparent"
-            android:src="@drawable/main_bt_02" />
+    <ImageButton
+        android:id="@+id/btnsearch"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_columnWeight="1"
+        android:layout_rowWeight="1"
+        android:scaleType="centerCrop"
+        android:contentDescription="@string/description_btn"
+        android:background="@android:color/transparent"
+        android:src="@drawable/main_bt_02" />
 
-        <ImageButton
-            android:id="@+id/btnkakao"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_columnWeight="1"
-            android:layout_rowWeight="1"
-            android:scaleType="centerCrop"
-            android:contentDescription="@string/description_btn"
-            android:background="@android:color/transparent"
-            android:src="@drawable/main_bt_03" />
+    <ImageButton
+        android:id="@+id/btnnaver"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_columnWeight="1"
+        android:layout_rowWeight="1"
+        android:scaleType="centerCrop"
+        android:contentDescription="@string/description_btn"
+        android:background="@android:color/transparent"
+        android:src="@drawable/main_bt_03" />
 
-        <ImageButton
-            android:id="@+id/btnnaver"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_columnWeight="1"
-            android:layout_rowWeight="1"
-            android:scaleType="centerCrop"
-            android:contentDescription="@string/description_btn"
-            android:background="@android:color/transparent"
-            android:src="@drawable/main_bt_04"/>
+    <ImageButton
+        android:id="@+id/btnkakao"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_columnWeight="1"
+        android:layout_rowWeight="1"
+        android:scaleType="centerCrop"
+        android:contentDescription="@string/description_btn"
+        android:background="@android:color/transparent"
+        android:src="@drawable/main_bt_04"/>
 
-        <ImageButton
-            android:id="@+id/btndelivery"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_columnWeight="1"
-            android:layout_rowWeight="1"
-            android:scaleType="centerCrop"
-            android:contentDescription="@string/description_btn"
-            android:background="@android:color/transparent"
-            android:src="@drawable/main_bt_05" />
+    <ImageButton
+        android:id="@+id/btndelivery"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_columnWeight="1"
+        android:layout_rowWeight="1"
+        android:scaleType="centerCrop"
+        android:contentDescription="@string/description_btn"
+        android:background="@android:color/transparent"
+        android:src="@drawable/main_bt_05" />
 
-        <ImageButton
-            android:id="@+id/btnyoutube"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_columnWeight="1"
-            android:layout_rowWeight="1"
-            android:scaleType="centerCrop"
-            android:contentDescription="@string/description_btn"
-            android:background="@android:color/transparent"
-            android:src="@drawable/main_bt_06"/>
+    <ImageButton
+        android:id="@+id/btnyoutube"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_columnWeight="1"
+        android:layout_rowWeight="1"
+        android:scaleType="centerCrop"
+        android:contentDescription="@string/description_btn"
+        android:background="@android:color/transparent"
+        android:src="@drawable/main_bt_06"/>
 
-        <ImageButton
-            android:id="@+id/btndaum"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_columnWeight="1"
-            android:layout_rowWeight="1"
-            android:scaleType="centerCrop"
-            android:contentDescription="@string/description_btn"
-            android:background="@android:color/transparent"
-            android:src="@drawable/main_bt_07"/>
+    <ImageButton
+        android:id="@+id/btndaum"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_columnWeight="1"
+        android:layout_rowWeight="1"
+        android:scaleType="centerCrop"
+        android:contentDescription="@string/description_btn"
+        android:background="@android:color/transparent"
+        android:src="@drawable/main_bt_07"/>
 
-        <ImageButton
-            android:id="@+id/btnetc"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_columnWeight="1"
-            android:layout_rowWeight="1"
-            android:scaleType="centerCrop"
-            android:contentDescription="@string/description_btn"
-            android:background="@android:color/transparent"
-            android:src="@drawable/main_bt_08" />
+    <ImageButton
+        android:id="@+id/btnetc"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_columnWeight="1"
+        android:layout_rowWeight="1"
+        android:scaleType="centerCrop"
+        android:contentDescription="@string/description_btn"
+        android:background="@android:color/transparent"
+        android:src="@drawable/main_bt_08" />
 
 </GridLayout>

@@ -17,6 +17,7 @@
             android:layout_width="0dp"
             android:layout_height="175dp"
             android:layout_weight="1"
+            android:gravity="bottom|center"
             android:text="문자 보내기" />
 
         <Button
@@ -24,6 +25,7 @@
             android:layout_width="0dp"
             android:layout_height="175dp"
             android:layout_weight="1"
+            android:gravity="bottom|center"
             android:text="영상 통화" />
 
     </LinearLayout>
@@ -40,6 +42,7 @@
             android:layout_width="0dp"
             android:layout_height="175dp"
             android:layout_weight="1"
+            android:gravity="bottom|center"
             android:text="음성 통화" />
 
         <Button
@@ -47,6 +50,7 @@
             android:layout_width="0dp"
             android:layout_height="175dp"
             android:layout_weight="1"
+            android:gravity="bottom|center"
             android:text="선물 하기" />
 
     </LinearLayout>
@@ -63,6 +67,7 @@
             android:layout_width="0dp"
             android:layout_height="175dp"
             android:layout_weight="1"
+            android:gravity="bottom|center"
             android:text="프로필 설정하기" />
 
         <Button
@@ -70,6 +75,7 @@
             android:layout_width="0dp"
             android:layout_height="175dp"
             android:layout_weight="1"
+            android:gravity="bottom|center"
             android:text="쇼핑 하기" />
 
     </LinearLayout>
@@ -86,6 +92,7 @@
             android:layout_width="0dp"
             android:layout_height="175dp"
             android:layout_weight="1"
+            android:gravity="bottom|center"
             android:text="친구 추가" />
 
         <Button
@@ -93,6 +100,7 @@
             android:layout_width="0dp"
             android:layout_height="175dp"
             android:layout_weight="1"
+            android:gravity="bottom|center"
             android:text="더보기카카오" />
 
     </LinearLayout>

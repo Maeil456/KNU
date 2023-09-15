@@ -1,103 +1,100 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<GridLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:padding="16dp">
+    android:columnCount="2"
+    android:rowCount="4"
+    android:background="@android:color/transparent">
 
-    <LinearLayout
-        android:layout_width="match_parent"
+    <!-- 첫 번째 행 -->
+    <ImageButton
+        android:id="@+id/btnNaverFunction1"
+        android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_weight="1"
-        android:gravity="center"
-        android:orientation="horizontal">
+        android:layout_columnWeight="1"
+        android:layout_rowWeight="1"
+        android:scaleType="centerCrop"
+        android:contentDescription="@string/description_btn"
+        android:background="@android:color/transparent"
+        android:src="@drawable/naver_bt_01"/>
 
-        <Button
-            android:id="@+id/btnNaverFunction1"
-            android:layout_width="0dp"
-            android:layout_height="175dp"
-            android:layout_weight="1"
-            android:text="네이버 검색 하기" />
-
-        <Button
-            android:id="@+id/btnNaverFunction2"
-            android:layout_width="0dp"
-            android:layout_height="175dp"
-            android:layout_weight="1"
-            android:text="주식 보기" />
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
+    <ImageButton
+        android:id="@+id/btnNaverFunction2"
+        android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_weight="1"
-        android:gravity="center"
-        android:orientation="horizontal">
+        android:layout_columnWeight="1"
+        android:layout_rowWeight="1"
+        android:scaleType="centerCrop"
+        android:contentDescription="@string/description_btn"
+        android:background="@android:color/transparent"
+        android:src="@drawable/naver_bt_02" />
 
-        <Button
-            android:id="@+id/btnNaverFunction3"
-            android:layout_width="0dp"
-            android:layout_height="175dp"
-            android:layout_weight="1"
-            android:text="날씨 보기" />
-
-        <Button
-            android:id="@+id/btnNaverFunction4"
-            android:layout_width="0dp"
-            android:layout_height="175dp"
-            android:layout_weight="1"
-            android:text="메일보기,보내기" />
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
+    <ImageButton
+        android:id="@+id/btnNaverFunction3"
+        android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_weight="1"
-        android:gravity="center"
-        android:orientation="horizontal">
+        android:layout_columnWeight="1"
+        android:layout_rowWeight="1"
+        android:scaleType="centerCrop"
+        android:contentDescription="@string/description_btn"
+        android:background="@android:color/transparent"
+        android:src="@drawable/naver_bt_03" />
 
-        <Button
-            android:id="@+id/btnNaverFunction5"
-            android:layout_width="0dp"
-            android:layout_height="175dp"
-            android:layout_weight="1"
-            android:text="뉴스 보기" />
-
-        <Button
-            android:id="@+id/btnNaverFunction6"
-            android:layout_width="0dp"
-            android:layout_height="175dp"
-            android:layout_weight="1"
-            android:text="쇼핑 하기" />
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
+    <ImageButton
+        android:id="@+id/btnNaverFunction4"
+        android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_weight="1"
-        android:gravity="center"
-        android:orientation="horizontal">
+        android:layout_columnWeight="1"
+        android:layout_rowWeight="1"
+        android:scaleType="centerCrop"
+        android:contentDescription="@string/description_btn"
+        android:background="@android:color/transparent"
+        android:src="@drawable/naver_bt_04"/>
 
-        <Button
-            android:id="@+id/btnNaverFunction7"
-            android:layout_width="0dp"
-            android:layout_height="175dp"
-            android:layout_weight="1"
-            android:text="지도 보기" />
+    <ImageButton
+        android:id="@+id/btnNaverFunction5"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_columnWeight="1"
+        android:layout_rowWeight="1"
+        android:scaleType="centerCrop"
+        android:contentDescription="@string/description_btn"
+        android:background="@android:color/transparent"
+        android:src="@drawable/naver_bt_05" />
 
-        <Button
-            android:id="@+id/btnNaverFunction8"
-            android:layout_width="0dp"
-            android:layout_height="175dp"
-            android:layout_weight="1"
-            android:text="더보기네이버" />
+    <ImageButton
+        android:id="@+id/btnNaverFunction6"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_columnWeight="1"
+        android:layout_rowWeight="1"
+        android:scaleType="centerCrop"
+        android:contentDescription="@string/description_btn"
+        android:background="@android:color/transparent"
+        android:src="@drawable/naver_bt_06"/>
 
-    </LinearLayout>
+    <ImageButton
+        android:id="@+id/btnNaverFunction7"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_columnWeight="1"
+        android:layout_rowWeight="1"
+        android:scaleType="centerCrop"
+        android:contentDescription="@string/description_btn"
+        android:background="@android:color/transparent"
+        android:src="@drawable/naver_bt_07"/>
 
+    <ImageButton
+        android:id="@+id/btnNaverFunction8"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_columnWeight="1"
+        android:layout_rowWeight="1"
+        android:scaleType="centerCrop"
+        android:contentDescription="@string/description_btn"
+        android:background="@android:color/transparent"
+        android:src="@drawable/naver_bt_08" />
 
-
-
-</LinearLayout>
+</GridLayout>
