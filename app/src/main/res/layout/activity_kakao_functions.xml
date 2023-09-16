@@ -1,111 +1,100 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<GridLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:padding="16dp">
+    android:columnCount="2"
+    android:rowCount="4"
+    android:background="@android:color/transparent">
 
-    <LinearLayout
-        android:layout_width="match_parent"
+    <!-- 첫 번째 행 -->
+    <ImageButton
+        android:id="@+id/btnKakaoFunction1"
+        android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_weight="1"
-        android:gravity="center"
-        android:orientation="horizontal">
+        android:layout_columnWeight="1"
+        android:layout_rowWeight="1"
+        android:scaleType="centerCrop"
+        android:contentDescription="@string/description_btn"
+        android:background="@android:color/transparent"
+        android:src="@drawable/kakao_bt_01"/>
 
-        <Button
-            android:id="@+id/btnKakaoFunction1"
-            android:layout_width="0dp"
-            android:layout_height="175dp"
-            android:layout_weight="1"
-            android:gravity="bottom|center"
-            android:text="문자 보내기" />
-
-        <Button
-            android:id="@+id/btnKakaoFunction2"
-            android:layout_width="0dp"
-            android:layout_height="175dp"
-            android:layout_weight="1"
-            android:gravity="bottom|center"
-            android:text="영상 통화" />
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
+    <ImageButton
+        android:id="@+id/btnKakaoFunction2"
+        android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_weight="1"
-        android:gravity="center"
-        android:orientation="horizontal">
+        android:layout_columnWeight="1"
+        android:layout_rowWeight="1"
+        android:scaleType="centerCrop"
+        android:contentDescription="@string/description_btn"
+        android:background="@android:color/transparent"
+        android:src="@drawable/kakao_bt_02" />
 
-        <Button
-            android:id="@+id/btnKakaoFunction3"
-            android:layout_width="0dp"
-            android:layout_height="175dp"
-            android:layout_weight="1"
-            android:gravity="bottom|center"
-            android:text="음성 통화" />
-
-        <Button
-            android:id="@+id/btnKakaoFunction4"
-            android:layout_width="0dp"
-            android:layout_height="175dp"
-            android:layout_weight="1"
-            android:gravity="bottom|center"
-            android:text="선물 하기" />
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
+    <ImageButton
+        android:id="@+id/btnKakaoFunction3"
+        android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_weight="1"
-        android:gravity="center"
-        android:orientation="horizontal">
+        android:layout_columnWeight="1"
+        android:layout_rowWeight="1"
+        android:scaleType="centerCrop"
+        android:contentDescription="@string/description_btn"
+        android:background="@android:color/transparent"
+        android:src="@drawable/kakao_bt_03" />
 
-        <Button
-            android:id="@+id/btnKakaoFunction5"
-            android:layout_width="0dp"
-            android:layout_height="175dp"
-            android:layout_weight="1"
-            android:gravity="bottom|center"
-            android:text="프로필 설정하기" />
-
-        <Button
-            android:id="@+id/btnKakaoFunction6"
-            android:layout_width="0dp"
-            android:layout_height="175dp"
-            android:layout_weight="1"
-            android:gravity="bottom|center"
-            android:text="쇼핑 하기" />
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
+    <ImageButton
+        android:id="@+id/btnKakaoFunction4"
+        android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_weight="1"
-        android:gravity="center"
-        android:orientation="horizontal">
+        android:layout_columnWeight="1"
+        android:layout_rowWeight="1"
+        android:scaleType="centerCrop"
+        android:contentDescription="@string/description_btn"
+        android:background="@android:color/transparent"
+        android:src="@drawable/kakao_bt_04"/>
 
-        <Button
-            android:id="@+id/btnKakaoFunction7"
-            android:layout_width="0dp"
-            android:layout_height="175dp"
-            android:layout_weight="1"
-            android:gravity="bottom|center"
-            android:text="친구 추가" />
+    <ImageButton
+        android:id="@+id/btnKakaoFunction5"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_columnWeight="1"
+        android:layout_rowWeight="1"
+        android:scaleType="centerCrop"
+        android:contentDescription="@string/description_btn"
+        android:background="@android:color/transparent"
+        android:src="@drawable/kakao_bt_05" />
 
-        <Button
-            android:id="@+id/btnKakaoFunction8"
-            android:layout_width="0dp"
-            android:layout_height="175dp"
-            android:layout_weight="1"
-            android:gravity="bottom|center"
-            android:text="더보기카카오" />
+    <ImageButton
+        android:id="@+id/btnKakaoFunction6"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_columnWeight="1"
+        android:layout_rowWeight="1"
+        android:scaleType="centerCrop"
+        android:contentDescription="@string/description_btn"
+        android:background="@android:color/transparent"
+        android:src="@drawable/kakao_bt_06"/>
 
-    </LinearLayout>
+    <ImageButton
+        android:id="@+id/btnKakaoFunction7"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_columnWeight="1"
+        android:layout_rowWeight="1"
+        android:scaleType="centerCrop"
+        android:contentDescription="@string/description_btn"
+        android:background="@android:color/transparent"
+        android:src="@drawable/kakao_bt_07"/>
 
+    <ImageButton
+        android:id="@+id/btnKakaoFunction8"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_columnWeight="1"
+        android:layout_rowWeight="1"
+        android:scaleType="centerCrop"
+        android:contentDescription="@string/description_btn"
+        android:background="@android:color/transparent"
+        android:src="@drawable/kakao_bt_08" />
 
-
-
-</LinearLayout>
+</GridLayout>

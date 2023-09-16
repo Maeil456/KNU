@@ -1,73 +1,58 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context=".MainActivity">
+<GridLayout
+xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:tools="http://schemas.android.com/tools"
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+android:columnCount="1"
+android:rowCount="4"
+android:background="@android:color/transparent">
 
-    <!-- 첫 번째 행 -->
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:orientation="horizontal">
+<!-- 첫 번째 행 -->
+<ImageButton
+    android:id="@+id/btnpolit"
+    android:layout_width="0dp"
+    android:layout_height="0dp"
+    android:layout_columnWeight="1"
+    android:layout_rowWeight="1"
+    android:scaleType="centerCrop"
+    android:contentDescription="@string/description_btn"
+    android:background="@android:color/transparent"
+    android:src="@drawable/naver_02_bt_01"/>
 
-        <Button
-            android:id="@+id/btnpolit"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:text="정치/사회 뉴스보기" />
+<ImageButton
+    android:id="@+id/btnceleb"
+    android:layout_width="0dp"
+    android:layout_height="0dp"
+    android:layout_columnWeight="1"
+    android:layout_rowWeight="1"
+    android:scaleType="centerCrop"
+    android:contentDescription="@string/description_btn"
+    android:background="@android:color/transparent"
+    android:src="@drawable/naver_02_bt_02" />
 
-    </LinearLayout>
+<ImageButton
+    android:id="@+id/btnsports"
+    android:layout_width="0dp"
+    android:layout_height="0dp"
+    android:layout_columnWeight="1"
+    android:layout_rowWeight="1"
+    android:scaleType="centerCrop"
+    android:contentDescription="@string/description_btn"
+    android:background="@android:color/transparent"
+    android:src="@drawable/naver_02_bt_03" />
 
-    <!-- 두 번째 행 -->
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:orientation="horizontal">
+<ImageButton
+    android:id="@+id/btnecono"
+    android:layout_width="0dp"
+    android:layout_height="0dp"
+    android:layout_columnWeight="1"
+    android:layout_rowWeight="1"
+    android:scaleType="centerCrop"
+    android:contentDescription="@string/description_btn"
+    android:background="@android:color/transparent"
+    android:src="@drawable/naver_02_bt_04"/>
 
-        <Button
-            android:id="@+id/btnceleb"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:text="연예 뉴스보기" />
 
-    </LinearLayout>
 
-    <!-- 세 번째 행 -->
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:orientation="horizontal">
-
-        <Button
-            android:id="@+id/btnsports"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:text="스포츠 뉴스보기" />
-
-    </LinearLayout>
-
-    <!-- 네 번째 행 -->
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:orientation="horizontal">
-
-        <Button
-            android:id="@+id/btnecono"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:text="경제 뉴스보기" />
-
-    </LinearLayout>
-
-</LinearLayout>
+</GridLayout>

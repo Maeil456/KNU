@@ -119,7 +119,7 @@ class NaverFunctionActivity : AppCompatActivity() {
         btnEpisode5.setOnClickListener {
             val intent = Intent(this@NaverFunctionActivity, NewsFunctionActivity::class.java)
             startActivity(intent)
-            RecentOptionsManager.addOption("뉴스보기")
+            RecentOptionsManager.addOption("뉴스 보기")
         }
         btnEpisode6.setOnClickListener {
             val packageName = "com.nhn.android.search"
@@ -137,7 +137,7 @@ class NaverFunctionActivity : AppCompatActivity() {
             startLinkIntent(packageName,url)
             val intentB = Intent(this, BubbleService::class.java)
             startService(intentB)
-            RecentOptionsManager.addOption("쇼핑 하기")
+            RecentOptionsManager.addOption("네이버쇼핑 하기")
         }
         btnEpisode7.setOnClickListener {
             val packageName = "com.nhn.android.nmap"

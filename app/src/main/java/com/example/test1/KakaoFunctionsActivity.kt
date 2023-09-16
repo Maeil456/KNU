@@ -7,6 +7,7 @@ import android.content.IntentFilter
 import android.net.Uri
 import android.os.Bundle
 import android.widget.Button
+import android.widget.ImageButton
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 
@@ -25,14 +26,14 @@ class KakaoFunctionsActivity : AppCompatActivity() {
             setDisplayHomeAsUpEnabled(true) // 뒤로 가기 버튼 활성화
         }
 
-        val btnKakaoFunction1 = findViewById<Button>(R.id.btnKakaoFunction1)
-        val btnKakaoFunction2 = findViewById<Button>(R.id.btnKakaoFunction2)
-        val btnKakaoFunction3 = findViewById<Button>(R.id.btnKakaoFunction3)
-        val btnKakaoFunction4 = findViewById<Button>(R.id.btnKakaoFunction4)
-        val btnKakaoFunction5 = findViewById<Button>(R.id.btnKakaoFunction5)
-        val btnKakaoFunction6 = findViewById<Button>(R.id.btnKakaoFunction6)
-        val btnKakaoFunction7 = findViewById<Button>(R.id.btnKakaoFunction7)
-        val btnKakaoFunction8 = findViewById<Button>(R.id.btnKakaoFunction8)
+        val btnKakaoFunction1 = findViewById<ImageButton>(R.id.btnKakaoFunction1)
+        val btnKakaoFunction2 = findViewById<ImageButton>(R.id.btnKakaoFunction2)
+        val btnKakaoFunction3 = findViewById<ImageButton>(R.id.btnKakaoFunction3)
+        val btnKakaoFunction4 = findViewById<ImageButton>(R.id.btnKakaoFunction4)
+        val btnKakaoFunction5 = findViewById<ImageButton>(R.id.btnKakaoFunction5)
+        val btnKakaoFunction6 = findViewById<ImageButton>(R.id.btnKakaoFunction6)
+        val btnKakaoFunction7 = findViewById<ImageButton>(R.id.btnKakaoFunction7)
+        val btnKakaoFunction8 = findViewById<ImageButton>(R.id.btnKakaoFunction8)
 
         val filter = IntentFilter().apply {
             addAction(FavorActivity.ACTION_RECENTLY_BUTTON)
@@ -140,7 +141,7 @@ class KakaoFunctionsActivity : AppCompatActivity() {
             startMainIntent(packageName)
             val intentB = Intent(this, BubbleService::class.java)
             startService(intentB)
-            RecentOptionsManager.addOption("쇼핑 하기")
+            RecentOptionsManager.addOption("카카오쇼핑 하기")
         }
 
         btnKakaoFunction7.setOnClickListener {
@@ -186,14 +187,14 @@ class KakaoFunctionsActivity : AppCompatActivity() {
                 if(appname=="kakao") {
                     if (btnNumber < 9) {
                         when (btnNumber) {
-                            1 -> findViewById<Button>(R.id.btnKakaoFunction1).performClick()
-                            2 -> findViewById<Button>(R.id.btnKakaoFunction2).performClick()
-                            3 -> findViewById<Button>(R.id.btnKakaoFunction3).performClick()
-                            4 -> findViewById<Button>(R.id.btnKakaoFunction4).performClick()
-                            5 -> findViewById<Button>(R.id.btnKakaoFunction5).performClick()
-                            6 -> findViewById<Button>(R.id.btnKakaoFunction6).performClick()
-                            7 -> findViewById<Button>(R.id.btnKakaoFunction7).performClick()
-                            8 -> findViewById<Button>(R.id.btnKakaoFunction8).performClick()
+                            1 -> findViewById<ImageButton>(R.id.btnKakaoFunction1).performClick()
+                            2 -> findViewById<ImageButton>(R.id.btnKakaoFunction2).performClick()
+                            3 -> findViewById<ImageButton>(R.id.btnKakaoFunction3).performClick()
+                            4 -> findViewById<ImageButton>(R.id.btnKakaoFunction4).performClick()
+                            5 -> findViewById<ImageButton>(R.id.btnKakaoFunction5).performClick()
+                            6 -> findViewById<ImageButton>(R.id.btnKakaoFunction6).performClick()
+                            7 -> findViewById<ImageButton>(R.id.btnKakaoFunction7).performClick()
+                            8 -> findViewById<ImageButton>(R.id.btnKakaoFunction8).performClick()
                             else -> println("intent Error")
                         }
                     } else println("intent Error")

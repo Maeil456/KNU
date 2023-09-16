@@ -8,6 +8,7 @@ import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.widget.Button
+import android.widget.ImageButton
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 
@@ -27,10 +28,10 @@ class NewsFunctionActivity : AppCompatActivity() {
             setDisplayHomeAsUpEnabled(true) // 뒤로 가기 버튼 활성화
         }
 
-        val btnEpisode1 = findViewById<Button>(R.id.btnpolit)
-        val btnEpisode2 = findViewById<Button>(R.id.btnceleb)
-        val btnEpisode3 = findViewById<Button>(R.id.btnsports)
-        val btnEpisode4 = findViewById<Button>(R.id.btnecono)
+        val btnEpisode1 = findViewById<ImageButton>(R.id.btnpolit)
+        val btnEpisode2 = findViewById<ImageButton>(R.id.btnceleb)
+        val btnEpisode3 = findViewById<ImageButton>(R.id.btnsports)
+        val btnEpisode4 = findViewById<ImageButton>(R.id.btnecono)
 
         val filter = IntentFilter().apply {
             addAction(FavorActivity.ACTION_RECENTLY_BUTTON)
@@ -128,10 +129,10 @@ class NewsFunctionActivity : AppCompatActivity() {
                 if (appname == "news") {
                     if (btnNumber < 9) {
                         when (btnNumber) {
-                            1 -> findViewById<Button>(R.id.btnpolit).performClick()
-                            2 -> findViewById<Button>(R.id.btnceleb).performClick()
-                            3 -> findViewById<Button>(R.id.btnsports).performClick()
-                            4 -> findViewById<Button>(R.id.btnecono).performClick()
+                            1 -> findViewById<ImageButton>(R.id.btnpolit).performClick()
+                            2 -> findViewById<ImageButton>(R.id.btnceleb).performClick()
+                            3 -> findViewById<ImageButton>(R.id.btnsports).performClick()
+                            4 -> findViewById<ImageButton>(R.id.btnecono).performClick()
                             else -> println("intent Error")
                         }
                     } else println("intent Error")
