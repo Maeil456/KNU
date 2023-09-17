@@ -42,9 +42,9 @@ class KakaoFunctionsActivity : AppCompatActivity() {
 
         btnKakaoFunction1.setOnClickListener {
             val packageName = "com.kakao.talk"
-            setArray("Naver_search")
-            setArray2("Naver_search_imageSize")
-            setImage("Naver_search_image")
+            setArray("kakao_message")
+            setArray2("kakao_message_imageSize")
+            setImage("kakao_message_image")
 
             val intent = Intent(FloatingImageService.ACTION_SHOW_FLOATING_IMAGE)
             intent.putParcelableArrayListExtra("targetPositions", targetPositions)

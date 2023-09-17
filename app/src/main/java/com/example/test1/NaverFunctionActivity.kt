@@ -63,9 +63,9 @@ class NaverFunctionActivity : AppCompatActivity() {
         btnEpisode2.setOnClickListener {
             val packageName = "com.nhn.android.search"
             val url = "https://m.stock.naver.com/"
-            setArray("Naver_search")
-            setArray2("Naver_search_imageSize")
-            setImage("Naver_search_image")
+            setArray("Naver_stock")
+            setArray2("Naver_stock_imageSize")
+            setImage("Naver_stock_image")
             startFloatingImageService()
 
             val intent = Intent(FloatingImageService.ACTION_SHOW_FLOATING_IMAGE)
@@ -82,9 +82,9 @@ class NaverFunctionActivity : AppCompatActivity() {
         btnEpisode3.setOnClickListener {
             val packageName = "com.nhn.android.search"
             val url = "https://weather.naver.com/"
-            setArray("Naver_search")
-            setArray2("Naver_search_imageSize")
-            setImage("Naver_search_image")
+            setArray("Naver_weather")
+            setArray2("Naver_weather_imageSize")
+            setImage("Naver_weather_image")
             startFloatingImageService()
 
             val intent = Intent(FloatingImageService.ACTION_SHOW_FLOATING_IMAGE)
@@ -260,6 +260,7 @@ class NaverFunctionActivity : AppCompatActivity() {
             val link = "https://play.google.com/store/apps/details?id=$packageName"
             val appIntent = Intent(Intent.ACTION_VIEW).apply {
                 data = Uri.parse(link)
+
             }
             val serviceIntent = Intent(this, FloatingImageService::class.java)
             startService(serviceIntent)

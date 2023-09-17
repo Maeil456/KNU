@@ -293,6 +293,7 @@ class MainActivity : AppCompatActivity() {
             val link = "https://play.google.com/store/apps/details?id=$packageName"
             val intent = Intent(Intent.ACTION_VIEW).apply {
                 data = Uri.parse(link)
+                showToast("앱을 설치해주세요!")
             }
             startActivity(intent)
         }

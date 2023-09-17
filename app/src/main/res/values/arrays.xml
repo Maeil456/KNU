@@ -20,51 +20,45 @@
     </string-array>
 
     <string-array name="Naver_search">
-        <item>100,500</item>
-        <item>100,250</item>
-        <item>950,100</item>
+        <item>100,600</item>
+        <item>200,760</item>
     </string-array>
 
     <string-array name="Naver_search_image">
-        <item>bubble_g_down</item>
-        <item>bubble_g_up</item>
-        <item>bubble_r_circle</item>
+        <item>naver_help1</item>
+        <item>bubble_r_sq</item>
     </string-array>
 
     <string-array name="Naver_search_imageSize">
         <item>900,150</item>
+        <item>800,150</item>
+    </string-array>
+
+    <string-array name="Naver_stock">
+        <item>50,200</item>
+    </string-array>
+
+    <string-array name="Naver_stock_image">
+        <item>naver_help2</item>
+    </string-array>
+
+    <string-array name="Naver_stock_imageSize">
         <item>900,150</item>
-        <item>120,120</item>
     </string-array>
 
-    <string-array name="Naver1_search">
-        <item>300,500</item>
-        <item>300,1150</item>
+    <string-array name="Naver_weather">
+        <item>100,200</item>
+        <item>100,2200</item>
     </string-array>
 
-    <string-array name="Naver1_search_image">
-        <item>pin</item>
-        <item>testbox_one</item>
+    <string-array name="Naver_weather_image">
+        <item>naver_help3</item>
+        <item>naver_help4</item>
     </string-array>
 
-    <string-array name="Naver1_search_imageSize">
-        <item>300,300</item>
-        <item>1000,300</item>
-    </string-array>
-
-    <string-array name="Naver2_search">
-        <item>300,500</item>
-        <item>300,1150</item>
-    </string-array>
-
-    <string-array name="Naver2_search_image">
-        <item>pin</item>
-        <item>testbox_one</item>
-    </string-array>
-
-    <string-array name="Naver2_search_imageSize">
-        <item>300,300</item>
-        <item>1000,300</item>
+    <string-array name="Naver_weather_imageSize">
+        <item>900,150</item>
+        <item>900,150</item>
     </string-array>
 
     <string-array name="Naver3_search">
@@ -111,5 +105,24 @@
         <item>300,300</item>
         <item>1000,300</item>
     </string-array>
+
+    <string-array name="kakao_message">
+        <item>100,200</item>
+        <item>120,1800</item>
+        <item>100,1800</item>
+    </string-array>
+
+    <string-array name="kakao_message_image">
+        <item>kakao_help1</item>
+        <item>kakao_help2</item>
+        <item>kakao_help3</item>
+    </string-array>
+
+    <string-array name="kakao_message_imageSize">
+        <item>900,150</item>
+        <item>200,200</item>
+        <item>900,900</item>
+    </string-array>
+
 
 </resources>
