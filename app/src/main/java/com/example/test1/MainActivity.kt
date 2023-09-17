@@ -155,9 +155,9 @@ class MainActivity : AppCompatActivity() {
         btnEpisode8.setOnClickListener {
             checkImageService()
             val packageName = "com.nhn.android.search"
-            setArray("Naver_search")
-            setArray2("Naver_search_imageSize")
-            setImage("Naver_search_image")
+            setArray("Test")
+            setArray2("Test_Size")
+            setImage("Test_image")
 
             val intent = Intent(ACTION_SHOW_FLOATING_IMAGE)
             intent.putParcelableArrayListExtra("targetPositions", targetPositions)
