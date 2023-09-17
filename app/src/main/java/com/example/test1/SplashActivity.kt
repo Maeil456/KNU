@@ -36,10 +36,10 @@ class SplashActivity : AppCompatActivity() {
 
         imageView.startAnimation(animation)
 
-        // 1.5초 후에 MainActivity로 전환
+        // 2초 후에 MainActivity로 전환
         Handler(Looper.getMainLooper()).postDelayed({
             startActivity(Intent(this, MainActivity::class.java))
             finish()
-        }, 1500)
+        }, 2000)
     }
 }

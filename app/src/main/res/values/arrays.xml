@@ -1,20 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <string-array name="Test">
+        <item>100,500</item>
+        <item>100,250</item>
+        <item>950,100</item>
+    </string-array>
+
+    <string-array name="Test_image">
+        <item>bubble_g_down</item>
+        <item>bubble_g_up</item>
+        <item>bubble_r_circle</item>
+    </string-array>
+
+    <string-array name="Test_Size">
+        <item>900,150</item>
+        <item>900,150</item>
+        <item>120,120</item>
+    </string-array>
 
     <string-array name="Naver_search">
-        <item>300,500</item>
-        <item>300,1150</item>
+        <item>100,500</item>
+        <item>100,250</item>
+        <item>950,100</item>
     </string-array>
 
     <string-array name="Naver_search_image">
-        <item>pin</item>
-        <item>testbox_one</item>
+        <item>bubble_g_down</item>
+        <item>bubble_g_up</item>
+        <item>bubble_r_circle</item>
     </string-array>
 
     <string-array name="Naver_search_imageSize">
-        <item>300,300</item>
-        <item>1000,300</item>
+        <item>900,150</item>
+        <item>900,150</item>
+        <item>120,120</item>
     </string-array>
 
     <string-array name="Naver1_search">
