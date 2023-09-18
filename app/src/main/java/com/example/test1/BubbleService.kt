@@ -41,7 +41,7 @@ class BubbleService : FloatingBubbleService() {
 
             .bubble(bubbleView)
 
-            .startLocation(50,700)
+            .startLocation(0,350)
 
             .behavior(BubbleBehavior.DYNAMIC_CLOSE_BUBBLE)
 
