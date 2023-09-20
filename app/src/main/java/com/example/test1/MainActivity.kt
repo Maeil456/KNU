@@ -103,6 +103,8 @@ class MainActivity : AppCompatActivity() {
         btnEpisode5.setOnClickListener {
             checkImageService()
             val packageName = "com.sampleapp"
+
+            arrayClear()
             setArray("Naver_search")
             setArray2("Naver_search_imageSize")
             setImage("Naver_search_image")
@@ -113,6 +115,7 @@ class MainActivity : AppCompatActivity() {
             intent.putStringArrayListExtra("imageIndex",imageIndex)
             sendBroadcast(intent)
             startEpisodeIntent(packageName)
+
             val intentB = Intent(this, BubbleService::class.java)
             startService(intentB)
             RecentOptionsManager.addOption("배달의 민족")
@@ -121,6 +124,8 @@ class MainActivity : AppCompatActivity() {
         btnEpisode6.setOnClickListener {
             checkImageService()
             val packageName = "com.google.android.youtube"
+
+            arrayClear()
             setArray("Naver_search")
             setArray2("Naver_search_imageSize")
             setImage("Naver_search_image")
@@ -131,6 +136,7 @@ class MainActivity : AppCompatActivity() {
             intent.putStringArrayListExtra("imageIndex",imageIndex)
             sendBroadcast(intent)
             startEpisodeIntent(packageName)
+
             val intentB = Intent(this, BubbleService::class.java)
             startService(intentB)
             RecentOptionsManager.addOption("유튜브")
@@ -138,6 +144,8 @@ class MainActivity : AppCompatActivity() {
         btnEpisode7.setOnClickListener {
             checkImageService()
             val packageName = "net.daum.android.mail"
+
+            arrayClear()
             setArray("Naver_search")
             setArray2("Naver_search_imageSize")
             setImage("Naver_search_image")
@@ -148,6 +156,7 @@ class MainActivity : AppCompatActivity() {
             intent.putStringArrayListExtra("imageIndex",imageIndex)
             sendBroadcast(intent)
             startEpisodeIntent(packageName)
+
             val intentB = Intent(this, BubbleService::class.java)
             startService(intentB)
             RecentOptionsManager.addOption("다음")
@@ -155,6 +164,8 @@ class MainActivity : AppCompatActivity() {
         btnEpisode8.setOnClickListener {
             checkImageService()
             val packageName = "com.nhn.android.search"
+
+            arrayClear()
             setArray("Test")
             setArray2("Test_Size")
             setImage("Test_image")
@@ -165,6 +176,7 @@ class MainActivity : AppCompatActivity() {
             intent.putStringArrayListExtra("imageIndex",imageIndex)
             sendBroadcast(intent)
             startEpisodeIntent(packageName)
+
             val intentB = Intent(this, BubbleService::class.java)
             startService(intentB)
             RecentOptionsManager.addOption("더보기메인")
@@ -316,6 +328,12 @@ class MainActivity : AppCompatActivity() {
         } else {
             startFloatingImageService()
         }
+    }
+
+    private fun arrayClear(){
+        imageIndex.clear()
+        targetPositions.clear()
+        targetSizes.clear()
     }
 
 }

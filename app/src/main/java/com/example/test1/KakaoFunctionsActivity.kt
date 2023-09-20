@@ -42,6 +42,8 @@ class KakaoFunctionsActivity : AppCompatActivity() {
 
         btnKakaoFunction1.setOnClickListener {
             val packageName = "com.kakao.talk"
+
+            arrayClear()
             setArray("kakao_message")
             setArray2("kakao_message_imageSize")
             setImage("kakao_message_image")
@@ -52,6 +54,7 @@ class KakaoFunctionsActivity : AppCompatActivity() {
             intent.putStringArrayListExtra("imageIndex",imageIndex)
             sendBroadcast(intent)
             startMainIntent(packageName)
+
             val intentB = Intent(this, BubbleService::class.java)
             startService(intentB)
             RecentOptionsManager.addOption("문자 보내기")
@@ -59,6 +62,8 @@ class KakaoFunctionsActivity : AppCompatActivity() {
 
         btnKakaoFunction2.setOnClickListener {
             val packageName = "com.kakao.talk"
+
+            arrayClear()
             setArray("Naver_search")
             setArray2("Naver_search_imageSize")
             setImage("Naver_search_image")
@@ -69,6 +74,7 @@ class KakaoFunctionsActivity : AppCompatActivity() {
             intent.putStringArrayListExtra("imageIndex",imageIndex)
             sendBroadcast(intent)
             startMainIntent(packageName)
+
             val intentB = Intent(this, BubbleService::class.java)
             startService(intentB)
             RecentOptionsManager.addOption("영상 통화")
@@ -76,6 +82,8 @@ class KakaoFunctionsActivity : AppCompatActivity() {
 
         btnKakaoFunction3.setOnClickListener {
             val packageName = "com.kakao.talk"
+
+            arrayClear()
             setArray("Naver_search")
             setArray2("Naver_search_imageSize")
             setImage("Naver_search_image")
@@ -86,6 +94,7 @@ class KakaoFunctionsActivity : AppCompatActivity() {
             intent.putStringArrayListExtra("imageIndex",imageIndex)
             sendBroadcast(intent)
             startMainIntent(packageName)
+
             val intentB = Intent(this, BubbleService::class.java)
             startService(intentB)
             RecentOptionsManager.addOption("음성 통화")
@@ -93,6 +102,8 @@ class KakaoFunctionsActivity : AppCompatActivity() {
 
         btnKakaoFunction4.setOnClickListener {
             val packageName = "com.kakao.talk"
+
+            arrayClear()
             setArray("Naver_search")
             setArray2("Naver_search_imageSize")
             setImage("Naver_search_image")
@@ -102,8 +113,8 @@ class KakaoFunctionsActivity : AppCompatActivity() {
             intent.putParcelableArrayListExtra("targetSizes", targetSizes)
             intent.putStringArrayListExtra("imageIndex",imageIndex)
             sendBroadcast(intent)
-
             startMainIntent(packageName)
+
             val intentB = Intent(this, BubbleService::class.java)
             startService(intentB)
             RecentOptionsManager.addOption("선물 하기")
@@ -111,9 +122,11 @@ class KakaoFunctionsActivity : AppCompatActivity() {
 
         btnKakaoFunction5.setOnClickListener {
             val packageName = "com.kakao.talk"
-            setArray("Naver_search")
-            setArray2("Naver_search_imageSize")
-            setImage("Naver_search_image")
+
+            arrayClear()
+            setArray("kakao_profile")
+            setArray2("kakao_profile_imageSize")
+            setImage("kakao_profile_image")
 
             val intent = Intent(FloatingImageService.ACTION_SHOW_FLOATING_IMAGE)
             intent.putParcelableArrayListExtra("targetPositions", targetPositions)
@@ -121,6 +134,7 @@ class KakaoFunctionsActivity : AppCompatActivity() {
             intent.putStringArrayListExtra("imageIndex",imageIndex)
             sendBroadcast(intent)
             startMainIntent(packageName)
+
             val intentB = Intent(this, BubbleService::class.java)
             startService(intentB)
             RecentOptionsManager.addOption("프로필 설정하기")
@@ -128,6 +142,8 @@ class KakaoFunctionsActivity : AppCompatActivity() {
 
         btnKakaoFunction6.setOnClickListener {
             val packageName = "com.kakao.talk"
+
+            arrayClear()
             setArray("Naver_search")
             setArray2("Naver_search_imageSize")
             setImage("Naver_search_image")
@@ -137,8 +153,8 @@ class KakaoFunctionsActivity : AppCompatActivity() {
             intent.putParcelableArrayListExtra("targetSizes", targetSizes)
             intent.putStringArrayListExtra("imageIndex",imageIndex)
             sendBroadcast(intent)
-
             startMainIntent(packageName)
+
             val intentB = Intent(this, BubbleService::class.java)
             startService(intentB)
             RecentOptionsManager.addOption("카카오쇼핑 하기")
@@ -146,6 +162,8 @@ class KakaoFunctionsActivity : AppCompatActivity() {
 
         btnKakaoFunction7.setOnClickListener {
             val packageName = "com.kakao.talk"
+
+            arrayClear()
             setArray("Naver_search")
             setArray2("Naver_search_imageSize")
             setImage("Naver_search_image")
@@ -156,12 +174,15 @@ class KakaoFunctionsActivity : AppCompatActivity() {
             intent.putStringArrayListExtra("imageIndex",imageIndex)
             sendBroadcast(intent)
             startMainIntent(packageName)
+
             val intentB = Intent(this, BubbleService::class.java)
             startService(intentB)
             RecentOptionsManager.addOption("친구 추가")
         }
         btnKakaoFunction8.setOnClickListener {
             val packageName = "com.kakao.talk"
+
+            arrayClear()
             setArray("Naver_search")
             setArray2("Naver_search_imageSize")
             setImage("Naver_search_image")
@@ -172,6 +193,7 @@ class KakaoFunctionsActivity : AppCompatActivity() {
             intent.putStringArrayListExtra("imageIndex",imageIndex)
             sendBroadcast(intent)
             startMainIntent(packageName)
+
             val intentB = Intent(this, BubbleService::class.java)
             startService(intentB)
             RecentOptionsManager.addOption("카카오 테스트")
@@ -311,6 +333,12 @@ class KakaoFunctionsActivity : AppCompatActivity() {
         super.onResume()
         val hideImageIntent = Intent(MainActivity.ACTION_HIDE_IMAGE)
         sendBroadcast(hideImageIntent)
+    }
+
+    private fun arrayClear(){
+        imageIndex.clear()
+        targetPositions.clear()
+        targetSizes.clear()
     }
 
 

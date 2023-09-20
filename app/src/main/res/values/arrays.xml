@@ -20,26 +20,26 @@
     </string-array>
 
     <string-array name="Naver_search">
-        <item>100,600</item>
-        <item>100,200</item>
-        <item>700,100</item>
+        <item>60,330</item>
+        <item>80,200</item>
+        <item>970,80</item>
     </string-array>
 
     <string-array name="Naver_search_image">
-        <item>naver_help_search</item>
+        <item>naver_help_search1</item>
         <item>naver_help_search2</item>
         <item>bubble_r_circle</item>
     </string-array>
 
     <string-array name="Naver_search_imageSize">
-        <item>900,150</item>
-        <item>900,150</item>
-        <item>100,100</item>
+        <item>950,250</item>
+        <item>950,250</item>
+        <item>150,150</item>
     </string-array>
 
     <string-array name="Naver_weather">
-        <item>100,200</item>
-        <item>100,2000</item>
+        <item>80,300</item>
+        <item>80,1800</item>
     </string-array>
 
     <string-array name="Naver_weather_image">
@@ -48,12 +48,12 @@
     </string-array>
 
     <string-array name="Naver_weather_imageSize">
-        <item>900,150</item>
-        <item>900,150</item>
+        <item>950,250</item>
+        <item>950,250</item>
     </string-array>
 
     <string-array name="Naver_stock">
-        <item>100,300</item>
+        <item>80,300</item>
     </string-array>
 
     <string-array name="Naver_stock_image">
@@ -61,7 +61,7 @@
     </string-array>
 
     <string-array name="Naver_stock_imageSize">
-        <item>900,150</item>
+        <item>950,250</item>
     </string-array>
 
     <string-array name="Naver3_search">
@@ -94,37 +94,49 @@
         <item>1000,300</item>
     </string-array>
 
-    <string-array name="Naver5_search">
-        <item>300,500</item>
-        <item>300,1150</item>
-    </string-array>
-
-    <string-array name="Naver5_search_image">
-        <item>pin</item>
-        <item>testbox_one</item>
-    </string-array>
-
-    <string-array name="Naver5_search_imageSize">
-        <item>300,300</item>
-        <item>1000,300</item>
-    </string-array>
 
     <string-array name="kakao_message">
-        <item>100,200</item>
-        <item>100,1600</item>
-        <item>100,1850</item>
+        <item>50,2100</item>
+        <item>20,250</item>
+        <item>100,1680</item>
+        <item>120,1500</item>
     </string-array>
 
     <string-array name="kakao_message_image">
+        <item>bubble_r_circle</item>
         <item>kakao_help_message1</item>
-        <item>kakao_help_message2</item>
+        <item>kakao_help_message4</item>
         <item>kakao_help_message3</item>
     </string-array>
 
     <string-array name="kakao_message_imageSize">
-        <item>900,150</item>
-        <item>500,500</item>
-        <item>1000,1000</item>
+        <item>150,150</item>
+        <item>1050,275</item>
+        <item>950,250</item>
+        <item>872,500</item>
     </string-array>
 
+    <string-array name="kakao_profile">
+        <item>50,2100</item>
+        <item>100,200</item>
+        <item>70,1700</item>
+        <item>70,1200</item>
+        <item>70,350</item>
+    </string-array>
+
+    <string-array name="kakao_profile_image">
+        <item>bubble_r_circle</item>
+        <item>kakao_help_message2</item>
+        <item>kakao_help_profile1</item>
+        <item>kakao_help_profile2</item>
+        <item>kakao_help_profile3</item>
+    </string-array>
+
+    <string-array name="kakao_profile_imageSize">
+        <item>150,150</item>
+        <item>750,200</item>
+        <item>950,250</item>
+        <item>950,250</item>
+        <item>950,250</item>
+    </string-array>
 </resources>

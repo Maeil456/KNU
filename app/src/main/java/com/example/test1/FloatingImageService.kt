@@ -107,6 +107,9 @@ class FloatingImageService : AccessibilityService() {
             }
             if (intent?.action == ACTION_HIDE_IMAGE) {
                 hideFloatingImage()
+                targetPositions.clear()
+                imageIndex.clear()
+                targetSizes.clear()
             }
         }
     }

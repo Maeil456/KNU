@@ -41,6 +41,8 @@ class NewsFunctionActivity : AppCompatActivity() {
         btnEpisode1.setOnClickListener {
             val packageName = "com.nhn.android.search"
             val url = "https://news.naver.com/main/main.naver?mode=LSD&mid=shm&sid1=100"
+
+            arrayClear()
             setArray("Naver_search")
             setArray2("Naver_search_imageSize")
             setImage("Naver_search_image")
@@ -51,8 +53,8 @@ class NewsFunctionActivity : AppCompatActivity() {
             intent.putParcelableArrayListExtra("targetSizes", targetSizes)
             intent.putStringArrayListExtra("imageIndex",imageIndex)
             sendBroadcast(intent)
-
             startLinkIntent(packageName,url)
+
             val intentB = Intent(this, BubbleService::class.java)
             startService(intentB)
             RecentOptionsManager.addOption("정치/사회 뉴스보기")
@@ -61,6 +63,8 @@ class NewsFunctionActivity : AppCompatActivity() {
         btnEpisode2.setOnClickListener {
             val packageName = "com.nhn.android.search"
             val url = "https://entertain.naver.com/home"
+
+            arrayClear()
             setArray("Naver_search")
             setArray2("Naver_search_imageSize")
             setImage("Naver_search_image")
@@ -71,8 +75,8 @@ class NewsFunctionActivity : AppCompatActivity() {
             intent.putParcelableArrayListExtra("targetSizes", targetSizes)
             intent.putStringArrayListExtra("imageIndex",imageIndex)
             sendBroadcast(intent)
-
             startLinkIntent(packageName,url)
+
             val intentB = Intent(this, BubbleService::class.java)
             startService(intentB)
             RecentOptionsManager.addOption("연예 뉴스보기")
@@ -81,6 +85,8 @@ class NewsFunctionActivity : AppCompatActivity() {
         btnEpisode3.setOnClickListener {
             val packageName = "com.nhn.android.search"
             val url = "https://sports.news.naver.com/index"
+
+            arrayClear()
             setArray("Naver_search")
             setArray2("Naver_search_imageSize")
             setImage("Naver_search_image")
@@ -91,8 +97,8 @@ class NewsFunctionActivity : AppCompatActivity() {
             intent.putParcelableArrayListExtra("targetSizes", targetSizes)
             intent.putStringArrayListExtra("imageIndex",imageIndex)
             sendBroadcast(intent)
-
             startLinkIntent(packageName,url)
+
             val intentB = Intent(this, BubbleService::class.java)
             startService(intentB)
             RecentOptionsManager.addOption("스포츠 뉴스보기")
@@ -101,6 +107,8 @@ class NewsFunctionActivity : AppCompatActivity() {
         btnEpisode4.setOnClickListener {
             val packageName = "com.nhn.android.search"
             val url = "https://news.naver.com/main/main.naver?mode=LSD&mid=shm&sid1=101"
+
+            arrayClear()
             setArray("Naver_search")
             setArray2("Naver_search_imageSize")
             setImage("Naver_search_image")
@@ -111,8 +119,8 @@ class NewsFunctionActivity : AppCompatActivity() {
             intent.putParcelableArrayListExtra("targetSizes", targetSizes)
             intent.putStringArrayListExtra("imageIndex",imageIndex)
             sendBroadcast(intent)
-
             startLinkIntent(packageName,url)
+
             val intentB = Intent(this, BubbleService::class.java)
             startService(intentB)
             RecentOptionsManager.addOption("경제 뉴스보기")
@@ -222,5 +230,11 @@ class NewsFunctionActivity : AppCompatActivity() {
         super.onResume()
         val hideImageIntent = Intent(MainActivity.ACTION_HIDE_IMAGE)
         sendBroadcast(hideImageIntent)
+    }
+
+    private fun arrayClear(){
+        imageIndex.clear()
+        targetPositions.clear()
+        targetSizes.clear()
     }
 }
