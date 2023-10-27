@@ -5,6 +5,7 @@ import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
 import android.net.Uri
+import android.os.Build
 import android.os.Bundle
 import android.widget.Button
 import android.widget.ImageButton
@@ -38,7 +39,11 @@ class KakaoFunctionsActivity : AppCompatActivity() {
         val filter = IntentFilter().apply {
             addAction(FavorActivity.ACTION_RECENTLY_BUTTON)
         }
-        registerReceiver(recentlyButtonReceiver, filter)
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            registerReceiver(recentlyButtonReceiver, filter,RECEIVER_EXPORTED)
+        }else {
+            registerReceiver(recentlyButtonReceiver, filter)
+        }
 
         btnKakaoFunction1.setOnClickListener {
             val packageName = "com.kakao.talk"

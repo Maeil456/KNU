@@ -1,6 +1,7 @@
 package com.example.test1
 
 import android.accessibilityservice.AccessibilityService
+import android.annotation.SuppressLint
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
@@ -15,6 +16,7 @@ import android.view.WindowManager
 import android.view.accessibility.AccessibilityEvent
 import android.widget.ImageView
 import android.widget.Toast
+import androidx.annotation.RequiresApi
 import com.example.test1.BubbleService.Companion.ACTION_IMAGE_FROM_FIRST
 import com.example.test1.MainActivity.Companion.ACTION_HIDE_IMAGE
 
@@ -143,6 +145,8 @@ class FloatingImageService : AccessibilityService() {
 
     override fun onAccessibilityEvent(event: AccessibilityEvent?) {}
 
+
+
     override fun onCreate() {
         super.onCreate()
         if (!::windowManager.isInitialized) {
@@ -153,7 +157,11 @@ class FloatingImageService : AccessibilityService() {
             addAction(ACTION_IMAGE_FROM_FIRST)
             addAction(ACTION_HIDE_IMAGE)
         }
-        registerReceiver(floatingImageReceiver, filter)
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            registerReceiver(floatingImageReceiver, filter, RECEIVER_EXPORTED)
+        }else{
+            registerReceiver(floatingImageReceiver, filter)
+        }
     }
 
     override fun onDestroy() {
@@ -198,7 +206,11 @@ class FloatingImageService : AccessibilityService() {
         intentFilter.addAction(ACTION_SHOW_FLOATING_IMAGE)
         intentFilter.addAction(ACTION_HIDE_IMAGE)
         intentFilter.addAction(ACTION_IMAGE_FROM_FIRST)
-        registerReceiver(floatingImageReceiver, intentFilter)
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            registerReceiver(floatingImageReceiver, intentFilter, RECEIVER_EXPORTED)
+        } else{
+            registerReceiver(floatingImageReceiver, intentFilter)
+        }
 
         return START_STICKY
     }

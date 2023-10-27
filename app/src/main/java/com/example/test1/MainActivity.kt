@@ -1,5 +1,6 @@
 package com.example.test1
 
+import android.annotation.SuppressLint
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
@@ -39,6 +40,7 @@ class MainActivity : AppCompatActivity() {
         const val ACTION_HIDE_IMAGE = "com.example.test1.ACTION_HIDE_IMAGE"
     }
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -75,7 +77,11 @@ class MainActivity : AppCompatActivity() {
         val filter = IntentFilter().apply {
             addAction(FavorActivity.ACTION_RECENTLY_BUTTON)
         }
-        registerReceiver(recentlyButtonReceiver, filter)
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            registerReceiver(recentlyButtonReceiver, filter,RECEIVER_EXPORTED)
+        }else {
+            registerReceiver(recentlyButtonReceiver, filter)
+        }
 
         btnEpisode1.setOnClickListener {
             checkImageService()

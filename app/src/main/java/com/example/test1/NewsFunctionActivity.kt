@@ -36,7 +36,11 @@ class NewsFunctionActivity : AppCompatActivity() {
         val filter = IntentFilter().apply {
             addAction(FavorActivity.ACTION_RECENTLY_BUTTON)
         }
-        registerReceiver(recentlyButtonReceiver, filter)
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            registerReceiver(recentlyButtonReceiver, filter,RECEIVER_EXPORTED)
+        }else {
+            registerReceiver(recentlyButtonReceiver, filter)
+        }
 
         btnEpisode1.setOnClickListener {
             val packageName = "com.nhn.android.search"
