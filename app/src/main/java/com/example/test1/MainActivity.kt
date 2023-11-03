@@ -111,9 +111,9 @@ class MainActivity : AppCompatActivity() {
             val packageName = "com.sampleapp"
 
             arrayClear()
-            setArray("Naver_search")
-            setArray2("Naver_search_imageSize")
-            setImage("Naver_search_image")
+            setArray("baemin_help")
+            setArray2("baemin_help_imageSize")
+            setImage("baemin_help_image")
 
             val intent = Intent(ACTION_SHOW_FLOATING_IMAGE)
             intent.putParcelableArrayListExtra("targetPositions", targetPositions)
@@ -132,9 +132,9 @@ class MainActivity : AppCompatActivity() {
             val packageName = "com.google.android.youtube"
 
             arrayClear()
-            setArray("Naver_search")
-            setArray2("Naver_search_imageSize")
-            setImage("Naver_search_image")
+            setArray("youtube_help")
+            setArray2("youtube_help_imageSize")
+            setImage("youtube_help_image")
 
             val intent = Intent(ACTION_SHOW_FLOATING_IMAGE)
             intent.putParcelableArrayListExtra("targetPositions", targetPositions)
@@ -162,6 +162,7 @@ class MainActivity : AppCompatActivity() {
             intent.putStringArrayListExtra("imageIndex",imageIndex)
             sendBroadcast(intent)
             startEpisodeIntent(packageName)
+            showToast("추후 업데이트 예정입니다.")
 
             val intentB = Intent(this, BubbleService::class.java)
             startService(intentB)

@@ -43,9 +43,9 @@ class BubbleService : ExpandableBubbleService() {
 
             .startLocation(0,350)
 
-            //.closeBehavior(CloseBubbleBehavior.DYNAMIC_CLOSE_BUBBLE)
+        //.closeBehavior(CloseBubbleBehavior.DYNAMIC_CLOSE_BUBBLE)
 
-            //.closeBubbleView(ViewHelper.fromDrawable(this, R.drawable.xicon, 3, 3))
+        //.closeBubbleView(ViewHelper.fromDrawable(this, R.drawable.xicon, 3, 3))
 
 
     }

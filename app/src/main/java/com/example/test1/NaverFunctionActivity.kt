@@ -116,9 +116,9 @@ class NaverFunctionActivity : AppCompatActivity() {
             val url = "https://mail.naver.com/v2/folders/0/all"
             arrayClear()
 
-            setArray("Naver_search")
-            setArray2("Naver_search_imageSize")
-            setImage("Naver_search_image")
+            setArray("Naver_mail")
+            setArray2("Naver_mail_imageSize")
+            setImage("Naver_mail_image")
             startFloatingImageService()
 
             val intent = Intent(FloatingImageService.ACTION_SHOW_FLOATING_IMAGE)
@@ -142,9 +142,9 @@ class NaverFunctionActivity : AppCompatActivity() {
             val url = "https://shopping.naver.com/home"
             arrayClear()
 
-            setArray("Naver_search")
-            setArray2("Naver_search_imageSize")
-            setImage("Naver_search_image")
+            setArray("Naver_shopping")
+            setArray2("Naver_shopping_imageSize")
+            setImage("Naver_shopping_image")
             startFloatingImageService()
 
             val intent = Intent(FloatingImageService.ACTION_SHOW_FLOATING_IMAGE)

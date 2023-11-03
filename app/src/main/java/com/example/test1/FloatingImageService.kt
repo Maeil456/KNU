@@ -124,20 +124,20 @@ class FloatingImageService : AccessibilityService() {
                 if(currentPositionIndex >= targetPositions.size) {
                     hideFloatingImage()
                     currentPositionIndex = 0
-                    } else {
-                        val targetPosition = targetPositions[currentPositionIndex]
-                        val resourceId= resources.getIdentifier(imageIndex[currentPositionIndex], "drawable", packageName)
+                } else {
+                    val targetPosition = targetPositions[currentPositionIndex]
+                    val resourceId= resources.getIdentifier(imageIndex[currentPositionIndex], "drawable", packageName)
 
-                        params.x = targetPosition.x
-                        params.y = targetPosition.y
+                    params.x = targetPosition.x
+                    params.y = targetPosition.y
 
-                        floatingImageView?.setImageResource(resourceId)
+                    floatingImageView?.setImageResource(resourceId)
 
-                        floatingImageView?.setWidth(targetSizes[currentPositionIndex].x)
-                        floatingImageView?.setHeight(targetSizes[currentPositionIndex].y)
+                    floatingImageView?.setWidth(targetSizes[currentPositionIndex].x)
+                    floatingImageView?.setHeight(targetSizes[currentPositionIndex].y)
 
-                        windowManager.updateViewLayout(floatingImageLayout, params)
-                    }
+                    windowManager.updateViewLayout(floatingImageLayout, params)
+                }
             }
         }
         true

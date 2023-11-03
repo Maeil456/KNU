@@ -69,9 +69,9 @@ class KakaoFunctionsActivity : AppCompatActivity() {
             val packageName = "com.kakao.talk"
 
             arrayClear()
-            setArray("Naver_search")
-            setArray2("Naver_search_imageSize")
-            setImage("Naver_search_image")
+            setArray("kakao_facetalk")
+            setArray2("kakao_facetalk_imageSize")
+            setImage("kakao_facetalk_image")
 
             val intent = Intent(FloatingImageService.ACTION_SHOW_FLOATING_IMAGE)
             intent.putParcelableArrayListExtra("targetPositions", targetPositions)
@@ -89,9 +89,9 @@ class KakaoFunctionsActivity : AppCompatActivity() {
             val packageName = "com.kakao.talk"
 
             arrayClear()
-            setArray("Naver_search")
-            setArray2("Naver_search_imageSize")
-            setImage("Naver_search_image")
+            setArray("kakao_voicetalk")
+            setArray2("kakao_voicetalk_imageSize")
+            setImage("kakao_voicetalk_image")
 
             val intent = Intent(FloatingImageService.ACTION_SHOW_FLOATING_IMAGE)
             intent.putParcelableArrayListExtra("targetPositions", targetPositions)
@@ -109,9 +109,9 @@ class KakaoFunctionsActivity : AppCompatActivity() {
             val packageName = "com.kakao.talk"
 
             arrayClear()
-            setArray("Naver_search")
-            setArray2("Naver_search_imageSize")
-            setImage("Naver_search_image")
+            setArray("kakao_shopping")
+            setArray2("kakao_shopping_imageSize")
+            setImage("kakao_shopping_image")
 
             val intent = Intent(FloatingImageService.ACTION_SHOW_FLOATING_IMAGE)
             intent.putParcelableArrayListExtra("targetPositions", targetPositions)
@@ -149,9 +149,9 @@ class KakaoFunctionsActivity : AppCompatActivity() {
             val packageName = "com.kakao.talk"
 
             arrayClear()
-            setArray("Naver_search")
-            setArray2("Naver_search_imageSize")
-            setImage("Naver_search_image")
+            setArray("kakao_shopping")
+            setArray2("kakao_shopping_imageSize")
+            setImage("kakao_shopping_image")
 
             val intent = Intent(FloatingImageService.ACTION_SHOW_FLOATING_IMAGE)
             intent.putParcelableArrayListExtra("targetPositions", targetPositions)
@@ -169,9 +169,9 @@ class KakaoFunctionsActivity : AppCompatActivity() {
             val packageName = "com.kakao.talk"
 
             arrayClear()
-            setArray("Naver_search")
-            setArray2("Naver_search_imageSize")
-            setImage("Naver_search_image")
+            setArray("kakao_friend")
+            setArray2("kakao_friend_imageSize")
+            setImage("kakao_friend_image")
 
             val intent = Intent(FloatingImageService.ACTION_SHOW_FLOATING_IMAGE)
             intent.putParcelableArrayListExtra("targetPositions", targetPositions)

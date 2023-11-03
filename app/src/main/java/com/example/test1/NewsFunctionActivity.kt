@@ -47,9 +47,9 @@ class NewsFunctionActivity : AppCompatActivity() {
             val url = "https://news.naver.com/main/main.naver?mode=LSD&mid=shm&sid1=100"
 
             arrayClear()
-            setArray("Naver_search")
-            setArray2("Naver_search_imageSize")
-            setImage("Naver_search_image")
+            setArray("Naver_news")
+            setArray2("Naver_news_imageSize")
+            setImage("Naver_news_image")
             startFloatingImageService()
 
             val intent = Intent(FloatingImageService.ACTION_SHOW_FLOATING_IMAGE)
@@ -69,9 +69,9 @@ class NewsFunctionActivity : AppCompatActivity() {
             val url = "https://entertain.naver.com/home"
 
             arrayClear()
-            setArray("Naver_search")
-            setArray2("Naver_search_imageSize")
-            setImage("Naver_search_image")
+            setArray("Naver_news")
+            setArray2("Naver_news_imageSize")
+            setImage("Naver_news_image")
             startFloatingImageService()
 
             val intent = Intent(FloatingImageService.ACTION_SHOW_FLOATING_IMAGE)
@@ -91,9 +91,9 @@ class NewsFunctionActivity : AppCompatActivity() {
             val url = "https://sports.news.naver.com/index"
 
             arrayClear()
-            setArray("Naver_search")
-            setArray2("Naver_search_imageSize")
-            setImage("Naver_search_image")
+            setArray("Naver_news")
+            setArray2("Naver_news_imageSize")
+            setImage("Naver_news_image")
             startFloatingImageService()
 
             val intent = Intent(FloatingImageService.ACTION_SHOW_FLOATING_IMAGE)
@@ -113,9 +113,9 @@ class NewsFunctionActivity : AppCompatActivity() {
             val url = "https://news.naver.com/main/main.naver?mode=LSD&mid=shm&sid1=101"
 
             arrayClear()
-            setArray("Naver_search")
-            setArray2("Naver_search_imageSize")
-            setImage("Naver_search_image")
+            setArray("Naver_news")
+            setArray2("Naver_news_imageSize")
+            setImage("Naver_news_image")
             startFloatingImageService()
 
             val intent = Intent(FloatingImageService.ACTION_SHOW_FLOATING_IMAGE)
