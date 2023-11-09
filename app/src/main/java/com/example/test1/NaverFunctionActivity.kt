@@ -34,7 +34,7 @@ class NaverFunctionActivity : AppCompatActivity() {
         val btnEpisode5 = findViewById<ImageButton>(R.id.btnNaverFunction5)
         val btnEpisode6 = findViewById<ImageButton>(R.id.btnNaverFunction6)
         val btnEpisode7 = findViewById<ImageButton>(R.id.btnNaverFunction7)
-        //val btnEpisode8 = findViewById<ImageButton>(R.id.btnNaverFunction8)
+        val btnEpisode8 = findViewById<ImageButton>(R.id.btnNaverFunction8)
 
         val filter = IntentFilter().apply {
             addAction(FavorActivity.ACTION_RECENTLY_BUTTON)
@@ -162,9 +162,9 @@ class NaverFunctionActivity : AppCompatActivity() {
             val packageName = "com.nhn.android.nmap"
             arrayClear()
 
-            setArray("Naver_search")
-            setArray2("Naver_search_imageSize")
-            setImage("Naver_search_image")
+            setArray("Naver_map")
+            setArray2("Naver_map_imageSize")
+            setImage("Naver_map_image")
             startFloatingImageService()
 
             val intent = Intent(FloatingImageService.ACTION_SHOW_FLOATING_IMAGE)
@@ -177,6 +177,28 @@ class NaverFunctionActivity : AppCompatActivity() {
             val intentB = Intent(this, BubbleService::class.java)
             startService(intentB)
             RecentOptionsManager.addOption("지도 보기")
+        }
+
+        btnEpisode8.setOnClickListener {
+            showToast("추후 업데이트 예정입니다.")
+            /*val packageName = "com.nhn.android.nmap"
+            arrayClear()
+
+            setArray("Naver_map")
+            setArray2("Naver_map_imageSize")
+            setImage("Naver_map_image")
+            startFloatingImageService()
+
+            val intent = Intent(FloatingImageService.ACTION_SHOW_FLOATING_IMAGE)
+            intent.putParcelableArrayListExtra("targetPositions", targetPositions)
+            intent.putParcelableArrayListExtra("targetSizes", targetSizes)
+            intent.putStringArrayListExtra("imageIndex",imageIndex)
+            sendBroadcast(intent)
+            startEpisodeIntent(packageName)
+
+            val intentB = Intent(this, BubbleService::class.java)
+            startService(intentB)
+            RecentOptionsManager.addOption("지도 보기")*/
         }
     }
 

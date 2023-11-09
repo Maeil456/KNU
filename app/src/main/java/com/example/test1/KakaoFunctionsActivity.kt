@@ -109,9 +109,9 @@ class KakaoFunctionsActivity : AppCompatActivity() {
             val packageName = "com.kakao.talk"
 
             arrayClear()
-            setArray("kakao_shopping")
-            setArray2("kakao_shopping_imageSize")
-            setImage("kakao_shopping_image")
+            setArray("kakao_gift")
+            setArray2("kakao_gift_imageSize")
+            setImage("kakao_gift_image")
 
             val intent = Intent(FloatingImageService.ACTION_SHOW_FLOATING_IMAGE)
             intent.putParcelableArrayListExtra("targetPositions", targetPositions)
@@ -185,7 +185,8 @@ class KakaoFunctionsActivity : AppCompatActivity() {
             RecentOptionsManager.addOption("친구 추가")
         }
         btnKakaoFunction8.setOnClickListener {
-            val packageName = "com.kakao.talk"
+            showToast("추후 업데이트 예정입니다.")
+            /*val packageName = "com.kakao.talk"
 
             arrayClear()
             setArray("Naver_search")
@@ -201,7 +202,7 @@ class KakaoFunctionsActivity : AppCompatActivity() {
 
             val intentB = Intent(this, BubbleService::class.java)
             startService(intentB)
-            RecentOptionsManager.addOption("카카오 테스트")
+            RecentOptionsManager.addOption("카카오 테스트")*/
         }
 
     }

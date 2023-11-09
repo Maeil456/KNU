@@ -151,10 +151,10 @@ class MainActivity : AppCompatActivity() {
             checkImageService()
             val packageName = "net.daum.android.mail"
 
+            //setArray("youtube_help")
+            //setArray2("youtube_help_imageSize")
+            //setImage("youtube_help_image")
             arrayClear()
-            setArray("Naver_search")
-            setArray2("Naver_search_imageSize")
-            setImage("Naver_search_image")
 
             val intent = Intent(ACTION_SHOW_FLOATING_IMAGE)
             intent.putParcelableArrayListExtra("targetPositions", targetPositions)
@@ -170,12 +170,10 @@ class MainActivity : AppCompatActivity() {
         }
         btnEpisode8.setOnClickListener {
             checkImageService()
-            val packageName = "com.nhn.android.search"
+            showToast("추후 업데이트 예정입니다.")
+            /*val packageName = "com.nhn.android.search"
 
             arrayClear()
-            setArray("Test")
-            setArray2("Test_Size")
-            setImage("Test_image")
 
             val intent = Intent(ACTION_SHOW_FLOATING_IMAGE)
             intent.putParcelableArrayListExtra("targetPositions", targetPositions)
@@ -186,7 +184,7 @@ class MainActivity : AppCompatActivity() {
 
             val intentB = Intent(this, BubbleService::class.java)
             startService(intentB)
-            RecentOptionsManager.addOption("더보기메인")
+            RecentOptionsManager.addOption("더보기메인")*/
         }
     }
 
@@ -312,7 +310,9 @@ class MainActivity : AppCompatActivity() {
             val link = "https://play.google.com/store/apps/details?id=$packageName"
             val intent = Intent(Intent.ACTION_VIEW).apply {
                 data = Uri.parse(link)
-                showToast("앱을 설치해주세요!")
+                setArray("noapp_help")
+                setArray2("noapp_help_imageSize")
+                setImage("noapp_help_image")
             }
             startActivity(intent)
         }

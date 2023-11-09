@@ -100,7 +100,7 @@
     </string-array>
 
     <string-array name="Naver_shopping_image">
-        <item>naver_help_shopping1</item>
+        <item>naver_help_shopping</item>
         <item>naver_help_shopping2</item>
     </string-array>
 
@@ -284,6 +284,18 @@
         <item>950,250</item>
         <item>950,250</item>
         <item>750,350</item>
+    </string-array>
+
+    <string-array name="noapp_help">
+        <item>80,700</item>
+    </string-array>
+
+    <string-array name="noapp_help_image">
+        <item>help_noapp</item>
+    </string-array>
+
+    <string-array name="noapp_help_imageSize">
+        <item>950,250</item>
     </string-array>
 
 
