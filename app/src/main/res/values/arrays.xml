@@ -76,7 +76,7 @@
 
     <string-array name="Naver_mail_imageSize">
         <item>950,250</item>
-        <item>300,300</item>
+        <item>800,210</item>
     </string-array>
 
     <string-array name="Naver_news">
@@ -95,13 +95,13 @@
     </string-array>
 
     <string-array name="Naver_shopping">
+        <item>100,300</item>
         <item>80,300</item>
-        <item>120,300</item>
     </string-array>
 
     <string-array name="Naver_shopping_image">
-        <item>naver_help_shopping</item>
         <item>naver_help_shopping2</item>
+        <item>naver_help_shopping</item>
     </string-array>
 
     <string-array name="Naver_shopping_imageSize">
@@ -109,8 +109,10 @@
         <item>950,250</item>
     </string-array>
 
+    <!-- TODO: Rework naver_map with new drawable until we got that -->
     <string-array name="Naver_map">
         <item>80,300</item>
+
     </string-array>
 
     <string-array name="Naver_map_image">
@@ -143,64 +145,64 @@
     </string-array>
 
     <string-array name="kakao_facetalk">
+        <item>50,2100</item>
         <item>50,300</item>
-        <item>700,1900</item>
-        <item>700,2100</item>
+        <item>660,1750</item>
     </string-array>
 
     <string-array name="kakao_facetalk_image">
+        <item>bubble_r_circle</item>
         <item>kakao_help_facetalk1</item>
         <item>kakao_help_message2</item>
-        <item>bubble_r_circle</item>
     </string-array>
 
     <string-array name="kakao_facetalk_imageSize">
-        <item>950,250</item>
-        <item>750,300</item>
         <item>150,150</item>
+        <item>950,250</item>
+        <item>300,150</item>
     </string-array>
 
     <string-array name="kakao_voicetalk">
+        <item>50,2100</item>
         <item>50,300</item>
-        <item>700,1900</item>
-        <item>700,2100</item>
+        <item>380,1750</item>
     </string-array>
 
     <string-array name="kakao_voicetalk_image">
+        <item>bubble_r_circle</item>
         <item>kakao_help_voicetalk1</item>
         <item>kakao_help_message2</item>
-        <item>bubble_r_circle</item>
     </string-array>
 
     <string-array name="kakao_voicetalk_imageSize">
-        <item>950,250</item>
-        <item>750,300</item>
         <item>150,150</item>
+        <item>950,250</item>
+        <item>300,150</item>
     </string-array>
 
     <string-array name="kakao_gift">
-        <item>700,2300</item>
-        <item>20,1100</item>
-        <item>50,300</item>
-        <item>800,200</item>
+        <item>880,2100</item>
+        <item>70,780</item>
+        <item>70,300</item>
+        <item>160,200</item>
     </string-array>
 
     <string-array name="kakao_gift_image">
-        <item>kakao_help_gift1</item>
+        <item>bubble_r_circle</item>
         <item>bubble_r_circle</item>
         <item>kakao_help_gift2</item>
         <item>kakao_help_gift3</item>
     </string-array>
 
     <string-array name="kakao_gift_imageSize">
-        <item>950,250</item>
+        <item>150,150</item>
         <item>150,150</item>
         <item>950,250</item>
-        <item>750,300</item>
+        <item>750,250</item>
     </string-array>
 
     <string-array name="kakao_profile">
-        <item>30,100</item>
+        <item>50,2100</item>
         <item>50,200</item>
         <item>70,1700</item>
         <item>70,1200</item>
@@ -208,24 +210,24 @@
     </string-array>
 
     <string-array name="kakao_profile_image">
-        <item>kakao_help_message2</item>
         <item>bubble_r_circle</item>
+        <item>kakao_help_message2</item>
         <item>kakao_help_profile1</item>
         <item>kakao_help_profile2</item>
         <item>kakao_help_profile3</item>
     </string-array>
 
     <string-array name="kakao_profile_imageSize">
-        <item>750,200</item>
         <item>150,150</item>
+        <item>380,190</item>
         <item>950,250</item>
         <item>950,250</item>
         <item>950,250</item>
     </string-array>
 
     <string-array name="kakao_shopping">
-        <item>700,2300</item>
-        <item>100,1500</item>
+        <item>0,1800</item>
+        <item>50,1450</item>
     </string-array>
 
     <string-array name="kakao_shopping_image">
@@ -239,18 +241,21 @@
     </string-array>
 
     <string-array name="kakao_friend">
-        <item>700,150</item>
-        <item>300,400</item>
-        <item>200,600</item>
+        <item>50,2100</item>
+        <item>20,180</item>
+        <item>350,400</item>
+        <item>100,600</item>
     </string-array>
 
     <string-array name="kakao_friend_image">
+        <item>bubble_r_circle</item>
         <item>kakao_help_friend1</item>
         <item>kakao_help_friend2</item>
         <item>kakao_help_friend3</item>
     </string-array>
 
     <string-array name="kakao_friend_imageSize">
+        <item>150,150</item>
         <item>750,300</item>
         <item>750,300</item>
         <item>950,250</item>

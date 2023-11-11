@@ -41,7 +41,7 @@ class BubbleService : ExpandableBubbleService() {
 
             .bubbleView(imgView)
 
-            .startLocation(0,350)
+            .startLocation(0,500)
 
         //.closeBehavior(CloseBubbleBehavior.DYNAMIC_CLOSE_BUBBLE)
 
