@@ -111,16 +111,19 @@
 
     <!-- TODO: Rework naver_map with new drawable until we got that -->
     <string-array name="Naver_map">
-        <item>80,300</item>
+        <item>80,200</item>
+        <item>140,230</item>
 
     </string-array>
 
     <string-array name="Naver_map_image">
-        <item>naver_help_map</item>
+        <item>naver_help_map2</item>
+        <item>naver_help_map4</item>
     </string-array>
 
     <string-array name="Naver_map_imageSize">
         <item>850,250</item>
+        <item>750,150</item>
     </string-array>
 
     <string-array name="kakao_message">
