@@ -9,7 +9,7 @@
         android:id="@+id/splash_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/intro_full" />
+        android:src="@drawable/intro_full2" />
     <!-- ADD SPLASH ART -->
 
 

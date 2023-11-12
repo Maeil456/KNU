@@ -109,7 +109,6 @@
         <item>950,250</item>
     </string-array>
 
-    <!-- TODO: Rework naver_map with new drawable until we got that -->
     <string-array name="Naver_map">
         <item>80,200</item>
         <item>140,230</item>
